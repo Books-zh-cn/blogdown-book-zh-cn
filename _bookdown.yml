@@ -1,5 +1,11 @@
-delete_merged_file: true
+book_filename: blogdown-book-zh-cn
+repo: https://github.com/zhenghu159/blogdown-book-zh-cn
 output_dir: "docs"
+clean: [packages.bib, blogdown.bbl]
 language:
+  label:
+    fig: "FIGURE "
+    tab: "TABLE "
   ui:
     chapter_name: "Chapter "
+delete_merged_file: true

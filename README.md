@@ -1,13 +1,9 @@
-Welcome! 
+To compile this book, open `index.Rmd` in the RStudio IDE, install the **blogdown** package from Github, and click the RStudio Addin "Preview Book". You should be able to preview the HTML version of the book.
 
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). 
+It is trickier to compile it to PDF. You need to install LaTeX. I recommend [TinyTeX](https://yihui.org/tinytex/):
 
-This template provides a skeleton file structure that you can edit to create your book. 
+```r
+tinytex::install_tinytex()
+```
 
-The contents inside the .Rmd files provide some pointers to help you get started, but feel free to also delete the content in each file and start fresh.
-
-Additional resources:
-
-The **bookdown** book: https://bookdown.org/yihui/bookdown/
-
-The **bookdown** package reference site: https://pkgs.rstudio.com/bookdown
+Then download and install three fonts from [Google Fonts](https://fonts.google.com/?query=source&selection.family=Alegreya|Alegreya+SC|Source+Code+Pro): Alegreya, Alegreya SC, and Source Code Pro. Run `make pdf` (if `make` is available) or `Rscript _render.R "bookdown::pdf_book"` in the `docs/` directory. Install LaTeX packages if missing. If you're using a Mac with OS X 10.8 or later, install [XQuartz](https://www.xquartz.org).
