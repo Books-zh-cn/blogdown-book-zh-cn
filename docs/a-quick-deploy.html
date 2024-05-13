@@ -327,50 +327,50 @@ Thanks for your patience while we work to update the book, and please stay tuned
 </div>
 <div id="a-quick-deploy" class="section level2 hasAnchor" number="1.3">
 <h2><span class="header-section-number">1.3</span> A quick deploy<a href="a-quick-deploy.html#a-quick-deploy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Publishing a <strong>blogdown</strong> website involves copying the output directory containing all your rendered site files (typically, a bunch of <code>*.html</code> files and site assets like fonts, CSS, JavaScript, and images) to a web server or web hosting service.</p>
-<p>In this section, we will walk you through a quick deploy to publish your website using a drag-and-drop tool from <a href="https://www.netlify.com" class="uri">https://www.netlify.com</a>. Netlify is a platform that offers cloud hosting and serverless backend services for static websites. Lucky for us, that is exactly what we need—since <strong>blogdown</strong> helps us create static websites using Hugo.</p>
-<p>If you followed along with Section <a href="a-quick-example.html#a-quick-example">1.2</a>, you should now have s static website using the Hugo lithium theme with knitted <code>.Rmd</code> content for one post and served locally using <strong>blogdown</strong>.</p>
-<p>The drag-and-drop method we describe next is a good workflow to start with if you are not familiar with GIT or GitHub or deploying websites. There are many options for publishing static websites, and we will talk more about them plus advanced workflows involving version control and continuous deployment in Chapter <a href="deployment.html#deployment">3</a>.</p>
+<p>发布 <strong>blogdown</strong> 网站涉及将包含所有渲染的网站文件（通常是一堆 <code>*.html</code> 文件和网站资源，如 fonts、CSS、JavaScript 和 images）的输出目录复制到 Web 服务器或 Web 托管服务。</p>
+<p>在本部分中，我们将引导您完成快速部署，以使用 <a href="https://www.netlify.com" class="uri">https://www.netlify.com</a> 中的拖放工具发布您的网站。Netlify 是一个为静态网站提供云托管和无服务器后端服务的平台。对我们来说幸运的是，这正是我们所需要的—因为 <strong>blogdown</strong> 帮助我们使用 Hugo 创建静态网站。</p>
+<p>如果您按照 Section <a href="a-quick-example.html#a-quick-example">1.2</a> 进行操作，您现在应该拥有一个使用 Hugo lithium 主题的静态网站，其中包含一篇 post 的 knitted <code>.Rmd</code> 内容，并使用 <strong>blogdown</strong> 在本地提供服务。</p>
+<p>如果您不熟悉 GIT 或 GitHub 或部署网站，我们接下来描述的拖放方法是一个很好的工作流程。发布静态网站有很多选项，我们将在 Chapter <a href="deployment.html#deployment">3</a> 中详细讨论它们以及涉及版本控制和持续部署的高级工作流程。</p>
 <div id="build-site" class="section level3 hasAnchor" number="1.3.1">
 <h3><span class="header-section-number">1.3.1</span> Build site<a href="a-quick-deploy.html#build-site" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The publishing directory of a Hugo site is <code>public/</code> by default. Your <em>built</em> website will be generated to this directory, which you can upload to any web server that can serve static websites, and your website will be up and running.</p>
-<p>Serving your Hugo site locally using <code>blogdown::serve_site()</code> does not generate the <code>public/</code> directory. To follow this drag-and-drop method, you’ll need to build your site locally first.</p>
-<p>Restart the R session, and run:</p>
+<p>Hugo 网站的发布目录默认为 <code>public/</code>。您<em>构建</em>的网站将生成到此目录，您可以将其上传到任何可以提供静态网站服务的网络服务器，您的网站将启动并运行。</p>
+<p>使用 <code>blogdown::serve_site()</code> 在本地为您的 Hugo 站点提供服务不会生成 <code>public/</code> 目录。要遵循这种拖放方法，您需要首先在本地构建站点。</p>
+<p>重新启动 R 会话，然后运行：</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="a-quick-deploy.html#cb12-1" tabindex="-1"></a>blogdown<span class="sc">::</span><span class="fu">build_site</span>()</span></code></pre></div>
-<p>Alternatively, if you use RStudio, you may use:</p>
+<p>或者，如果您使用 RStudio，您可以使用：</p>
 <ul>
-<li><p>the “Build Website” button in the Build pane, or</p></li>
-<li><p>press <code>Ctrl + Shift + B</code> (<code>Cmd + Shift + B</code> on macOS) to build the website.</p></li>
+<li><p>Build 窗格中的 “Build Website” 按钮，或者</p></li>
+<li><p>按 <code>Ctrl + Shift + B</code> (<code>Cmd + Shift + B</code> on macOS) 构建网站。</p></li>
 </ul>
-<p>You should see a new <code>public/</code> directory under the root directory of your project. Never edit files in this directory, as your changes will always be overwritten whenever you re-build your site.</p>
-<p>Note that this function does not re-knit R Markdown files by default, because it may be expensive and often undesirable to render <code>.Rmd</code> files that have been knitted before. Given that R package upgrades have a tendency to break older code, continuously re-knitting old content is nearly impossible to do without errors, especially over longer periods of time.</p>
-<p>We recommend always using <code>blogdown::serve_site()</code> first to preview your site before building it. By default, that function will knit your R Markdown content that has not been knitted yet. As mentioned earlier, we also recommend running <code>blogdown::check_content()</code>. Among other things, we check if you have content that needs to be re-knit:</p>
+<p>您应该在项目的根目录下看到一个新的 <code>public/</code> 目录。切勿编辑此目录中的文件，因为每当您重新构建站点时，您的更改都将被覆盖。</p>
+<p>请注意，此功能默认情况下不会 re-knit R Markdown 文件，因为渲染之前 knitted 过的 <code>.Rmd</code> 文件可能会很昂贵并且通常不受欢迎。鉴于 R 包升级有破坏旧代码的趋势，连续 re-knitting 旧内容几乎不可能不出错，尤其是在较长的时间内。</p>
+<p>我们建议在构建网站之前始终先使用 <code>blogdown::serve_site()</code> 来预览您的网站。默认情况下，该函数将 knit 尚未 knitted 的 R Markdown 内容。如前所述，我们还建议运行 <code>blogdown::check_content()</code>。除此之外，我们还会检查您是否有需要 re-knit 的内容：</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb13-1"><a href="a-quick-deploy.html#cb13-1" tabindex="-1"></a>| Checking your R Markdown content...</span>
 <span id="cb13-2"><a href="a-quick-deploy.html#cb13-2" tabindex="-1"></a>○ All R Markdown files have been knitted.</span>
 <span id="cb13-3"><a href="a-quick-deploy.html#cb13-3" tabindex="-1"></a>○ All R Markdown output files are up to date with their source files.</span></code></pre></div>
 </div>
 <div id="use-netlify-drop" class="section level3 hasAnchor" number="1.3.2">
 <h3><span class="header-section-number">1.3.2</span> Use Netlify Drop<a href="a-quick-deploy.html#use-netlify-drop" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Next, go online to Netlify Drop at <a href="https://app.netlify.com/drop" class="uri">https://app.netlify.com/drop</a>. You can drag and drop the <code>public/</code> folder from your file viewer to the indicated area on the Netlify web page, where it says “Drag and drop your site output folder here.”</p>
-<p>Wait for a few seconds for Netlify to deploy the files, and it will assign a random subdomain of the form <code>random-word-12345.netlify.app</code> to you. After your site is live, you will be able to share the link to your new <strong>blogdown</strong> site if you would like to.</p>
-<p>You will notice a disclaimer that this site will be deleted after 24 hours. You need to create an account to save this link and keep your site online.</p>
+<p>接下来，在线访问 Netlify Drop：<a href="https://app.netlify.com/drop" class="uri">https://app.netlify.com/drop</a>。 您可以将 <code>public/</code> 文件夹从文件查看器拖放到 Netlify 网页上的指定区域，其中显示“将站点输出文件夹拖放到此处”。</p>
+<p>等待几秒钟，让 Netlify 部署文件，它会为您分配一个形式为 <code>random-word-12345.netlify.app</code> 的随机子域。您的网站上线后，如果您愿意，您将能够共享新 <strong>blogdown</strong> 网站的链接。</p>
+<p>您会注意到一条免责声明，表明该网站将在 24 小时后删除。您需要创建一个帐户来保存此链接并使您的网站保持在线。</p>
 </div>
 <div id="sign-up-for-netlify" class="section level3 hasAnchor" number="1.3.3">
 <h3><span class="header-section-number">1.3.3</span> Sign up for Netlify<a href="a-quick-deploy.html#sign-up-for-netlify" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Netlify has a free plan with plenty of useful features, so we recommend signing up for an account. To sign up:</p>
+<p>Netlify 有一个免费计划，其中包含许多有用的功能，因此我们建议您注册一个帐户。注册：</p>
 <ol style="list-style-type: decimal">
-<li><p>Go online to <a href="https://www.netlify.com" class="uri">https://www.netlify.com</a>.</p></li>
-<li><p>Click on the “Sign Up” button.</p></li>
-<li><p>If you have a GitHub account (<a href="https://github.com" class="uri">https://github.com</a>), we recommend signing up using your existing GitHub account (no need to create another account), so select “GitHub” (you may need to sign in), and click to “Authorize Netlify.”</p></li>
-<li><p>From your account, if you used Netlify Drop, you can (and should) change your random subdomain to a more meaningful one. You may read the docs for changing a site’s default Netlify subdomain here: <a href="https://docs.netlify.com/domains-https/custom-domains/#assign-a-domain-to-a-site" class="uri">https://docs.netlify.com/domains-https/custom-domains/#assign-a-domain-to-a-site</a></p></li>
-<li><p>Also from your account, you may update your existing site by making changes locally, reknitting if necessary, then rebuilding your site with <code>blogdown::build_site()</code>. In the “Deploys” tab on Netlify, scroll down to where you see “Need to update your site? Drag and drop your site output folder here.” Drop your updated <code>public/</code> folder there to update the deployed website.</p></li>
+<li><p>在线访问 <a href="https://www.netlify.com" class="uri">https://www.netlify.com</a>.</p></li>
+<li><p>单击 “Sign Up” 按钮。</p></li>
+<li><p>如果您有 GitHub 帐户（<a href="https://github.com" class="uri">https://github.com</a>），我们建议使用您现有的 GitHub 帐户进行注册（无需创建其他帐户），因此选择“GitHub”（您可能需要登录），然后单击 “Authorize Netlify”。</p></li>
+<li><p>在您的帐户中，如果您使用 Netlify Drop，您可以（并且应该）将您的随机子域更改为更有意义的子域。您可以在此处阅读有关更改站点默认 Netlify 子域的文档：<a href="https://docs.netlify.com/domains-https/custom-domains/#assign-a-domain-to-a-site" class="uri">https://docs.netlify.com/domains-https/custom-domains/#assign-a-domain-to-a-site</a></p></li>
+<li><p>此外，您还可以通过您的帐户在本地进行更改来更新现有网站，必要时 reknit，然后使用 <code>blogdown::build_site()</code> 重建您的网站。在 Netlify 的 “Deploys” 选项卡中，向下滚动到看到 “Need to update your site? Drag and drop your site output folder here.” 将更新后的 <code>public/</code> 文件夹拖放到此处以更新已部署的网站。</p></li>
 </ol>
 </div>
 <div id="what-is-next-1" class="section level3 hasAnchor" number="1.3.4">
 <h3><span class="header-section-number">1.3.4</span> What is next?<a href="a-quick-deploy.html#what-is-next-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The workflow described above can be cumbersome the more you work on your website. It can be much easier to publish a website if you are familiar with GIT and GitHub.</p>
-<p>We recommend that you create a new site on Netlify from your GitHub repository that contains the source files of your website, so that you can enjoy the benefits of continuous deployment instead of manually uploading the <code>public/</code> folder every time.</p>
-<p>With this advanced workflow, you do not need to run <code>blogdown::hugo_build()</code> locally, because the website can be built on Netlify via Hugo. Instead, you would rely on <code>blogdown::serve_site()</code> locally to preview your site before pushing your changes to GitHub. See Chapter <a href="deployment.html#deployment">3</a> for more information.</p>
+<p>您在网站上工作的次数越多，上述工作流程可能会变得很麻烦。如果您熟悉 GIT 和 GitHub，发布网站会容易得多。</p>
+<p>我们建议您从 GitHub 存储库在 Netlify 上创建一个新站点，其中包含您网站的源文件，这样您就可以享受持续部署的好处，而不是每次都手动上传 <code>public/</code> 文件夹。</p>
+<p>借助这种高级工作流程，您无需在本地运行 <code>blogdown::hugo_build()</code>，因为可以通过 Hugo 在 Netlify 上构建网站。相反，您可以在将更改推送到 GitHub 之前在本地依赖 <code>blogdown::serve_site()</code> 预览您的网站。请参阅 Chapter <a href="deployment.html#deployment">3</a> 了解更多信息。</p>
 </div>
 </div>
             </section>

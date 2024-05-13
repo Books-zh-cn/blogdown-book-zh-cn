@@ -327,18 +327,18 @@ Thanks for your patience while we work to update the book, and please stay tuned
 </div>
 <div id="rstudio-ide" class="section level2 hasAnchor" number="1.4">
 <h2><span class="header-section-number">1.4</span> RStudio IDE<a href="rstudio-ide.html#rstudio-ide" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are a few essential RStudio addins to make it easy to edit and preview your website, and you can find them in the menu “Addins” on the RStudio toolbar:</p>
+<p>有一些基本的 RStudio 插件可以让您轻松编辑和预览网站，您可以在 RStudio 工具栏上的 “Addins” 菜单中找到它们：</p>
 <ul>
-<li><p>“Serve Site”: This addin calls <code>blogdown::serve_site()</code> to continuously serve your website locally using the LiveReload technology, so you can live preview the website. You can continue to edit material for your site while you are previewing it.</p></li>
-<li><p>“New Post”: This addin provides a dialog box for you to enter the metadata of your blog post, including the title, author, date, and so on. See Figure <a href="rstudio-ide.html#fig:new-post">1.7</a> for an example. This addin actually calls the function <code>blogdown::new_post()</code> under the hood, but does a few things automatically:</p>
+<li><p>“Serve Site”：此插件调用 <code>blogdown::serve_site()</code> 使用 LiveReload 技术在本地持续为您的网站提供服务，以便您可以实时预览网站。您可以在预览时继续编辑网站的材料。</p></li>
+<li><p>“New Post”：此插件提供了一个对话框，供您输入博客文章的 metadata，包括标题、作者、日期等。示例见 Figure <a href="rstudio-ide.html#fig:new-post">1.7</a>。这个插件实际上在底层调用了函数 <code>blogdown::new_post()</code> ，但会自动执行一些操作：</p>
 <ul>
-<li><p>As you type the title of the post, it will generate a filename for you, and you can edit it if you do not like the automatically generated one. In fact, you can also use this addin to create normal pages under any directories under <code>content/</code>. For example, if you want to add a resume page, you can change the filename to <code>resume.md</code> from the default <code>post/YYYY-mm-dd-resume.md</code>.</p></li>
-<li><p>You can select the date from a calendar widget provided by Shiny.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p></li>
-<li><p>It will scan the categories and tags of existing posts, so when you want to input categories or tags, you can select them from the dropdown menus, or create new ones.</p></li>
-<li><p>After a new post is created, it will be automatically opened, so you can start writing the content immediately.</p></li>
+<li><p>当您输入 post 标题时，它会为您生成一个文件名，如果您不喜欢自动生成的文件名，您可以对其进行编辑。事实上，你也可以使用这个插件在 <code>content/</code> 下的任何目录下创建普通页面。例如，如果要添加简历页面，可以将文件名从默认的 <code>post/YYYY-mm-dd-resume.md</code> 更改为 <code>resume.md</code>。</p></li>
+<li><p>您可以从 Shiny 提供的日历小部件中选择日期。<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p></li>
+<li><p>它将扫描现有 posts 的类别和标签，因此当您想要输入类别或标签时，您可以从下拉菜单中选择它们，或者创建新的类别或标签。</p></li>
+<li><p>新 post 创建后会自动打开，您可以立即开始撰写内容。</p></li>
 </ul></li>
-<li><p>“Update Metadata”: This addin allows you to update the YAML metadata of the currently opened post. See Figure <a href="rstudio-ide.html#fig:update-meta">1.8</a> for an example. The main advantage of this addin is that you can select categories and tags from dropdown menus instead of having to remember them.</p></li>
-<li><p>“Insert Image”: This addin allows you to insert any image in your computer to your currently opened post.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> Figure <a href="rstudio-ide.html#fig:insert-image">1.9</a> shows how the addin looks like. This addin copies the image to the final location for your post files, and adds the Markdown/HTML code to embed the image. You can specify the width and height of the image, as well as the alternative text. The addin will show the final image file path after the image is uploaded. You can edit the path if necessary. If the image already exists, the addin will ask you whether you want to overwrite it as in Figure <a href="rstudio-ide.html#fig:overwrite-image">1.10</a>: when in doubt, change the name in the “Target file path” text input to avoid a conflict with previous images you have inserted.</p></li>
+<li><p>“Update Metadata”: 此插件允许您更新当前打开的 post 的 YAML metadata。示例见 Figure <a href="rstudio-ide.html#fig:update-meta">1.8</a>。该插件的主要优点是您可以从下拉菜单中选择类别和标签，而不必记住它们。</p></li>
+<li><p>“Insert Image”: 此插件允许您将计算机中的任何图像插入到当前打开的 post 中。<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> Figure <a href="rstudio-ide.html#fig:insert-image">1.9</a> 显示了该插件的外观。此插件将图像复制到 post 文件的最终位置，并添加 Markdown/HTML 代码来嵌入图像。您可以指定图像的宽度和高度以及替代文本。图片上传后，插件将显示最终的图片文件路径。如有必要，您可以编辑路径。如果图像已经存在，插件会询问您是否要覆盖它，如 Figure <a href="rstudio-ide.html#fig:overwrite-image">1.10</a> 所示：如有疑问，请更改 “Target file path” 文本输入中的名称，以避免与您之前插入的图像发生冲突。</p></li>
 </ul>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:new-post"></span>
 <img src="images/new-post.png" alt="Create a new post using the RStudio addin." width="80%" />
@@ -364,10 +364,10 @@ FIGURE 1.9: Insert an image to an existing post using the RStudio addin.
 FIGURE 1.10: Overwrite the image you are inserting in your blog post.
 </p>
 </div>
-<p>With these addins, you should rarely need to run any R commands manually after you have set up your website, since all your posts will be automatically compiled whenever you create a new post or modify an existing post due to the LiveReload feature.</p>
-<p>If your website was created using the function <code>blogdown::new_site()</code> instead of the RStudio menu (see Figure <a href="a-quick-example.html#fig:new-project">1.1</a> and <a href="a-quick-example.html#fig:blogdown-project">1.2</a>) for the first time, you can quit RStudio and open the project again. If you go to the menu <code>Tools -&gt; Project Options</code>, your project type should be “Website” like what you can see in Figure <a href="rstudio-ide.html#fig:project-options">1.11</a>.</p>
-<p>Then you will see a pane in RStudio named “Build,” and there is a button “Build Website.” When you click this button, RStudio will call <code>blogdown::build_site()</code> to build the website. This will automatically generate files in the <code>public/</code> directory.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
-<p>We strongly recommend that you uncheck the option “Preview site after building” in your RStudio project options (Figure <a href="rstudio-ide.html#fig:project-options">1.11</a>).<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> You can also uncheck the option “Re-knit current preview when supporting files change,” since this option is not really useful after you call <code>serve_site()</code>.</p>
+<p>使用这些插件，在设置网站后，您应该很少需要手动运行任何 R 命令，因为由于 LiveReload 功能，每当您创建新帖子或修改现有帖子时，您的所有帖子都会自动编译。</p>
+<p>如果您的网站是第一次使用函数 <code>blogdown::new_site()</code> 而不是 RStudio 菜单（见 Figure <a href="a-quick-example.html#fig:new-project">1.1</a> 和 <a href="a-quick-example.html#fig:blogdown-project">1.2</a>）创建的，您可以退出 RStudio 并再次打开项目。如果您进入菜单 <code>Tools -&gt; Project Options</code>，您的项目类型应该是 “Website”，如 Figure <a href="rstudio-ide.html#fig:project-options">1.11</a> 所示。</p>
+<p>然后您将在 RStudio 中看到一个名为 “Build” 的窗格，并且有一个 “Build Website” 按钮。当您单击此按钮时，RStudio 将调用 <code>blogdown::build_site()</code> 来构建网站。这会自动在 <code>public/</code> 目录下生成文件。<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
+<p>我们强烈建议您在 RStudio 项目选项中取消选中 “Preview site after building” 选项（Figure <a href="rstudio-ide.html#fig:project-options">1.11</a>）。<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> 您还可以取消选中 “Re-knit current preview when supporting files change” 选项，因为此选项在你调用 <code>serve_site()</code> 之后并不是很有用。</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:project-options"></span>
 <img src="images/project-options.png" alt="RStudio project options." width="80%" />
 <p class="caption">
@@ -378,10 +378,10 @@ FIGURE 1.11: RStudio project options.
 <div class="footnotes">
 <hr />
 <ol start="4">
-<li id="fn4"><p>Shiny is an R package for building interactive web apps using R. Using this addin, the calendar widget allows you to view an interactive calendar by month to select dates. This is a simple use of Shiny, but you can read more about Shiny apps here: <a href="https://shiny.rstudio.com" class="uri">https://shiny.rstudio.com</a>.<a href="rstudio-ide.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>Check <a href="https://lcolladotor.github.io/2018/03/07/blogdown-insert-image-addin" class="uri">https://lcolladotor.github.io/2018/03/07/blogdown-insert-image-addin</a> for a more in-depth explanation and for how to insert an image without using this addin.<a href="rstudio-ide.html#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>Or wherever your publishing directory is located. It is <code>public/</code> by default, but it can be changed by specifying the field <code>publishDir: "myNewDirectory"</code> in the <code>config.yaml</code> file.<a href="rstudio-ide.html#fnref6" class="footnote-back">↩︎</a></p></li>
-<li id="fn7"><p>In case you wonder why: unless you have set the option <code>relativeurls</code> to <code>true</code> in <code>config.toml</code>, it requires a web server to preview the website locally, otherwise even if you can see the homepage of your website in the RStudio Viewer, most links like those links to CSS and JavaScript files are unlikely to work. When the RStudio Viewer shows you the preview, it does not actually launch a web server.<a href="rstudio-ide.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Shiny 是一个 R 包，用于使用 R 构建交互式 Web apps。使用此插件，日历小部件允许您按月查看交互式日历以选择日期。这是 Shiny 的简单使用，但您可以在这里阅读有关 Shiny 应用程序的更多信息：<a href="https://shiny.rstudio.com" class="uri">https://shiny.rstudio.com</a>。<a href="rstudio-ide.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>查看 <a href="https://lcolladotor.github.io/2018/03/07/blogdown-insert-image-addin" class="uri">https://lcolladotor.github.io/2018/03/07/blogdown-insert-image-addin</a> 以获取更深入的解释以及如何在不使用此插件的情况下插入图像。<a href="rstudio-ide.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>或者您的发布目录所在的任何位置。默认是 <code>public/</code>，但可以通过在 <code>config.yaml</code> 文件中指定字段 <code>publishDir: "myNewDirectory"</code> 来更改。<a href="rstudio-ide.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>如果您想知道为什么：除非您在 <code>config.toml</code> 中将选项 <code>relativeurls</code> 设置为 <code>true</code>，否则需要 Web 服务器在本地预览网站，否则即使您可以在 RStudio Viewer 中看到网站的主页，大多数链接都像这些指向 CSS 和 JavaScript 文件的链接不太可能起作用。当 RStudio Viewer 向您显示预览时，它实际上并没有启动 Web 服务器。<a href="rstudio-ide.html#fnref7" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

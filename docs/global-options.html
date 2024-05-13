@@ -327,8 +327,8 @@ Thanks for your patience while we work to update the book, and please stay tuned
 </div>
 <div id="global-options" class="section level2 hasAnchor" number="1.5">
 <h2><span class="header-section-number">1.5</span> Global options<a href="global-options.html#global-options" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The <strong>blogdown</strong> package uses global options, specified in a <code>.Rprofile</code> file, to help users customize how <strong>blogdown</strong> works. When you create a new site, <strong>blogdown</strong> adds a project-level <code>.Rprofile</code> file in the root directory of your website project.</p>
-<p>Options should be set using the syntax <code>options(name = value)</code>, and those included in a new <strong>blogdown</strong> site’s <code>.Rprofile</code> file are presented in Table <a href="global-options.html#tab:global-options-new">1.1</a>.</p>
+<p><strong>blogdown</strong> 包使用 <code>.Rprofile</code> 文件中指定的全局选项来帮助用户自定义 <strong>blogdown</strong> 的工作方式。当您创建新站点时，<strong>blogdown</strong> 会在您的网站项目的根目录中添加一个项目级 .Rprofile` 文件。</p>
+<p>选项应使用语法 <code>options(name = value)</code> 进行设置，新 <strong>blogdown</strong> 站点的 <code>.Rprofile</code> 文件中包含的选项如 Table <a href="global-options.html#tab:global-options-new">1.1</a> 所示。</p>
 <table>
 <caption><span id="tab:global-options-new">TABLE 1.1: </span>Global options for configured for new blogdown sites.</caption>
 <colgroup>
@@ -366,23 +366,23 @@ Thanks for your patience while we work to update the book, and please stay tuned
 </tr>
 </tbody>
 </table>
-<p>Three of these options are worth further explanations:</p>
+<p>其中三个选项值得进一步解释：</p>
 <ul>
-<li><p><code>blogdown.hugo.version</code>: You can find available Hugo versions at <a href="https://github.com/gohugoio/hugo/releases/" class="uri">https://github.com/gohugoio/hugo/releases/</a>, and find all locally installed Hugo versions via <code>blogdown::find_hugo('all')</code>. A common mistake when specifying this option is to omit the version number <code>0</code> at the end. For example, only Hugo v0.55.0 exists, but not v0.55, so <code>options(blogdown.hugo.version = '0.55')</code> will not work, and you must set it to <code>0.55.0</code> precisely.</p></li>
-<li><p><code>blogdown.knit.on_save</code>: By default, the Rmd file is automatically knitted when it is saved. If you prefer clicking the <code>Knit</code> button in RStudio to manually knit the file, you may set this option to <code>FALSE</code>. If this option is unset, <strong>blogdown</strong> will set it to <code>TRUE</code> for the current R session (with a reminder message) when you click the <code>Knit</code> button.</p></li>
-<li><p><code>blogdown.method</code>: By default, an <code>Rmd</code> post is compiled to <code>.md</code> (Markdown) via <strong>rmarkdown</strong>, which will be rendered to HTML by Hugo’s Markdown renderer (e.g., Goldmark). You may set this option to <code>"html"</code> to pre-render <code>.md</code> to <code>.html</code> and bypass Hugo’s Markdown renderer. Basically, this option decides whether you want to use Pandoc or Hugo’s Markdown renderer to render Markdown to HTML. See Section @ref{method} for more information.</p></li>
+<li><p><code>blogdown.hugo.version</code>: 您可以在 <a href="https://github.com/gohugoio/hugo/releases/" class="uri">https://github.com/gohugoio/hugo/releases/</a> 找到可用的 Hugo 版本，并通过 <code>blogdown::find_hugo('all')</code> 查找所有本地安装的 Hugo 版本。指定此选项时的一个常见错误是省略末尾的版本号 <code>0</code>。例如，仅 Hugo v0.55.0 存在，但不存在 v0.55，因此 <code>options(blogdown.hugo.version = '0.55')</code> 将不起作用，您必须将其精确设置为 <code>0.55.0</code>。</p></li>
+<li><p><code>blogdown.knit.on_save</code>: 默认情况下，Rmd 文件保存时会自动 knitted。如果您更喜欢单击 RStudio 中的 <code>Knit</code> 按钮来手动 knit 文件，可以将此选项设置为 <code>FALSE</code>。如果未设置此选项，当您单击 <code>Knit</code> 按钮时，<strong>blogdown</strong> 会将当前 R 会话设置为 <code>TRUE</code>（带有提醒消息）。</p></li>
+<li><p><code>blogdown.method</code>: 默认情况下，<code>Rmd</code> 帖子通过 <strong>rmarkdown</strong> 编译为 .md (Markdown)，该文件将由 Hugo 的 Markdown 渲染器（例如 Goldmark）渲染为 HTML。您可以将此选项设置为 <code>"html"</code> 以将 <code>.md</code> 预渲染为 <code>.html</code> 并绕过 Hugo 的 Markdown 渲染器。基本上，此选项决定您是否要使用 Pandoc 还是 Hugo 的 Markdown 渲染器将 Markdown 渲染为 HTML。有关详细信息，请参阅 Section @ref{method}。</p></li>
 </ul>
-<p>We recommend that you set these options in your R startup profile file. If you have never used a startup profile file before, you can check out the help page <code>?Rprofile</code>. Here, we provide a brief but incomplete introduction to orient you quickly.</p>
-<p>A startup profile file is basically an R script that is executed when your R session is started. This is a perfect place to set global options, so you do not need to type these options again every time you start a new R session.</p>
-<p>There are a few things you need to know about R’s startup profile file before using:</p>
+<p>我们建议您在 R 启动配置文件中设置这些选项。如果您以前从未使用过启动配置文件，您可以查看帮助页面 <code>?Rprofile</code>。在这里，我们提供简短但不完整的介绍，以便您快速熟悉。</p>
+<p>启动配置文件基本上是一个 R 脚本，在 R 会话启动时执行。这是设置全局选项的完美位置，因此您无需在每次启动新的 R 会话时再次键入这些选项。</p>
+<p>在使用 R 的启动配置文件之前，您需要了解以下几点：</p>
 <ol style="list-style-type: decimal">
-<li><p>You can use a global profile file <code>~/.Rprofile</code>,<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> or a per-project file <code>.Rprofile</code> under the root directory of your RStudio project. The former will be applied to all R sessions that you start, unless you have provided the latter to override it.</p></li>
-<li><p>The name “startup profile file” means that R only executes this file when you first start your R session. This means that when you modify and save your <code>.Rprofile</code>, you must restart R for the changes to take effect.</p></li>
-<li><p><a href="https://yihui.org/en/2018/04/rprofile-trailing-newline/">R will silently ignore the last line of your <code>.Rprofile</code></a> if it does not have a trailing newline, so please make sure you add at least one newline to the end of your <code>.Rprofile</code>.</p></li>
+<li><p>您可以使用一个全局配置文件 <code>~/.Rprofile</code>,<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> 或 RStudio 项目根目录下的每个项目文件 <code>.Rprofile</code>。前者将应用于您启动的所有 R 会话，除非您提供了后者来覆盖它。</p></li>
+<li><p>名称 “startup profile file” 意味着 R 仅在您首次启动 R 会话时执行此文件。这意味着当您修改并保存 <code>.Rprofile</code> 时，必须重新启动 R 才能使更改生效。</p></li>
+<li><p><a href="https://yihui.org/en/2018/04/rprofile-trailing-newline/">R 将默默忽略 <code>.Rprofile</code> 的最后一行</a> 如果它没有尾随换行符, 因此请确保在 <code>.Rprofile</code> 末尾添加至少一个换行符。</p></li>
 </ol>
-<p>If you want to add a profile file to an existing <strong>blogdown</strong> project, or you created a new website without using <code>blogdown::new_site()</code>, you can create a boilerplate version with this command in your R console:</p>
+<p>如果您想将配置文件添加到现有的 <strong>blogdown</strong> 项目，或者您在不使用 <code>blogdown::new_site()</code> 的情况下创建了新网站，则可以在 R 控制台中使用以下命令创建样板版本：</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="global-options.html#cb14-1" tabindex="-1"></a>blogdown<span class="sc">::</span><span class="fu">config_Rprofile</span>()</span></code></pre></div>
-<p>This is the easiest way to create or modify a per-project profile file. At the top of the file in a new <strong>blogdown</strong> website project, you will see this:</p>
+<p>这是创建或修改每个项目配置文件的最简单方法。在新的 <strong>blogdown</strong> 网站项目的文件顶部，您将看到以下内容：</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="global-options.html#cb15-1" tabindex="-1"></a><span class="co"># REMEMBER to restart R after you modify and save this file!</span></span>
 <span id="cb15-2"><a href="global-options.html#cb15-2" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="global-options.html#cb15-3" tabindex="-1"></a><span class="co"># First, execute the global .Rprofile if it exists. You may</span></span>
@@ -392,8 +392,8 @@ Thanks for your patience while we work to update the book, and please stay tuned
 <span id="cb15-7"><a href="global-options.html#cb15-7" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(<span class="st">&quot;~/.Rprofile&quot;</span>)) {</span>
 <span id="cb15-8"><a href="global-options.html#cb15-8" tabindex="-1"></a>  base<span class="sc">::</span><span class="fu">sys.source</span>(<span class="st">&quot;~/.Rprofile&quot;</span>, <span class="at">envir =</span> <span class="fu">environment</span>())</span>
 <span id="cb15-9"><a href="global-options.html#cb15-9" tabindex="-1"></a>}</span></code></pre></div>
-<p>First, note the top message! The next section of code is necessary to execute both your project profile as well as the global profile if one exists. R only reads one startup profile file. For example, if you have a <code>.Rprofile</code> under the current directory and a global <code>~/.Rprofile</code>, only the former one will be executed when R starts up from the current directory. This code is provided for you so you may execute both a global and per-project profile file. Note that this code should only live in the project profile, and you <em>must not</em> add it to your global <code>~/.Rprofile</code>, otherwise it will trigger an infinite recursion.</p>
-<p>Below that, you will set your options. These can be stacked on separate lines, or you may use commas to list multiple options together:</p>
+<p>首先，请注意顶部消息！下一部分代码是执行项目配置文件以及全局配置文件所必需的（如果存在）。R 只读取一个启动配置文件。例如，如果当前目录下有一个 <code>.Rprofile</code> 和一个全局 <code>~/.Rprofile</code>，则当 R 从当前目录启动时，只会执行前一个。为您提供此代码，以便您可以执行全局和每个项目的配置文件。请注意，此代码只能存在于项目配置文件中，并且您不能将其添加到全局 <code>~/.Rprofile</code> 中，否则它将触发无限递归。</p>
+<p>在其下方，您将设置您的选项。这些可以堆叠在单独的行上，或者您可以使用逗号将多个选项一起列出：</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="global-options.html#cb16-1" tabindex="-1"></a><span class="co"># stacked options</span></span>
 <span id="cb16-2"><a href="global-options.html#cb16-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">blogdown.serve_site.startup =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb16-3"><a href="global-options.html#cb16-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">blogdown.knit.on_save =</span> <span class="cn">TRUE</span>)</span>
@@ -401,7 +401,7 @@ Thanks for your patience while we work to update the book, and please stay tuned
 <span id="cb16-5"><a href="global-options.html#cb16-5" tabindex="-1"></a><span class="co"># comma-separated options</span></span>
 <span id="cb16-6"><a href="global-options.html#cb16-6" tabindex="-1"></a><span class="fu">options</span>(<span class="at">blogdown.serve_site.startup =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb16-7"><a href="global-options.html#cb16-7" tabindex="-1"></a>        <span class="at">blogdown.knit.on_save =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p>It is up to you how to format your profile file—either way works. The <strong>blogdown</strong> options provided in the boilerplate profile file are just a subset of the options available. Depending on your personal preferences and the theme you choose, you may wish to set more global options as you work on your website. For example:</p>
+<p>如何格式化您的配置文件取决于您—无论哪种方式都有效。样板配置文件中提供的 <strong>blogdown</strong> 选项只是可用选项的子集。根据您的个人喜好和您选择的主题，您可能希望在网站上工作时设置更多全局选项。例如：</p>
 <table>
 <caption><span id="tab:global-options-2">TABLE 1.2: </span>Additional global options that affect the behavior of blogdown.</caption>
 <colgroup>
@@ -439,15 +439,15 @@ Thanks for your patience while we work to update the book, and please stay tuned
 </tr>
 </tbody>
 </table>
-<p>Suppose you always prefer writing <code>.Rmd</code> posts (instead of the default <code>.md</code>), and want the author of new posts to be “John Doe” by default. You can set these options in the profile file:</p>
+<p>假设您总是喜欢编写 <code>.Rmd</code> 帖子（而不是默认的 <code>.md</code>），并且希望新帖子的作者默认为 “John Doe”。您可以在配置文件中设置这些选项：</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="global-options.html#cb17-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">blogdown.ext =</span> <span class="st">&#39;.Rmd&#39;</span>, <span class="at">blogdown.author =</span> <span class="st">&#39;John Doe&#39;</span>, <span class="at">blogdown.subdir =</span> <span class="st">&#39;blog&#39;</span>)</span></code></pre></div>
-<p>A nice consequence of setting these options is that when you use the RStudio addin “New Post,” the fields “Author,” “Subdirectory,” and “Format” will be automatically populated, so you do not need to manipulate them every time, unless you want to change the defaults.</p>
-<p>One inconvenience when using startup profile files is the case of the team-authored blog, where multiple authors collaborate on the same website project. You cannot set author-specific options using the <code>blogdown.author</code> option in a single <code>.Rprofile</code>, because this option should be different for different authors. One workaround is to set common website options in your project <code>.Rprofile</code>, then allow each individual author to set their own author-specific options in the global <code>~/.Rprofile</code> on each author’s computer. If you use the boilerplate <code>blogdown::config_Rprofile()</code>, the first chunk of code at the top will ensure that the global <code>~/.Rprofile</code> is also executed if it exists.</p>
+<p>设置这些选项的一个很好的结果是，当您使用 RStudio 插件 “New Post” 时，“Author”、“Subdirectory” 和 “Format” 字段将自动填充，因此您无需每次都操作它们，除非你想改变默认值。</p>
+<p>使用启动配置文件时的一个不便之处在于团队创作的博客，其中多个作者在同一个网站项目上进行协作。您无法在单个 <code>.Rprofile</code> 中使用 <code>blogdown.author</code> 选项设置特定于作者的选项，因为此选项对于不同的作者应该不同。一种解决方法是在项目 <code>.Rprofile</code> 中设置通用网站选项，然后允许每个作者在每个作者计算机上的全局 <code>~/.Rprofile</code> 中设置自己的特定于作者的选项。如果您使用样板 <code>blogdown::config_Rprofile()</code>，顶部的第一块代码将确保全局 <code>~/.Rprofile</code> 也被执行（如果存在）。</p>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="8">
-<li id="fn8"><p>The tilde <code>~</code> denotes your home directory in your system.<a href="global-options.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>波形符 <code>~</code> 表示您系统中的主目录。<a href="global-options.html#fnref8" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

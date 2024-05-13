@@ -286,37 +286,37 @@ menu:
 
 ## A quick deploy
 
-Publishing a **blogdown** website involves copying the output directory containing all your rendered site files (typically, a bunch of `*.html` files and site assets like fonts, CSS, JavaScript, and images) to a web server or web hosting service.
+发布 **blogdown** 网站涉及将包含所有渲染的网站文件（通常是一堆 `*.html` 文件和网站资源，如 fonts、CSS、JavaScript 和 images）的输出目录复制到 Web 服务器或 Web 托管服务。
 
-In this section, we will walk you through a quick deploy to publish your website using a drag-and-drop tool from \index{Netlify} https://www.netlify.com. Netlify is a platform that offers cloud hosting and serverless backend services for static websites. Lucky for us, that is exactly what we need---since **blogdown** helps us create static websites using Hugo. 
+在本部分中，我们将引导您完成快速部署，以使用 \index{Netlify} https://www.netlify.com 中的拖放工具发布您的网站。Netlify 是一个为静态网站提供云托管和无服务器后端服务的平台。对我们来说幸运的是，这正是我们所需要的---因为 **blogdown** 帮助我们使用 Hugo 创建静态网站。
 
-If you followed along with Section \@ref(a-quick-example), you should now have s static website using the Hugo lithium theme with knitted `.Rmd` content for one post and served locally using **blogdown**.
+如果您按照 Section \@ref(a-quick-example) 进行操作，您现在应该拥有一个使用 Hugo lithium 主题的静态网站，其中包含一篇 post 的 knitted `.Rmd` 内容，并使用 **blogdown** 在本地提供服务。
 
-The drag-and-drop method we describe next is a good workflow to start with if you are not familiar with GIT or GitHub or deploying websites. There are many options for publishing static websites, and we will talk more about them plus advanced workflows involving version control and continuous deployment in Chapter \@ref(deployment).
+如果您不熟悉 GIT 或 GitHub 或部署网站，我们接下来描述的拖放方法是一个很好的工作流程。发布静态网站有很多选项，我们将在 Chapter \@ref(deployment) 中详细讨论它们以及涉及版本控制和持续部署的高级工作流程。
 
 ### Build site
 
-The publishing directory of a Hugo site is `public/` by default. Your *built* website will be generated to this directory, which you can upload to any web server that can serve static websites, and your website will be up and running.
+Hugo 网站的发布目录默认为 `public/`。您*构建*的网站将生成到此目录，您可以将其上传到任何可以提供静态网站服务的网络服务器，您的网站将启动并运行。
 
-Serving your Hugo site locally using `blogdown::serve_site()` does not generate the `public/` directory. To follow this drag-and-drop method, you'll need to build your site locally first.
+使用 `blogdown::serve_site()` 在本地为您的 Hugo 站点提供服务不会生成 `public/` 目录。要遵循这种拖放方法，您需要首先在本地构建站点。
 
-Restart the R session, and run:
+重新启动 R 会话，然后运行：
 
 ```{r eval=FALSE}
 blogdown::build_site()
 ```
 
-Alternatively, if you use RStudio, you may use:
+或者，如果您使用 RStudio，您可以使用：
 
-- the "Build Website" button in the Build pane, or 
+- Build 窗格中的 "Build Website" 按钮，或者
 
-- press `Ctrl + Shift + B` (`Cmd + Shift + B` on macOS) to build the website.
+- 按 `Ctrl + Shift + B` (`Cmd + Shift + B` on macOS) 构建网站。
 
-You should see a new `public/` directory under the root directory of your project. Never edit files in this directory, as your changes will always be overwritten whenever you re-build your site.
+您应该在项目的根目录下看到一个新的 `public/` 目录。切勿编辑此目录中的文件，因为每当您重新构建站点时，您的更改都将被覆盖。
 
-Note that this function does not re-knit R Markdown files by default, because it may be expensive and often undesirable to render `.Rmd` files that have been knitted before. Given that R package upgrades have a tendency to break older code, continuously re-knitting old content is nearly impossible to do without errors, especially over longer periods of time.
+请注意，此功能默认情况下不会 re-knit R Markdown 文件，因为渲染之前 knitted 过的 `.Rmd` 文件可能会很昂贵并且通常不受欢迎。鉴于 R 包升级有破坏旧代码的趋势，连续 re-knitting 旧内容几乎不可能不出错，尤其是在较长的时间内。
 
-We recommend always using `blogdown::serve_site()` first to preview your site before building it. By default, that function will knit your R Markdown content that has not been knitted yet. As mentioned earlier, we also recommend running `blogdown::check_content()`. Among other things, we check if you have content that needs to be re-knit:
+我们建议在构建网站之前始终先使用 `blogdown::serve_site()` 来预览您的网站。默认情况下，该函数将 knit 尚未 knitted 的 R Markdown 内容。如前所述，我们还建议运行 `blogdown::check_content()`。除此之外，我们还会检查您是否有需要 re-knit 的内容：
 
 ```default
 | Checking your R Markdown content...
@@ -326,53 +326,53 @@ We recommend always using `blogdown::serve_site()` first to preview your site be
 
 ### Use Netlify Drop
 
-Next, go online to\index{Netlify} Netlify Drop at https://app.netlify.com/drop. You can drag and drop the `public/` folder from your file viewer to the indicated area on the Netlify web page, where it says "Drag and drop your site output folder here."
+接下来，在线访问 Netlify Drop：https://app.netlify.com/drop。 您可以将 `public/` 文件夹从文件查看器拖放到 Netlify 网页上的指定区域，其中显示“将站点输出文件夹拖放到此处”。
 
-Wait for a few seconds for Netlify to deploy the files, and it will assign a random subdomain of the form `random-word-12345.netlify.app` to you. After your site is live, you will be able to share the link to your new **blogdown** site if you would like to.
+等待几秒钟，让 Netlify 部署文件，它会为您分配一个形式为 `random-word-12345.netlify.app` 的随机子域。您的网站上线后，如果您愿意，您将能够共享新 **blogdown** 网站的链接。
 
-You will notice a disclaimer that this site will be deleted after 24 hours. You need to create an account to save this link and keep your site online.
+您会注意到一条免责声明，表明该网站将在 24 小时后删除。您需要创建一个帐户来保存此链接并使您的网站保持在线。
 
 ### Sign up for Netlify
 
-Netlify has a free plan with plenty of useful features, so we recommend signing up for an account. To sign up:
+Netlify 有一个免费计划，其中包含许多有用的功能，因此我们建议您注册一个帐户。注册：
 
-1. Go online to \index{Netlify} https://www.netlify.com.
+1. 在线访问  \index{Netlify} https://www.netlify.com.
 
-1. Click on the "Sign Up" button. 
+1. 单击 "Sign Up" 按钮。
 
-1. If you have a GitHub account (https://github.com), we recommend signing up using your existing GitHub account (no need to create another account), so select "GitHub" (you may need to sign in), and click to "Authorize Netlify."
+1. 如果您有 GitHub 帐户（https://github.com），我们建议使用您现有的 GitHub 帐户进行注册（无需创建其他帐户），因此选择“GitHub”（您可能需要登录），然后单击 "Authorize Netlify"。
 
-1. From your account, if you used Netlify Drop, you can (and should) change your random subdomain to a more meaningful one. You may read the docs for changing a site's default Netlify subdomain here: https://docs.netlify.com/domains-https/custom-domains/#assign-a-domain-to-a-site
+1. 在您的帐户中，如果您使用 Netlify Drop，您可以（并且应该）将您的随机子域更改为更有意义的子域。您可以在此处阅读有关更改站点默认 Netlify 子域的文档：https://docs.netlify.com/domains-https/custom-domains/#assign-a-domain-to-a-site
 
-1. Also from your account, you may update your existing site by making changes locally, reknitting if necessary, then rebuilding your site with `blogdown::build_site()`. In the "Deploys" tab on Netlify, scroll down to where you see "Need to update your site? Drag and drop your site output folder here." Drop your updated `public/` folder there to update the deployed website.
+1. 此外，您还可以通过您的帐户在本地进行更改来更新现有网站，必要时 reknit，然后使用 `blogdown::build_site()` 重建您的网站。在 Netlify 的 "Deploys" 选项卡中，向下滚动到看到 "Need to update your site? Drag and drop your site output folder here." 将更新后的 `public/` 文件夹拖放到此处以更新已部署的网站。
 
 ### What is next?
 
-The workflow described above can be cumbersome the more you work on your website. It can be much easier to publish a website if you are familiar with GIT and GitHub. 
+您在网站上工作的次数越多，上述工作流程可能会变得很麻烦。如果您熟悉 GIT 和 GitHub，发布网站会容易得多。
 
-We recommend that you create a new site on Netlify from your GitHub repository that contains the source files of your website, so that you can enjoy the benefits of continuous deployment instead of manually uploading the `public/` folder every time. 
+我们建议您从 GitHub 存储库在 Netlify 上创建一个新站点，其中包含您网站的源文件，这样您就可以享受持续部署的好处，而不是每次都手动上传 `public/` 文件夹。
 
-With this advanced workflow, you do not need to run `blogdown::hugo_build()` locally, because the website can be built on Netlify via Hugo. Instead, you would rely on `blogdown::serve_site()` locally to preview your site before pushing your changes to GitHub. See Chapter \@ref(deployment) for more information.
+借助这种高级工作流程，您无需在本地运行 `blogdown::hugo_build()`，因为可以通过 Hugo 在 Netlify 上构建网站。相反，您可以在将更改推送到 GitHub 之前在本地依赖 `blogdown::serve_site()` 预览您的网站。请参阅 Chapter \@ref(deployment) 了解更多信息。
 
 ## RStudio IDE
 
-There are a few essential RStudio addins\index{RStudio addins} to make it easy to edit and preview your website, and you can find them in the menu "Addins" on the RStudio toolbar:
+有一些基本的 RStudio 插件可以让您轻松编辑和预览网站，您可以在 RStudio 工具栏上的 "Addins" 菜单中找到它们：
 
-- "Serve Site": This addin calls `blogdown::serve_site()` to continuously serve your website locally using the LiveReload technology, so you can live preview the website. You can continue to edit material for your site while you are previewing it.
+- “Serve Site”：此插件调用 `blogdown::serve_site()` 使用 LiveReload 技术在本地持续为您的网站提供服务，以便您可以实时预览网站。您可以在预览时继续编辑网站的材料。
 
-- "New Post": This addin provides a dialog box for you to enter the metadata of your blog post, including the title, author, date, and so on. See Figure \@ref(fig:new-post) for an example. This addin actually calls the function `blogdown::new_post()` under the hood, but does a few things automatically:
+- “New Post”：此插件提供了一个对话框，供您输入博客文章的 metadata，包括标题、作者、日期等。示例见 Figure \@ref(fig:new-post)。这个插件实际上在底层调用了函数 `blogdown::new_post()` ，但会自动执行一些操作：
 
-    - As you type the title of the post, it will generate a filename for you, and you can edit it if you do not like the automatically generated one. In fact, you can also use this addin to create normal pages under any directories under `content/`. For example, if you want to add a resume page, you can change the filename to `resume.md` from the default `post/YYYY-mm-dd-resume.md`.
+    - 当您输入 post 标题时，它会为您生成一个文件名，如果您不喜欢自动生成的文件名，您可以对其进行编辑。事实上，你也可以使用这个插件在 `content/` 下的任何目录下创建普通页面。例如，如果要添加简历页面，可以将文件名从默认的 `post/YYYY-mm-dd-resume.md` 更改为 `resume.md`。
 
-    - You can select the date from a calendar widget provided by Shiny.^[Shiny is an R package for building interactive web apps using R. Using this addin, the calendar widget allows you to view an interactive calendar by month to select dates. This is a simple use of Shiny, but you can read more about Shiny apps here: https://shiny.rstudio.com.]
+    - 您可以从 Shiny 提供的日历小部件中选择日期。^[Shiny 是一个 R 包，用于使用 R 构建交互式 Web apps。使用此插件，日历小部件允许您按月查看交互式日历以选择日期。这是 Shiny 的简单使用，但您可以在这里阅读有关 Shiny 应用程序的更多信息：https://shiny.rstudio.com。]
 
-    - It will scan the categories and tags of existing posts, so when you want to input categories or tags, you can select them from the dropdown menus, or create new ones.
+    - 它将扫描现有 posts 的类别和标签，因此当您想要输入类别或标签时，您可以从下拉菜单中选择它们，或者创建新的类别或标签。
     
-    - After a new post is created, it will be automatically opened, so you can start writing the content immediately.
+    - 新 post 创建后会自动打开，您可以立即开始撰写内容。
 
-- "Update Metadata": This addin allows you to update the YAML metadata of the currently opened post. See Figure \@ref(fig:update-meta) for an example. The main advantage of this addin is that you can select categories and tags from dropdown menus instead of having to remember them.
+- "Update Metadata": 此插件允许您更新当前打开的 post 的 YAML metadata。示例见 Figure \@ref(fig:update-meta)。该插件的主要优点是您可以从下拉菜单中选择类别和标签，而不必记住它们。
 
-- "Insert Image": This addin allows you to insert any image in your computer to your currently opened post.^[Check <https://lcolladotor.github.io/2018/03/07/blogdown-insert-image-addin> for a more in-depth explanation and for how to insert an image without using this addin.] Figure \@ref(fig:insert-image) shows how the addin looks like. This addin copies the image to the final location for your post files, and adds the Markdown/HTML code to embed the image. You can specify the width and height of the image, as well as the alternative text. The addin will show the final image file path after the image is uploaded. You can edit the path if necessary. If the image already exists, the addin will ask you whether you want to overwrite it as in Figure \@ref(fig:overwrite-image): when in doubt, change the name in the "Target file path" text input to avoid a conflict with previous images you have inserted.
+- "Insert Image": 此插件允许您将计算机中的任何图像插入到当前打开的 post 中。^[查看 <https://lcolladotor.github.io/2018/03/07/blogdown-insert-image-addin> 以获取更深入的解释以及如何在不使用此插件的情况下插入图像。] Figure \@ref(fig:insert-image) 显示了该插件的外观。此插件将图像复制到 post 文件的最终位置，并添加 Markdown/HTML 代码来嵌入图像。您可以指定图像的宽度和高度以及替代文本。图片上传后，插件将显示最终的图片文件路径。如有必要，您可以编辑路径。如果图像已经存在，插件会询问您是否要覆盖它，如 Figure \@ref(fig:overwrite-image) 所示：如有疑问，请更改 "Target file path" 文本输入中的名称，以避免与您之前插入的图像发生冲突。
 
 ```{r new-post, fig.cap='Create a new post using the RStudio addin.', fig.align='center', out.width='80%', echo=FALSE}
 knitr::include_graphics('images/new-post.png')
@@ -390,13 +390,13 @@ knitr::include_graphics('images/insert-image.png')
 knitr::include_graphics('images/overwrite-image.png')
 ```
 
-With these addins, you should rarely need to run any R commands manually after you have set up your website, since all your posts will be automatically compiled whenever you create a new post or modify an existing post due to the LiveReload feature.
+使用这些插件，在设置网站后，您应该很少需要手动运行任何 R 命令，因为由于 LiveReload 功能，每当您创建新帖子或修改现有帖子时，您的所有帖子都会自动编译。
 
-If your website was created using the function `blogdown::new_site()` instead of the RStudio menu (see Figure \@ref(fig:new-project) and \@ref(fig:blogdown-project)) for the first time, you can quit RStudio and open the project again. If you go to the menu `Tools -> Project Options`, your project type should be "Website" like what you can see in Figure \@ref(fig:project-options).
+如果您的网站是第一次使用函数 `blogdown::new_site()` 而不是 RStudio 菜单（见 Figure \@ref(fig:new-project) 和 \@ref(fig:blogdown-project)）创建的，您可以退出 RStudio 并再次打开项目。如果您进入菜单 `Tools -> Project Options`，您的项目类型应该是 "Website"，如 Figure \@ref(fig:project-options) 所示。
 
-Then you will see a pane in RStudio named "Build," and there is a button "Build Website." When you click this button, RStudio will call `blogdown::build_site()` to build the website. This will automatically generate files in the `public/` directory.^[Or wherever your publishing directory is located. It is `public/` by default, but it can be changed by specifying the field `publishDir: "myNewDirectory"` in the `config.yaml` file.]
+然后您将在 RStudio 中看到一个名为 "Build" 的窗格，并且有一个 "Build Website" 按钮。当您单击此按钮时，RStudio 将调用 `blogdown::build_site()` 来构建网站。这会自动在 `public/` 目录下生成文件。^[或者您的发布目录所在的任何位置。默认是 `public/`，但可以通过在 `config.yaml` 文件中指定字段 `publishDir: "myNewDirectory"` 来更改。]
 
-We strongly recommend that you uncheck the option "Preview site after building" in your RStudio project options (Figure \@ref(fig:project-options)).^[In case you wonder why: unless you have set the option `relativeurls` to `true` in `config.toml`, it requires a web server to preview the website locally, otherwise even if you can see the homepage of your website in the RStudio Viewer, most links like those links to CSS and JavaScript files are unlikely to work. When the RStudio Viewer shows you the preview, it does not actually launch a web server.] You can also uncheck the option "Re-knit current preview when supporting files change," since this option is not really useful after you call `serve_site()`.
+我们强烈建议您在 RStudio 项目选项中取消选中 "Preview site after building" 选项（Figure \@ref(fig:project-options)）。^[如果您想知道为什么：除非您在 `config.toml` 中将选项 `relativeurls` 设置为 `true`，否则需要 Web 服务器在本地预览网站，否则即使您可以在 RStudio Viewer 中看到网站的主页，大多数链接都像这些指向 CSS 和 JavaScript 文件的链接不太可能起作用。当 RStudio Viewer 向您显示预览时，它实际上并没有启动 Web 服务器。] 您还可以取消选中 "Re-knit current preview when supporting files change" 选项，因为此选项在你调用 `serve_site()` 之后并不是很有用。
 
 ```{r project-options, echo=FALSE, fig.cap='RStudio project options.', out.width='80%', fig.align='center'}
 knitr::include_graphics('images/project-options.png')
@@ -404,9 +404,9 @@ knitr::include_graphics('images/project-options.png')
 
 ## Global options\index{Global Options}
 
-The **blogdown** package uses global options, specified in a `.Rprofile` file, to help users customize how **blogdown** works. When you create a new site, **blogdown** adds a project-level `.Rprofile` file in the root directory of your website project.
+**blogdown** 包使用 `.Rprofile` 文件中指定的全局选项来帮助用户自定义 **blogdown** 的工作方式。当您创建新站点时，**blogdown** 会在您的网站项目的根目录中添加一个项目级 .Rprofile` 文件。
 
-Options should be set using the syntax `options(name = value)`, and those included in a new **blogdown** site's `.Rprofile` file are presented in Table \@ref(tab:global-options-new).
+选项应使用语法 `options(name = value)` 进行设置，新 **blogdown** 站点的 `.Rprofile` 文件中包含的选项如 Table \@ref(tab:global-options-new) 所示。
 
 ```{r global-options-new, echo=FALSE}
 knitr::kable(matrix(c(
@@ -418,33 +418,33 @@ knitr::kable(matrix(c(
 ), ncol = 3, byrow = TRUE, dimnames = list(NULL, c('Option name', 'Default', 'Meaning'))), booktabs = TRUE, caption = 'Global options for configured for new blogdown sites.')
 ```
 
-Three of these options are worth further explanations:
+其中三个选项值得进一步解释：
 
-- `blogdown.hugo.version`: You can find available Hugo versions at <https://github.com/gohugoio/hugo/releases/>, and find all locally installed Hugo versions via `blogdown::find_hugo('all')`. A common mistake when specifying this option is to omit the version number `0` at the end. For example, only Hugo v0.55.0 exists, but not v0.55, so `options(blogdown.hugo.version = '0.55')` will not work, and you must set it to `0.55.0` precisely.
+- `blogdown.hugo.version`: 您可以在 <https://github.com/gohugoio/hugo/releases/> 找到可用的 Hugo 版本，并通过 `blogdown::find_hugo('all')` 查找所有本地安装的 Hugo 版本。指定此选项时的一个常见错误是省略末尾的版本号 `0`。例如，仅 Hugo v0.55.0 存在，但不存在 v0.55，因此 `options(blogdown.hugo.version = '0.55')` 将不起作用，您必须将其精确设置为 `0.55.0`。
 
-- `blogdown.knit.on_save`: By default, the Rmd file is automatically knitted when it is saved. If you prefer clicking the `Knit` button in RStudio to manually knit the file, you may set this option to `FALSE`. If this option is unset, **blogdown** will set it to `TRUE` for the current R session (with a reminder message) when you click the `Knit` button.
+- `blogdown.knit.on_save`: 默认情况下，Rmd 文件保存时会自动 knitted。如果您更喜欢单击 RStudio 中的 `Knit` 按钮来手动 knit 文件，可以将此选项设置为 `FALSE`。如果未设置此选项，当您单击 `Knit` 按钮时，**blogdown** 会将当前 R 会话设置为 `TRUE`（带有提醒消息）。
 
-- `blogdown.method`: By default, an `Rmd` post is compiled to `.md` (Markdown) via **rmarkdown**, which will be rendered to HTML by Hugo's Markdown renderer (e.g., Goldmark). You may set this option to `"html"` to pre-render `.md` to `.html` and bypass Hugo's Markdown renderer. Basically, this option decides whether you want to use Pandoc or Hugo's Markdown renderer to render Markdown to HTML. See Section \@ref{method} for more information.
+- `blogdown.method`: 默认情况下，`Rmd` 帖子通过 **rmarkdown** 编译为 .md (Markdown)，该文件将由 Hugo 的 Markdown 渲染器（例如 Goldmark）渲染为 HTML。您可以将此选项设置为 `"html"` 以将 `.md` 预渲染为 `.html` 并绕过 Hugo 的 Markdown 渲染器。基本上，此选项决定您是否要使用 Pandoc 还是 Hugo 的 Markdown 渲染器将 Markdown 渲染为 HTML。有关详细信息，请参阅 Section \@ref{method}。
 
-We recommend that you set these options in your R startup profile file. If you have never used a startup profile file before, you can check out the help page `?Rprofile`. Here, we provide a brief but incomplete introduction to orient you quickly.
+我们建议您在 R 启动配置文件中设置这些选项。如果您以前从未使用过启动配置文件，您可以查看帮助页面 `?Rprofile`。在这里，我们提供简短但不完整的介绍，以便您快速熟悉。
 
-A startup profile file is basically an R script that is executed when your R session is started. This is a perfect place to set global options, so you do not need to type these options again every time you start a new R session. 
+启动配置文件基本上是一个 R 脚本，在 R 会话启动时执行。这是设置全局选项的完美位置，因此您无需在每次启动新的 R 会话时再次键入这些选项。
 
-There are a few things you need to know about R's startup profile file before using: 
+在使用 R 的启动配置文件之前，您需要了解以下几点：
 
-1. You can use a global profile file `~/.Rprofile`,^[The tilde `~` denotes your home directory in your system.] or a per-project file `.Rprofile` under the root directory of your RStudio project. The former will be applied to all R sessions that you start, unless you have provided the latter to override it. 
+1. 您可以使用一个全局配置文件 `~/.Rprofile`,^[波形符 `~` 表示您系统中的主目录。] 或 RStudio 项目根目录下的每个项目文件 `.Rprofile`。前者将应用于您启动的所有 R 会话，除非您提供了后者来覆盖它。
 
-1. The name "startup profile file" means that R only executes this file when you first start your R session. This means that when you modify and save your `.Rprofile`, you must restart R for the changes to take effect. 
+1. 名称 "startup profile file" 意味着 R 仅在您首次启动 R 会话时执行此文件。这意味着当您修改并保存 `.Rprofile` 时，必须重新启动 R 才能使更改生效。
 
-1. [R will silently ignore the last line of your `.Rprofile`](https://yihui.org/en/2018/04/rprofile-trailing-newline/) if it does not have a trailing newline, so please make sure you add at least one newline to the end of your `.Rprofile`.
+1. [R 将默默忽略 `.Rprofile` 的最后一行](https://yihui.org/en/2018/04/rprofile-trailing-newline/) 如果它没有尾随换行符, 因此请确保在 `.Rprofile` 末尾添加至少一个换行符。
 
-If you want to add a profile file to an existing **blogdown** project, or you created a new website without using `blogdown::new_site()`, you can create a boilerplate version with this command in your R console:
+如果您想将配置文件添加到现有的 **blogdown** 项目，或者您在不使用 `blogdown::new_site()` 的情况下创建了新网站，则可以在 R 控制台中使用以下命令创建样板版本：
 
 ```{r eval=FALSE}
 blogdown::config_Rprofile()
 ```
 
-This is the easiest way to create or modify a per-project profile file. At the top of the file in a new **blogdown** website project, you will see this:
+这是创建或修改每个项目配置文件的最简单方法。在新的 **blogdown** 网站项目的文件顶部，您将看到以下内容：
 
 ```r
 # REMEMBER to restart R after you modify and save this file!
@@ -458,9 +458,9 @@ if (file.exists("~/.Rprofile")) {
 }
 ```
 
-First, note the top message! The next section of code is necessary to execute both your project profile as well as the global profile if one exists. R only reads one startup profile file. For example, if you have a `.Rprofile` under the current directory and a global `~/.Rprofile`, only the former one will be executed when R starts up from the current directory. This code is provided for you so you may execute both a global and per-project profile file. Note that this code should only live in the project profile, and you _must not_ add it to your global `~/.Rprofile`, otherwise it will trigger an infinite recursion.
+首先，请注意顶部消息！下一部分代码是执行项目配置文件以及全局配置文件所必需的（如果存在）。R 只读取一个启动配置文件。例如，如果当前目录下有一个 `.Rprofile` 和一个全局  `~/.Rprofile`，则当 R 从当前目录启动时，只会执行前一个。为您提供此代码，以便您可以执行全局和每个项目的配置文件。请注意，此代码只能存在于项目配置文件中，并且您不能将其添加到全局 `~/.Rprofile` 中，否则它将触发无限递归。
 
-Below that, you will set your options. These can be stacked on separate lines, or you may use commas to list multiple options together:
+在其下方，您将设置您的选项。这些可以堆叠在单独的行上，或者您可以使用逗号将多个选项一起列出：
 
 ```r
 # stacked options
@@ -472,7 +472,7 @@ options(blogdown.serve_site.startup = FALSE,
         blogdown.knit.on_save = TRUE)
 ```
 
-It is up to you how to format your profile file---either way works. The **blogdown** options provided in the boilerplate profile file are just a subset of the options available. Depending on your personal preferences and the theme you choose, you may wish to set more global options as you work on your website. For example:
+如何格式化您的配置文件取决于您---无论哪种方式都有效。样板配置文件中提供的 **blogdown** 选项只是可用选项的子集。根据您的个人喜好和您选择的主题，您可能希望在网站上工作时设置更多全局选项。例如：
 
 ```{r global-options-2, echo=FALSE}
 knitr::kable(matrix(c(
@@ -484,21 +484,21 @@ knitr::kable(matrix(c(
 ), ncol = 3, byrow = TRUE, dimnames = list(NULL, c('Option name', 'Default', 'Meaning'))), booktabs = TRUE, caption = 'Additional global options that affect the behavior of blogdown.')
 ```
 
-Suppose you always prefer writing `.Rmd` posts (instead of the default `.md`), and want the author of new posts to be "John Doe" by default. You can set these options in the profile file:
+假设您总是喜欢编写 `.Rmd` 帖子（而不是默认的 `.md`），并且希望新帖子的作者默认为 "John Doe"。您可以在配置文件中设置这些选项：
 
 ```{r eval=FALSE}
 options(blogdown.ext = '.Rmd', blogdown.author = 'John Doe', blogdown.subdir = 'blog')
 ```
 
-A nice consequence of setting these options is that when you use the RStudio addin "New Post," the fields "Author," "Subdirectory," and "Format" will be automatically populated, so you do not need to manipulate them every time, unless you want to change the defaults.
+设置这些选项的一个很好的结果是，当您使用 RStudio 插件 "New Post" 时，"Author"、"Subdirectory" 和 "Format" 字段将自动填充，因此您无需每次都操作它们，除非你想改变默认值。
 
-One inconvenience when using startup profile files is the case of the team-authored blog, where multiple authors collaborate on the same website project. You cannot set author-specific options using the `blogdown.author` option in a single `.Rprofile`, because this option should be different for different authors. One workaround is to set common website options in your project `.Rprofile`, then allow each individual author to set their own author-specific options in the global `~/.Rprofile` on each author's computer. If you use the boilerplate `blogdown::config_Rprofile()`, the first chunk of code at the top will ensure that the global `~/.Rprofile` is also executed if it exists. 
+使用启动配置文件时的一个不便之处在于团队创作的博客，其中多个作者在同一个网站项目上进行协作。您无法在单个 `.Rprofile` 中使用 `blogdown.author` 选项设置特定于作者的选项，因为此选项对于不同的作者应该不同。一种解决方法是在项目 `.Rprofile` 中设置通用网站选项，然后允许每个作者在每个作者计算机上的全局 `~/.Rprofile` 中设置自己的特定于作者的选项。如果您使用样板 `blogdown::config_Rprofile()`，顶部的第一块代码将确保全局 `~/.Rprofile` 也被执行（如果存在）。
 
 ## R Markdown vs. Markdown {#output-format}
 
-If you are not familiar with R Markdown\index{R Markdown}, please see Appendix \@ref(r-markdown) for a quick tutorial. When you create a new post, you have to decide whether you want to use R Markdown or plain Markdown\index{Markdown}, as you can see from Figure \@ref(fig:new-post). 
+如果您不熟悉 R Markdown\index{R Markdown}，请参阅 Appendix \@ref(r-markdown) 的快速教程。当您创建新帖子时，您必须决定是否要使用 R Markdown 还是普通 Markdown，如 Figure \@ref(fig:new-post) 所示。
 
-Table \@ref(tab:md-diff) summarizes the main differences among the three file extensions. Note that `.Rmarkdown` is always rendered to Markdown (`.markdown`), yet `.Rmd` may be rendered to HTML or Markdown, depending on the global option `blogdown.method = "html"` or `"markdown"`.
+Table \@ref(tab:md-diff) 总结了三种文件扩展名之间的主要区别。请注意，`.Rmarkdown` 始终呈现为 Markdown (`.markdown`)，但 `.Rmd` 可能呈现为 HTML 或 Markdown，具体取决于全局选项 `blogdown.method = "html"` 或 `"markdown"`。
 
 Table: (\#tab:md-diff) Differences among the three document formats.
 
@@ -510,7 +510,7 @@ Table: (\#tab:md-diff) Differences among the three document formats.
 |LaTeX math   |yes  |maybe      |maybe|
 |HTML widgets |yes  |yes        |no   |
 
-Basically, you cannot execute any R code in a plain Markdown document (`.md` or `.markdown`), whereas in an R Markdown document (`.Rmd` or `.Rmarkdown`), you can embed R code chunks (```` ```{r} ````). However, you can still embed R code in plain Markdown using the syntax for fenced code blocks ```` ```r ```` (note there are no curly braces `{}`). Such code blocks will not be executed and may be suitable for pure demonstration purposes. Below is an example of an R code chunk in R Markdown:
+基本上，您无法在普通 Markdown 文档（`.md` 或 `.markdown`）中执行任何 R 代码，而在 R Markdown 文档（`.Rmd` 或 `.Rmarkdown`）中，您可以嵌入 R 代码块（```` ```{r} ````）。但是，您仍然可以使用受防护代码块 ```` ```r ```` 的语法将 R 代码嵌入到纯 Markdown 中（请注意，没有大括号 `{}`）。此类代码块将不会被执行，并且可能适合纯粹的演示目的。下面是 R Markdown 中 R 代码块的示例：
 
 ````{verbatim, lang='markdown'}
 ```{r cool-plot, fig.cap='A cool plot.'}
@@ -518,7 +518,7 @@ plot(cars, pch = 20)  # not really cool
 ```
 ````
 
-And here is an example of an R code block in plain Markdown:
+下面是纯 Markdown 格式的 R 代码块示例：
 
 ````{verbatim, lang='markdown'}
 ```r
@@ -526,7 +526,7 @@ And here is an example of an R code block in plain Markdown:
 ```
 ````
 
-A plain Markdown post is directly rendered to HTML through [Goldmark](https://github.com/yuin/goldmark) \index{Goldmark}(a Markdown renderer written in the Go language and adopted by Hugo). An R Markdown post is first compiled to Markdown through the R packages **rmarkdown** and **bookdown**, which means you can use most features of [**bookdown**'s Markdown extensions](https://bookdown.org/yihui/bookdown/components.html) in **blogdown**. Then the Markdown post can be rendered to HTML by either Goldmark or Pandoc\index{Pandoc}. For the latter case, you can also use richer features in [Pandoc's Markdown](http://pandoc.org/MANUAL.html#pandocs-markdown) (see Section \@ref(blogdown-method) for more information).
+普通的 Markdown 帖子通过 [Goldmark](https://github.com/yuin/goldmark) \index{Goldmark} (用 Go 语言编写并被 Hugo 采用的 Markdown 渲染器) 直接渲染为 HTML。R Markdown 帖子首先通过 R 包 **rmarkdown** 和 **bookdown** 编译为 Markdown，这意味着您可以在 **blogdown** 中使用 [**bookdown**'s Markdown extensions](https://bookdown.org/yihui/bookdown/components.html) 扩展的大部分功能。然后，Markdown 帖子可以通过 Goldmark 或 Pandoc\index{Pandoc} 呈现为 HTML。对于后一种情况，您还可以使用 [Pandoc's Markdown](http://pandoc.org/MANUAL.html#pandocs-markdown) 中更丰富的功能（更多信息请参见 Section \@ref(blogdown-method)）。
 
 ### Basic features of R Markdown
 
