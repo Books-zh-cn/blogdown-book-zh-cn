@@ -12,9 +12,9 @@ Try to translate **blogdown: Creating Websites with R Markdown** into Simplified
 
 | Chapter                          | progress | Time      |
 |:---------------------------------|:---------|:----------|
-| 1 Get Started                  |  ✔       | 2024.5.7 |
-| 1.1 Installation             |         |   |
-| 1.2 A quick example               |         |   |
+| 1 Get Started                    |  ✔       | 2024.5.7  |
+| 1.1 Installation                 |  ✔       | 2024.5.7  |
+| 1.2 A quick example              |  ✔       | 2024.5.13 |
 | 1.3 A quick deploy            |         |  |
 | 1.4 RStudio IDE           |         |   |
 | 1.5 Global options                   |         |   |

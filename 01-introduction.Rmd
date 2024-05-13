@@ -8,14 +8,14 @@
 
 ## Installation
 
-We assume you have already installed:
+我们假设您已经安装：
 
 + R (https://www.r-project.org) [@R-base] and 
 + the RStudio IDE (https://posit.co/download/rstudio-desktop/). 
 
-If you are not using the RStudio IDE, please install Pandoc\index{Pandoc} (http://pandoc.org). Instructions are available on the reference site (https://pandoc.org/installing.html).
+如果您没有使用 RStudio IDE，请安装 Pandoc\index{Pandoc} (http://pandoc.org)。参考站点上提供了说明 (https://pandoc.org/installing.html) 。
 
-The **blogdown** package is available on CRAN and you can install it with:
+**blogdown** 包在 CRAN 上可用，您可以使用以下命令安装它：
 
 ```{r eval=FALSE}
 install.packages('blogdown') 
@@ -23,7 +23,7 @@ install.packages('blogdown')
 
 ### Installation troubleshooting
 
-Do you have an old version of **blogdown**? Compare your version against ours and upgrade if necessary.
+你有旧版本的 **blogdown** 吗？将您的版本与我们的版本进行比较，并在必要时进行升级。
 
 ```{r eval=FALSE}
 packageVersion("blogdown")
@@ -33,38 +33,38 @@ packageVersion("blogdown")
 packageVersion("blogdown")[, 1:2]
 ```
 
-To update **blogdown**, run `install.packages('blogdown')`.
+要更新 **blogdown**，请运行 `install.packages('blogdown')`。
 
-Do you have old versions of **blogdown**'s dependencies (such as **rmarkdown**)? If you are experiencing problems, you may first try to update all R packages:
+您是否有旧版本的 **blogdown** 依赖项（例如 **rmarkdown**）？如果您遇到问题，您可以首先尝试更新所有 R 软件包：
 
 ```{r eval = FALSE}
 update.packages(ask = FALSE, checkBuilt = TRUE)
 ```
 
-If you are still experiencing issues with **blogdown**, you may try installing the development version from GitHub:
+如果您仍然遇到 **blogdown** 问题，您可以尝试从 GitHub 安装开发版本：
 
 ```{r eval=FALSE}
 if (!requireNamespace('remotes')) install.packages('remotes')
 remotes::install_github('rstudio/blogdown')
 ```
 
-If you use RStudio, it will remind you of restarting R before installing or updating any packages currently in use. If you do not use RStudio, you may need to restart R by yourself.
+如果您使用 RStudio，它会提醒您在安装或更新当前正在使用的任何软件包之前重新启动 R。如果您不使用 RStudio，您可能需要自行重新启动 R。
 
 ## A quick example
 
-In this section, we aim to take you from no website to a basic **blogdown** website, with minimal time and friction. We will briefly run through the development of a working but simple website using the default theme used by the **blogdown** package. 
+在本节中，我们的目标是让您以最少的时间和最少的摩擦从没有网站到建立一个基本的 **blogdown** 网站。我们将使用 **blogdown** 包使用的默认主题简要介绍一个可以工作但简单的网站的开发过程。
 
-This section is designed to provide a beginner-friendly workflow. In later sections, we will present different workflows and dive deeper into details like advanced **blogdown** features, Hugo themes, the Hugo static site generator, version control, and deployment options. 
+本部分旨在提供适合初学者的工作流程。在后面的部分中，我们将介绍不同的工作流程，并深入探讨高级 **blogdown** 功能、Hugo 主题、Hugo 静态站点生成器、版本控制和部署选项等细节。
 
 ### Prerequisites
 
-To keep this example *actually* quick, we will assume that you are using the RStudio IDE and will rely on some of the built-in features that help **blogdown** users.^[The instructions here rely on a recent RStudio IDE version, v1.4.1106. You may download all RStudio official releases from <https://posit.co/download/rstudio-desktop/>.]
+为了让这个示例真正快速，我们假设您正在使用 RStudio IDE，并将依赖一些帮助 **blogdown** 用户的内置功能。^[此处的说明依赖于最新的 RStudio IDE 版本 v1.4.1106。您可以从 <https://posit.co/download/rstudio-desktop/> 下载所有 RStudio 官方版本。]
 
-We also assume that you have followed the installation instructions in Section \@ref(installation).
+我们还假设您已遵循 Section \@ref(installation) 中的安装说明。
 
 ### Create project 
 
-The best home for your new **blogdown** website project is inside an RStudio project. A quick way to create one is to use the RStudio New Project Wizard (`File -> New Project -> New Directory`) (see Figure \@ref(fig:new-project) and \@ref(fig:blogdown-project)).
+新的 **blogdown** 网站项目的最佳创建方式是在 RStudio project 中。创建的快速方法是使用 RStudio New Project 菜单 (`File -> New Project -> New Directory`) (see Figure \@ref(fig:new-project) and \@ref(fig:blogdown-project))。
 
 ```{r new-project, echo=FALSE, fig.cap='Create a new website project in RStudio.', out.width='80%', fig.align='center'}
 knitr::include_graphics('images/new-project.png')
@@ -74,21 +74,21 @@ knitr::include_graphics('images/new-project.png')
 knitr::include_graphics('images/blogdown-project.png')
 ```
 
-Click "Create Project". The project wizard then runs a function that creates a new site for you by doing the following steps:
+单击  "Create Project"。然后，项目向导运行一个函数，通过执行以下步骤为您创建一个新站点：
 
-1. Creates and opens a new [RStudio Project](https://support.posit.co/hc/en-us/articles/200526207-Using-Projects) for the website;
-1. Downloads and installs the default theme (called [`hugo-lithium`](https://github.com/yihui/hugo-lithium)) with an example site;
-1. Adds a sample `.Rmd` post;
-1. Creates a `netlify.toml` file to help you deploy your site to [Netlify,](https://www.netlify.com) and
-1. Creates an `.Rprofile` file to set your **blogdown** options (some have been set up for you).
+1. 为网站创建并打开一个新的 [RStudio Project](https://support.posit.co/hc/en-us/articles/200526207-Using-Projects);
+1. 下载并安装带有示例站点的默认主题 (called [`hugo-lithium`](https://github.com/yihui/hugo-lithium));
+1. 添加一个示例 `.Rmd` post;
+1. 创建一个 `netlify.toml` 文件来帮助您将站点部署到 [Netlify,](https://www.netlify.com)，并且
+1. 创建一个 `.Rprofile` 文件来设置您的 **blogdown** 选项（其中一些选项已为您设置）。
 
-If you are not using RStudio, you can create a new empty directory, and call the `new_site()` function in the directory in the R console to create a new site project:
+如果您没有使用 RStudio，您可以创建一个新的空目录，并在 R 控制台中调用该目录中的 `new_site()` 函数来创建新的站点项目：
 
 ```{r, eval=FALSE, echo=TRUE}
 blogdown::new_site()
 ```
 
-You should now see a bunch of directories and files under the site project. The project will include the following files:
+您现在应该在站点项目下看到一堆目录和文件。该项目将包含以下文件：
 
 - `config.yaml`: Hugo and theme configuration file.
 - `.Rprofile`: File to set up your **blogdown** options.
@@ -96,44 +96,44 @@ You should now see a bunch of directories and files under the site project. The 
 - `content/`: Website source files to edit and add, such as blog posts.
 - `themes/`: Hugo theme assets like HTML layout files and CSS, etc. Do not edit!
 
-After all this, your new site is ready! 
+完成所有这些后，您的新网站就准备好了！
 
 ### Serve site
 
-Before we explain these new directories and files, let's use our first **blogdown** function. It's an important one, and it is often the first one you use when you open up a **blogdown** project to start a local preview of your website.
+在我们解释这些新目录和文件之前，让我们使用我们的第一个 **blogdown** 函数。这是一个重要的功能，并且通常是您打开一个 **blogdown** 项目以启动网站的本地预览时使用的第一个功能。
 
-You can use run `blogdown::serve_site()` from the console or equivalently, click on the RStudio addin "Serve Site" (see Figure \@ref(fig:addin-serve)).
+您可以从控制台使用 run `blogdown::serve_site()`，或单击 RStudio 插件 “Serve Site” (see Figure \@ref(fig:addin-serve))。
 
 ```{r addin-serve, echo=FALSE, fig.cap='Use the blogdown addin to serve the site.', out.width='80%', fig.align='center'}
 knitr::include_graphics('images/addin-serve.png')
 ```
 
-Then you should see something that looks like Figure \@ref(fig:serve-site).
+然后您应该看到如 Figure \@ref(fig:serve-site) 所示的内容。
 
 ```{r serve-site, echo=FALSE, fig.cap='Serving the site in RStudio.', out.width='80%', fig.align='center'}
 knitr::include_graphics('images/serve-site.png')
 ```
 
-Serving the site did the following:
+Serving the site 执行了以下操作：
 
-1. Started a local Hugo server to help you preview your website, and 
-1. Knitted a sample `.Rmd` post to an `.html` page. You can see this from the progress message that printed to your console: `Rendering content/post/2020-12-01-r-rmarkdown/index.Rmd... Done.`
+1. 启动本地 Hugo server 来帮助您预览网站，并且 
+1. 将示例 `.Rmd` post Knitted 为一个 `.html` 页面。您可以从打印到控制台的进度消息中看到这一点：`Rendering content/post/2020-12-01-r-rmarkdown/index.Rmd... Done.`
 
-If you want to preview your site locally in your web browser, you may click on the "Show in new window" icon at the top of your RStudio viewer pane (to the right of the broom icon). You can see what the site looks like in Figure \@ref(fig:lithium).
+如果您想在 Web 浏览器中本地预览网站，可以单击 RStudio viewer 窗格顶部的 "Show in new window" 图标（扫帚图标的右侧）。您可以在 Figure \@ref(fig:lithium) 中看到该网站的外观。
 
 ```{r lithium, fig.cap='The homepage of the default new site.', echo=FALSE, fig.align='center', out.width='90%'}
 knitr::include_graphics('images/lithium-theme.png')
 ```
 
-Let's introduce an important and helpful technology that you just used: _LiveReload._\index{LiveReload} Serving your site uses LiveReload, which means your website^[Until you set up your website to be deployed, LiveReload only updates the *local* version of your website. This version is only visible to you. In order to make your website searchable, discoverable, and live on the Internet, you will need to upload your website's files to a site builder. See Chapter \@ref(deployment) for details.] will be automatically rebuilt and reloaded in your web browser^[You can also think of the RStudio Viewer as a web browser.] when you modify any source file of your website and save it. Basically, once you launch the website in a web browser, you do not need to rebuild it explicitly anymore. All you need to do is edit the source files, such as R Markdown documents, and save them. There is no need to click any buttons or run any commands. LiveReload is implemented via `blogdown::serve_site()`\index{blogdown::serve\_site()} and Hugo, and you will only need to use it once per work session.
+让我们介绍一下您刚刚使用的一项重要且有用的技术：_LiveReload._\index{LiveReload}。使用 LiveReload 为您的网站提供服务，这意味着当您修改网站的任何源文件并保存时，您的网站^[在您设置要部署的网站之前，LiveReload 仅更新网站的 *local* 版本。此版本仅您可见。为了使您的网站可搜索、可发现并在互联网上运行，您需要将网站文件上传到网站构建器。有关详细信息，请参阅 Chapter \@ref(deployment)。] 将自动重建并重新加载到您的网络浏览器^[您也可以将 RStudio Viewer 视为 Web 浏览器。]中。基本上，一旦您在网络浏览器中启动网站，您就不再需要显式地重建它。您所需要做的就是编辑源文件（例如 R Markdown 文档）并保存它们。无需单击任何按钮或运行任何命令。LiveReload 是通过 `blogdown::serve_site()`\index{blogdown::serve\_site()} 和 Hugo 实现的，每个工作会话只需使用一次。
 
 ### Edit content
 
-Now let's see LiveReload *in action*. In your files pane, navigate inside the `content/` folder. This folder is where all your site's content lives. Find and open the file `content/post/2020-12-01-r-rmarkdown/index.Rmd`. This is a sample R Markdown post that is added by **blogdown** by default when you set up a new site. 
+现在让我们看看 LiveReload 的实际应用。在文件窗格中，导航到 `content/` 文件夹内。该文件夹是您网站的所有内容所在的位置。查找并打开文件 `content/post/2020-12-01-r-rmarkdown/index.Rmd`。这是一个示例 R Markdown post，在您设置新站点时默认由 **blogdown** 添加。
 
-When you open that file, you will notice a YAML block at the top with familiar metadata like `title` and `author`, then code chunks and narrative text below the YAML as with your typical R Markdown file.
+当您打开该文件时，您会注意到顶部有一个 YAML 块，其中包含熟悉的 metadata 如 `title` 和 `author` 等，然后是 YAML 下面的代码块和叙述文本，就像典型的 R Markdown 文件一样。
 
-Let's edit this `index.Rmd` post. This post is a Hugo [page bundle.](https://gohugo.io/content-management/page-bundles/) Each post gets its own bundle, or folder. Inside the post bundle is where your static post-specific files like images and `.csv` data files should go. 
+让我们编辑这个 `index.Rmd` post。这篇 post 是一个 Hugo [page bundle](https://gohugo.io/content-management/page-bundles/)。每个 post 都有自己的 bundle 或文件夹。post bundle 内是您的静态帖子特定文件（例如图像和 `.csv` 数据文件）应该存放的位置。
 
 ```text
 content/
@@ -145,9 +145,9 @@ content/
 │   └── 2016-12-30-hello-markdown
 ```
 
-The default behavior of **blogdown** is to automatically knit posts that have not been knitted before when you serve your site, so this file has already been knitted---that is why you can see it in your local preview. 
+**blogdown** 的默认行为是在您为网站提供服务时自动 knit 以前未 knitted 过的 posts，因此该文件已经 knitted 过 --- 这就是为什么您可以在本地预览中看到它。
 
-Go ahead and add an R code chunk to this file, like:
+继续向该文件添加 R 代码块，例如：
 
 ````
 ```{r}`r ''`
@@ -155,9 +155,9 @@ summary(Orange)
 ```
 ````
 
-If you save the file with this edit, **blogdown** will re-knit the file on save, and your website preview should update after a few seconds once LiveReload kicks in.
+如果您通过此编辑保存文件，**blogdown** 将在保存时 re-knit 文件，一旦 LiveReload 启动，您的网站预览应在几秒钟后更新。
 
-Try it again! Add another R code chunk like:
+再试一次！添加另一个 R 代码块，例如：
 
 ````
 ```{r echo=FALSE}`r ''`
@@ -172,7 +172,7 @@ ggplot(Orange, aes(x = age,
 ```
 ````
 
-You should see a blog post that looks like Figure \@ref(fig:edit-content).
+您应该会看到一个 blog post 如 Figure \@ref(fig:edit-content) 所示。
 
 ```{r edit-content, fig.cap='Adding new R code to an .Rmd post.', echo=FALSE, fig.align='center', out.width='80%'}
 knitr::include_graphics('images/edit-content.png')
@@ -180,9 +180,9 @@ knitr::include_graphics('images/edit-content.png')
 
 ### When in doubt, run `blogdown::check_site()`
 
-There are many possible reasons why a website does not work as expected. For example, you may have misconfigured certain options in the website configuration file (such as `config.yaml`), or marked a post as draft but forgetten to unmark it before publishing the site. It is easy to make these mistakes, and often hard to diagnose them.
+网站无法按预期工作的可能原因有很多。例如，您可能错误配置了网站配置文件（例如 `config.yaml`）中的某些选项，或者将一个 post 标记为 draft 但忘记在发布网站之前取消标记。这些错误很容易犯，而且通常很难诊断。
 
-Fortunately, the function `blogdown::check_site()` can run a series of checks in your website project to help you identify common problems. It also provides tips on how to fix these problems. It is meant to be used during your interactive work sessions. You will see what files were checked, which checks were successful, and **blogdown** will offer `[TODO]` items when a check needs your attention, like this:
+幸运的是，函数 `blogdown::check_site()` 可以在您的网站项目中运行一系列检查，以帮助您识别常见问题。它还提供了有关如何解决这些问题的提示。它适用于您的交互式工作会话。您将看到哪些文件被检查，哪些检查成功，当检查需要您注意时，**blogdown** 将提供 `[TODO]` 项目，如下所示：
 
 ```text
 -----------------------------------------------------------
@@ -240,9 +240,9 @@ Fortunately, the function `blogdown::check_site()` can run a series of checks in
 
 ### Configure site
 
-We have just shown you how you can start adding `.Rmd` content to your website. However, when you are first setting up your site, you will want to edit a few other files to personalize your site. The `config.yaml` file stores your website configurations for Hugo and for your Hugo theme. You will usually only edit this file during the initial site setup.
+我们刚刚向您展示了如何开始将 `.Rmd` 内容添加到您的网站。但是，当您第一次设置网站时，您将需要编辑一些其他文件来个性化您的网站。`config.yaml` 文件存储 Hugo 和 Hugo 主题的网站配置。您通常只会在初始网站设置期间编辑此文件。
 
-For example, you may see configurations like these in `config.yaml`:
+例如，您可能会在 `config.yaml` 中看到类似以下的配置：
 
 ```yaml
 baseurl: /
@@ -266,23 +266,23 @@ menu:
       url: https://twitter.com/rstudio
 ```
 
-You can change the website title, e.g., `title: "My own cool website"`, and update the GitHub and Twitter URLs.
+您可以更改网站标题，例如：`title: "My own cool website"`，并更新 GitHub 和 Twitter URLs。
 
 ### Summary
 
-You have now learned three of the most basic concepts for a Hugo-based website:
+您现在已经了解了 Hugo-based 网站的三个最基本的概念：
 
-1. How to preview your Hugo site locally using `blogdown::serve_site()` or the RStudio addin "Serve Site."
+1. 如何使用 `blogdown::serve_site()` 或 RStudio 插件 “Serve Site” 在本地预览 Hugo 站点。
 
-1. How to edit the Hugo configuration file `config.yaml`\index{config.yaml} to specify global settings for your site and your theme.
+1. 如何编辑 Hugo 配置文件 `config.yaml`\index{config.yaml} 来指定站点和主题的全局设置。
 
-1. How to edit contents inside the `content/` directory, where you write the R Markdown or Markdown source files for your posts and pages. Under `content/` of the default site, you can see `about.md` and a `post/` directory containing a few posts. The organization of the content directory is up to you. You can have arbitrary files and directories there, depending on the website structure you want.
+1. 如何编辑 `content/` 目录中的内容，您可以在其中为 posts 和 pages 编写 R Markdown 或 Markdown 源文件。在默认站点的 `content/` 下，您可以看到 `about.md` 和包含一些帖子的 `post/` 目录。内容目录的组织由您决定。您可以在那里拥有任意文件和目录，具体取决于您想要的网站结构。
 
 ### What is next?
 
-If you are satisfied with this default theme, you are basically ready to start writing and publishing your new website! There are many options for publishing static websites like this one, and we will talk more about them in Chapter \@ref(deployment) if you are not familiar with deploying websites. 
+如果您对这个默认主题感到满意，那么您基本上已经准备好开始编写和发布您的新网站了！发布像这样的静态网站有很多选择，如果您不熟悉部署网站，我们将在 Chapter \@ref(deployment) 中详细讨论它们。
 
-We will also show how to use other themes in Section \@ref(other-themes). However, please keep in mind that a more complicated and fancier theme may require you to learn more about all the underlying technologies like the Hugo templating language, HTML, CSS, and JavaScript.
+我们还将在 Section \@ref(other-themes) 中展示如何使用其他主题。但是，请记住，更复杂和更奇特的主题可能需要您更多地了解所有底层技术，例如 Hugo templating language、HTML、CSS 和 JavaScript。
 
 ## A quick deploy
 

@@ -23,7 +23,7 @@
 <meta name="author" content="Yihui Xie, Amber Thomas, Alison Presmanes Hill" />
 
 
-<meta name="date" content="2024-05-07" />
+<meta name="date" content="2024-05-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -327,26 +327,26 @@ Thanks for your patience while we work to update the book, and please stay tuned
 </div>
 <div id="installation" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Installation<a href="installation.html#installation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We assume you have already installed:</p>
+<p>我们假设您已经安装：</p>
 <ul>
 <li>R (<a href="https://www.r-project.org" class="uri">https://www.r-project.org</a>) <span class="citation">(<a href="#ref-R-base">R Core Team 2022</a>)</span> and</li>
 <li>the RStudio IDE (<a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a>).</li>
 </ul>
-<p>If you are not using the RStudio IDE, please install Pandoc (<a href="http://pandoc.org" class="uri">http://pandoc.org</a>). Instructions are available on the reference site (<a href="https://pandoc.org/installing.html" class="uri">https://pandoc.org/installing.html</a>).</p>
-<p>The <strong>blogdown</strong> package is available on CRAN and you can install it with:</p>
+<p>如果您没有使用 RStudio IDE，请安装 Pandoc (<a href="http://pandoc.org" class="uri">http://pandoc.org</a>)。参考站点上提供了说明 (<a href="https://pandoc.org/installing.html" class="uri">https://pandoc.org/installing.html</a>) 。</p>
+<p><strong>blogdown</strong> 包在 CRAN 上可用，您可以使用以下命令安装它：</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="installation.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;blogdown&#39;</span>) </span></code></pre></div>
 <div id="installation-troubleshooting" class="section level3 hasAnchor" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> Installation troubleshooting<a href="installation.html#installation-troubleshooting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Do you have an old version of <strong>blogdown</strong>? Compare your version against ours and upgrade if necessary.</p>
+<p>你有旧版本的 <strong>blogdown</strong> 吗？将您的版本与我们的版本进行比较，并在必要时进行升级。</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="installation.html#cb2-1" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">&quot;blogdown&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &#39;1.19&#39;</code></pre>
-<p>To update <strong>blogdown</strong>, run <code>install.packages('blogdown')</code>.</p>
-<p>Do you have old versions of <strong>blogdown</strong>’s dependencies (such as <strong>rmarkdown</strong>)? If you are experiencing problems, you may first try to update all R packages:</p>
+<p>要更新 <strong>blogdown</strong>，请运行 <code>install.packages('blogdown')</code>。</p>
+<p>您是否有旧版本的 <strong>blogdown</strong> 依赖项（例如 <strong>rmarkdown</strong>）？如果您遇到问题，您可以首先尝试更新所有 R 软件包：</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="installation.html#cb4-1" tabindex="-1"></a><span class="fu">update.packages</span>(<span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">checkBuilt =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p>If you are still experiencing issues with <strong>blogdown</strong>, you may try installing the development version from GitHub:</p>
+<p>如果您仍然遇到 <strong>blogdown</strong> 问题，您可以尝试从 GitHub 安装开发版本：</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="installation.html#cb5-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&#39;remotes&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;remotes&#39;</span>)</span>
 <span id="cb5-2"><a href="installation.html#cb5-2" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&#39;rstudio/blogdown&#39;</span>)</span></code></pre></div>
-<p>If you use RStudio, it will remind you of restarting R before installing or updating any packages currently in use. If you do not use RStudio, you may need to restart R by yourself.</p>
+<p>如果您使用 RStudio，它会提醒您在安装或更新当前正在使用的任何软件包之前重新启动 R。如果您不使用 RStudio，您可能需要自行重新启动 R。</p>
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
