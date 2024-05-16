@@ -23,7 +23,7 @@
 <meta name="author" content="Yihui Xie, Amber Thomas, Alison Presmanes Hill" />
 
 
-<meta name="date" content="2024-05-13" />
+<meta name="date" content="2024-05-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -327,28 +327,28 @@ Thanks for your patience while we work to update the book, and please stay tuned
 </div>
 <div id="other-themes" class="section level2 hasAnchor" number="1.7">
 <h2><span class="header-section-number">1.7</span> Other themes<a href="other-themes.html#other-themes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In Hugo, themes control the entire appearance and functionality of your site. A Hugo theme is made with the following elements:</p>
+<p>在 Hugo 中，themes 控制站点的整个外观和功能。Hugo 主题由以下元素组成：</p>
 <ol style="list-style-type: decimal">
-<li><p>Configuration files. This may be a single <code>config.yaml</code> or <code>config.toml</code> file in the root of your website project. Some themes also use a configuration directory, located in <code>config/_default/</code>. Read more about these files in Chapter <a href="configuration.html#configuration">2.2</a>.</p></li>
-<li><p>Layout files, located for example in <code>themes/hugo-lithium/layouts/</code>. Hugo is a templating system, so layout files are <code>*.html</code> files, with a specific file and naming structure. Read more about these files in Section <a href="templates.html#templates">2.5</a>.</p></li>
-<li><p>Style asset files like fonts and CSS.</p></li>
-<li><p>HTML dependencies like JavaScript files.</p></li>
+<li><p>配置文件。这可能是网站项目根目录中的单个 <code>config.yaml</code> 或 <code>config.toml</code> 文件。某些主题还使用配置目录，位于 <code>config/_default/</code> 中。请参阅 Chapter <a href="configuration.html#configuration">2.2</a> 了解有关这些文件的更多信息。</p></li>
+<li><p>布局文件，例如位于 <code>themes/hugo-lithium/layouts/</code> 中。Hugo 是一个模板系统，因此布局文件是 <code>*.html</code> 文件，具有特定的文件和命名结构。请参阅 Section <a href="templates.html#templates">2.5</a> 了解有关这些文件的更多信息。</p></li>
+<li><p>样式资源文件，例如字体和 CSS。</p></li>
+<li><p>HTML 依赖项，如 JavaScript 文件。</p></li>
 </ol>
-<p>All of these files are contained in the <code>themes/</code> folder, and are kept separate from your website <code>content/</code>. However, all Hugo themes rely on specific <code>content/</code> and YAML frontmatter, so do not be fooled into thinking that themes and content are not dependent on each other—they are! In this section, we provide some opinionated advice on choosing themes, as well as recommended workflows for working with Hugo themes using <strong>blogdown</strong>.</p>
+<p>所有这些文件都包含在 <code>themes/</code> 文件夹中，并与您的网站 <code>content/</code> 分开保存。然而，所有 Hugo 主题都依赖于特定的 <code>content/</code> 和 YAML frontmatter，所以不要误以为主题和内容并不相互依赖—它们是相互依赖的！在本节中，我们提供了一些关于选择主题的固执己见的建议，以及使用 <strong>blogdown</strong> 处理 Hugo 主题的推荐工作流程。</p>
 <div id="choosing-themes" class="section level3 hasAnchor" number="1.7.1">
 <h3><span class="header-section-number">1.7.1</span> Choosing themes<a href="other-themes.html#choosing-themes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If you care a lot about the appearance of your website, you will probably spend quite a bit of time in the beginning looking for a Hugo theme that you like from the collection listed at <a href="https://themes.gohugo.io" class="uri">https://themes.gohugo.io</a>. Please note that not all themes have been tested with <strong>blogdown</strong>. If you find a certain theme does not work well with <strong>blogdown</strong>, you may report to <a href="https://github.com/rstudio/blogdown/issues" class="uri">https://github.com/rstudio/blogdown/issues</a>, and we will try to investigate the reason, but it can be time-consuming to learn and understand how a new theme works, so we recommend that you learn more about Hugo by yourself before asking, and we also encourage users to help each other there.</p>
-<p>There are now about 400 Hugo themes to choose from. To save you some time, we list a few themes below that match our taste:</p>
+<p>如果您非常关心网站的外观，那么一开始您可能会花费相当多的时间从 <a href="https://themes.gohugo.io" class="uri">https://themes.gohugo.io</a> 列出的集合中寻找您喜欢的 Hugo 主题。请注意，并非所有主题都经过 <strong>blogdown</strong> 测试。如果您发现某个主题与 <strong>blogdown</strong> 不能很好地配合，您可以向 <a href="https://github.com/rstudio/blogdown/issues" class="uri">https://github.com/rstudio/blogdown/issues</a> 报告，我们会尽力调查原因，但学习和了解新主题是如何工作的可能会很耗时，因此我们建议您在提问之前先自行了解一下 Hugo，我们也鼓励用户互相帮助。</p>
+<p>现在有大约 400 个 Hugo 主题可供选择。为了节省您的时间，我们在下面列出了一些符合我们口味的主题：</p>
 <ul>
 <li><p>Simple/minimal themes: <a href="https://themes.gohugo.io/hugo-xmin/">XMin,</a> <a href="https://themes.gohugo.io/hugo-tanka/">Tanka,</a>
 <a href="https://themes.gohugo.io/cupper-hugo-theme/">Cupper,</a>
 <a href="https://themes.gohugo.io/simple-a/">simple-a,</a> and <a href="https://themes.gohugo.io/ghostwriter/">ghostwriter.</a></p></li>
 <li><p>Sophisticated themes: <a href="https://themes.gohugo.io/themes/hugo-theme-jane/">Jane,</a> <a href="https://themes.gohugo.io/hugo-tranquilpeak-theme/">Tranquilpeak,</a>
 <a href="https://themes.gohugo.io/hugo-creative-portfolio-theme/">Creative portfolio,</a> and <a href="https://themes.gohugo.io/hugo-universal-theme/">Universal.</a></p></li>
-<li><p>Multimedia content themes: If you are interested in adding multimedia content to your site (such as audio files of a podcast), the <a href="https://github.com/mattstratton/castanet">castanet</a> theme provides an excellent framework tailored for this application. An example of a site using <strong>blogdown</strong> with the castanet theme is the <a href="https://www.r-podcast.org">R-Podcast.</a></p></li>
+<li><p>Multimedia content themes: 如果您有兴趣向您的站点添加多媒体内容（例如播客的音频文件），<a href="https://github.com/mattstratton/castanet">castanet</a> 主题提供了为此应用程序量身定制的出色框架。使用带有 castanet 主题的 <strong>blogdown</strong> 的网站的一个示例是 <a href="https://www.r-podcast.org">R-Podcast.</a>。</p></li>
 </ul>
-<p>If you do not understand HTML, CSS, or JavaScript, and have no experience with Hugo themes or templates, it may take you about 10 minutes to get started with your new website, since you have to accept everything you are given (such as the default theme); if you do have the knowledge and experience (and desire to highly customize your site), it may take you several days to get started. Hugo is really powerful. Be cautious with power.</p>
-<p>Another thing to keep in mind is that the more effort you make in a complicated theme, the more difficult it is to switch to other themes in the future, because you may have customized a lot of things that are not straightforward to port to another theme. So please ask yourself seriously, “Do I like this fancy theme so much that I will definitely not change it in the next couple of years?”</p>
+<p>如果您不懂 HTML、CSS 或 JavaScript，并且没有使用 Hugo 主题或模板的经验，那么您可能需要大约 10 分钟才能开始使用新网站，因为您必须接受所提供的一切（例如默认主题）；如果您确实拥有知识和经验（并且希望高度定制您的网站），那么您可能需要几天的时间才能开始。Hugo 确实很强大。对权力要谨慎。</p>
+<p>另一件要记住的事情是，你在一个复杂的主题上付出的努力越多，将来切换到其他主题就越困难，因为你可能已经定制了很多不能直接移植到另一个主题的东西。所以请认真地问自己，“我是否非常喜欢这个奇特的主题，以至于在未来几年内我绝对不会改变它？”</p>
 <blockquote>
 <p>If you choose to dig a rather deep hole, someday you will have no choice but keep on digging, even with tears.</p>
 <p>— Liyun Chen<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
@@ -356,42 +356,42 @@ Thanks for your patience while we work to update the book, and please stay tuned
 </div>
 <div id="new-site-new-theme" class="section level3 hasAnchor" number="1.7.2">
 <h3><span class="header-section-number">1.7.2</span> New site, new theme<a href="other-themes.html#new-site-new-theme" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To use a Hugo theme other than <code>hugo-lithium</code> with a new site (which we showed in Section <a href="a-quick-example.html#a-quick-example">1.2</a>), we recommend the following workflow:</p>
+<p>要在新站点中使用 <code>hugo-lithium</code> 以外的 Hugo 主题（我们在 Section <a href="a-quick-example.html#a-quick-example">1.2</a> 中展示），我们建议采用以下工作流程：</p>
 <ol style="list-style-type: decimal">
-<li><p>Carefully pick a theme at <a href="https://themes.gohugo.io" class="uri">https://themes.gohugo.io</a>, and find the link to its GitHub repository,<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> which is of the form <code>https://github.com/user/repo</code>. For example, the source of the <a href="https://themes.gohugo.io/anatole/">Hugo theme Anatole</a> is located at <a href="https://github.com/lxndrblz/anatole" class="uri">https://github.com/lxndrblz/anatole</a>.</p></li>
-<li><p>Create a new project in RStudio (<code>File -&gt; New Project -&gt; New Directory -&gt; Website using blogdown</code>) (see Figures <a href="a-quick-example.html#fig:new-project">1.1</a> and <a href="a-quick-example.html#fig:blogdown-project">1.2</a>).</p></li>
-<li><p>In the “Hugo theme” field, enter the <code>user/repo</code> from the link in Step 1. Click “Create Project”.</p>
-<p>Alternatively, in the R console, you may type <code>blogdown::new_site(theme = 'user/repo')</code>:</p>
+<li><p>在 <a href="https://themes.gohugo.io" class="uri">https://themes.gohugo.io</a> 上仔细选择一个主题，<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> 并找到其 GitHub 存储库的链接，格式为 <code>https://github.com/user/repo</code>。例如，<a href="https://themes.gohugo.io/anatole/">Hugo theme Anatole</a> 的来源位于 <a href="https://github.com/lxndrblz/anatole" class="uri">https://github.com/lxndrblz/anatole</a>。</p></li>
+<li><p>在 RStudio 中创建一个新项目 (<code>File -&gt; New Project -&gt; New Directory -&gt; Website using blogdown</code>) （见 Figures <a href="a-quick-example.html#fig:new-project">1.1</a> 和 <a href="a-quick-example.html#fig:blogdown-project">1.2</a>）。</p></li>
+<li><p>在 “Hugo theme” 字段中，输入步骤 1 中链接中的 <code>user/repo</code>。单击 “Create Project”。</p>
+<p>或者，在 R 控制台中，您可以输入 <code>blogdown::new_site(theme = 'user/repo')</code>：</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="other-themes.html#cb22-1" tabindex="-1"></a><span class="co"># for example, create a new site with the anatole theme</span></span>
 <span id="cb22-2"><a href="other-themes.html#cb22-2" tabindex="-1"></a>blogdown<span class="sc">::</span><span class="fu">new_site</span>(<span class="at">theme =</span> <span class="st">&#39;lxndrblz/anatole&#39;</span>)</span></code></pre></div></li>
-<li><p>Play with the new site for a while and if you do not like it, you can repeat the above steps, otherwise edit the options in the configuration file (<code>config.yaml</code> or <code>config.toml</code>). If you do not understand certain options, go to the documentation of the theme, which is often the README page of the GitHub repository. Not all options have to be changed.</p></li>
+<li><p>使用新站点一段时间，如果您不喜欢它，可以重复上述步骤，否则编辑配置文件（<code>config.yaml</code> 或 <code>config.toml</code>）中的选项。如果您不理解某些选项，请转到主题文档，这通常是 GitHub 存储库的 README 页面。并非所有选项都必须更改。</p></li>
 </ol>
 </div>
 <div id="existing-site-new-theme" class="section level3 hasAnchor" number="1.7.3">
 <h3><span class="header-section-number">1.7.3</span> Existing site, new theme<a href="other-themes.html#existing-site-new-theme" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Generally, we do not advise you to switch themes, as each Hugo theme depends on different variables that you provide in the theme-specific configuration file (<code>config.yaml</code> or <code>config.toml</code>) and in the YAML of the <code>content/</code> files. Example sites are often provided for individual themes, so we recommend using <code>blogdown::new_site()</code>, then editing the provided example site as a starting point. However, if you do want to test a different Hugo theme with an existing site, you can start with the following workflow:</p>
+<p>一般来说，我们不建议您切换主题，因为每个 Hugo 主题都取决于您在特定于主题的配置文件（<code>config.yaml</code> 或 <code>config.toml</code>）以及 <code>content/</code> 文件的 YAML 中提供的不同变量。通常为各个主题提供示例站点，因此我们建议使用 <code>blogdown::new_site()</code>，然后编辑提供的示例站点作为起点。但是，如果您确实想使用现有站点测试不同的 Hugo 主题，则可以从以下工作流程开始：</p>
 <ol style="list-style-type: decimal">
-<li><p>In the R console, install the theme via <code>blogdown::install_theme()</code>.</p>
+<li><p>在 R 控制台中，通过 <code>blogdown::install_theme()</code> 安装主题。</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="other-themes.html#cb23-1" tabindex="-1"></a>blogdown<span class="sc">::</span><span class="fu">install_theme</span>(<span class="at">theme =</span> <span class="st">&#39;lxndrblz/anatole&#39;</span>)</span></code></pre></div></li>
-<li><p>Manually move the configuration file (<code>config.yaml</code> or <code>config.toml</code>) from the <code>themes/theme-name/exampleSite/</code> directory to the root directory of your website to match the newly installed theme.</p></li>
-<li><p>Carefully inspect the differences between your new theme’s <code>exampleSite</code> and the files inside your <code>content/</code> folder. A theme’s <code>exampleSite</code> content is tailored to a specific theme, so changing themes without changing your <code>content/</code> is a bit like wearing someone else’s clothes—they just may not fit right.</p></li>
+<li><p>手动将配置文件（<code>config.yaml</code> 或 <code>config.toml</code>）从 <code>themes/theme-name/exampleSite/</code> 目录移动到网站的根目录以匹配新安装的主题。</p></li>
+<li><p>仔细检查新主题的 <code>exampleSite</code> 和 <code>content/</code> 文件夹中的文件之间的差异。主题的示例站点内容是针对特定主题量身定制的，因此在不更改 <code>content/</code> 的情况下更改主题/有点像穿别人的衣服—它们可能不合适。</p></li>
 </ol>
 </div>
 <div id="existing-site-update-theme" class="section level3 hasAnchor" number="1.7.4">
 <h3><span class="header-section-number">1.7.4</span> Existing site, update theme<a href="other-themes.html#existing-site-update-theme" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Updating Hugo theme files is not for the faint of heart, and we also do not recommend doing this unless you must. We also generally recommend you only do this when you integrate GIT and GitHub for version control, and that you attempt to update your theme in a branch first.</p>
-<p>The main reason this is difficult is that Hugo theme files can require changes in your website configuration file (<code>config.yaml</code> or <code>config.toml</code>) and in the YAML of individual content files, depending on the extent of the theme update. So updating a theme can be quite a hassle.</p>
-<p>Why do theme developers update their themes? Three reasons. One, Hugo changes. As a result, Hugo theme developers must change their themes to keep up with deprecated Hugo functions. Two, Hugo theme developers fix their themes when bugs are reported. Three, popular Hugo themes often field lots of feature requests, and some theme developers are responsive to adding new features.</p>
-<p>If you find yourself needing to update your theme, you may do the following:</p>
+<p>更新 Hugo 主题文件不适合胆小的人，除非必须，否则我们也不建议这样做。我们通常还建议您仅在集成 GIT 和 GitHub 进行版本控制时才执行此操作，并且首先尝试在分支中更新主题。</p>
+<p>这很困难的主要原因是 Hugo 主题文件可能需要更改网站配置文件（<code>config.yaml</code> 或 <code>config.toml</code>）以及各个内容文件的 YAML，具体取决于主题更新的程度。所以更新主题可能会很麻烦。</p>
+<p>为什么主题开发者要更新他们的主题？三个原因。一、Hugo 改变了。因此，Hugo 主题开发人员必须更改其主题以跟上已弃用的 Hugo 功能。第二，Hugo 主题开发人员在报告错误时修复他们的主题。第三，流行的 Hugo 主题通常会提出大量功能请求，并且一些主题开发人员对添加新功能很敏感。</p>
+<p>如果您发现自己需要更新主题，可以执行以下操作：</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="other-themes.html#cb24-1" tabindex="-1"></a>blogdown<span class="sc">::</span><span class="fu">install_theme</span>(<span class="at">theme =</span> <span class="st">&#39;lxndrblz/anatole&#39;</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p>Then slowly work through what changed in the site configuration files and the <code>content/</code> frontmatter (YAML metadata) by comparing the updated theme’s <code>exampleSite</code>. As stated earlier, we recommend doing this work in a different branch (i.e., not <code>main</code>) before merging.</p>
+<p>然后通过比较更新的主题的 <code>exampleSite</code> 来慢慢了解站点配置文件和 <code>content/</code> frontmatter（YAML metadata）中的更改。如前所述，我们建议在合并之前在不同的分支（即 not <code>main</code>）中完成这项工作。</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="10">
 <li id="fn10"><p>Translated from her Chinese Weibo.<a href="other-themes.html#fnref10" class="footnote-back">↩︎</a></p></li>
-<li id="fn11"><p>For most themes, you can find this by navigating to the theme of your choice from <a href="http://themes.gohugo.io" class="uri">http://themes.gohugo.io</a> and then clicking on “Download.”<a href="other-themes.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>对于大多数主题，您可以通过从 <a href="http://themes.gohugo.io" class="uri">http://themes.gohugo.io</a> 导航到您选择的主题，然后单击 “Download” 来找到它。<a href="other-themes.html#fnref11" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

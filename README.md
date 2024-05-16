@@ -18,9 +18,9 @@ Try to translate **blogdown: Creating Websites with R Markdown** into Simplified
 | 1.3 A quick deploy               |  ✔       | 2024.5.13 |
 | 1.4 RStudio IDE                  |  ✔       | 2024.5.13 |
 | 1.5 Global options               |  ✔       | 2024.5.13 |
-| 1.6 R Markdown vs. Markdown |        |   |
-| 1.7 Other themes                    |         |   |
-| 1.8 A recommended workflow         |        |   |
+| 1.6 R Markdown vs. Markdown      |  ✔       | 2024.5.15 |
+| 1.7 Other themes                 |  ✔       | 2024.5.15 |
+| 1.8 A recommended workflow       |  ✔       | 2024.5.16 |
 | 2 Hugo                        |         |    |
 | 2.1 Static sites and Hugo     |          |           |
 | 2.2 Configuration                 |          |           |
