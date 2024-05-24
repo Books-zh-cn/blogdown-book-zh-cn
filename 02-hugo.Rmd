@@ -1,20 +1,20 @@
 # Hugo
 
-In this chapter, we will briefly introduce\index{Hugo} Hugo (https://gohugo.io), the static site generator on which **blogdown** is based. This chapter is not meant to replace the official Hugo documentation, but provide a guide to those who are just getting started with Hugo. When in doubt, please consult the official Hugo documentation.
+在本章中，我们将简要介绍 **blogdown** 所基于的静态站点生成器 \index{Hugo} Hugo (https://gohugo.io)。本章并不是要取代 Hugo 官方文档，而是为那些刚刚开始使用 Hugo 的人提供一个指南。如有疑问，请查阅 Hugo 官方文档。
 
 ## Static sites and Hugo {#static-sites}
 
-A static site\index{Static Site} often consists of HTML files (with optional external dependencies like images and JavaScript libraries), and the web server sends exactly the same content to the web browser no matter who visits the web pages. There is no dynamic computing on the server when a page is requested. By comparison, a dynamic site relies on a server-side language to do certain computing and sends potentially different content depending on different conditions. A common language is PHP, and a typical example of a dynamic site is a web forum. For example, each user has a profile page, but typically this does not mean the server has stored a different HTML profile page for every single user. Instead, the server will fetch the user data from a database, and render the profile page dynamically.
+静态站点通常由 HTML 文件（具有可选的外部依赖项，如图像和 JavaScript 库）组成，并且无论谁访问网页，Web 服务器都会向 Web 浏览器发送完全相同的内容。当请求页面时，服务器上没有动态计算。相比之下，动态站点依赖服务器端语言来执行某些计算，并根据不同的条件发送可能不同的内容。通用语言是 PHP，动态站点的典型示例是网络论坛。例如，每个用户都有一个个人资料页面，但这通常并不意味着服务器为每个用户存储了不同的 HTML 个人资料页面。相反，服务器将从数据库中获取用户数据，并动态呈现个人资料页面。
 
-For a static site, each URL you visit often has a corresponding HTML file stored on the server, so there is no need to compute anything before serving the file to visitors. This means static sites tend to be faster in response time than dynamic sites, and they are also much easier to deploy, since deployment simply means copying static files to a server. A dynamic site often relies on databases, and you will have to install more software packages to serve a dynamic site. For more advantages of static sites, please read the page "[Benefits of Static Site Generators](https://gohugo.io/about/benefits/)" on Hugo's website.
+对于静态站点，您访问的每个 URL 通常都会在服务器上存储相应的 HTML 文件，因此在向访问者提供文件之前无需进行任何计算。这意味着静态站点的响应时间往往比动态站点更快，而且它们也更容易部署，因为部署只是意味着将静态文件复制到服务器。动态站点通常依赖于数据库，您必须安装更多软件包才能为动态站点提供服务。有关静态站点的更多优点，请阅读 Hugo 网站上的 "[Benefits of Static Site Generators](https://gohugo.io/about/benefits/)" 页面。
 
-There are many existing static site generators, including Hugo, [Jekyll,](https://jekyllrb.com) and [Hexo,](https://hexo.io) etc. Most of them can build general-purpose websites but are often used to build blogs.
+现有的静态站点生成器有很多，包括 Hugo、[Jekyll](https://jekyllrb.com) 和 [Hexo](https://hexo.io) 等。它们大多数可以构建通用网站，但通常用于构建博客。
 
-We love Hugo for many reasons, but there are a few that stand out. Unlike other static site generators, the installation of Hugo is very simple because it provides a single executable without dependencies for most operating systems (see Section \@ref(installation)). It was also designed to render hundreds of pages of content faster than comparable static site generators and can reportedly render a single page in approximately 1 millisecond. Lastly, the community of Hugo users is very active both on the [Hugo discussion forum](https://discuss.gohugo.io) and on [GitHub issues.](https://github.com/gohugoio/hugo/issues)
+我们喜爱 Hugo 的原因有很多，但有几个原因最为突出。与其他静态站点生成器不同，Hugo 的安装非常简单，因为它为大多数操作系统提供了一个不依赖的可执行文件（请参见 Section \@ref(installation)）。它还被设计为比同类静态站点生成器更快地呈现数百页内容，据报道可以在大约 1 毫秒内呈现单个页面。最后，Hugo 用户社区在 [Hugo discussion forum](https://discuss.gohugo.io) 和 [GitHub issues](https://github.com/gohugoio/hugo/issues) 上都非常活跃。
 
-Although we think Hugo is a fantastic static site generator, there is really one and only one major missing feature: the support for R Markdown. That is basically the whole point of the **blogdown** package.^[Another motivation was an easier way to create new pages or posts. Static site generators often provide commands to create new posts, but you often have to open and modify the new file created by hand after using these commands. I was very frustrated by this, because I was looking for a graphical user interface where I can just fill out the title, author, date, and other information about a page, then I can start writing the content right away. That is why I provided the RStudio addin "New Post" and the function `blogdown::new_post()`. In the past few years, I hated it every time I was about to create a new post either by hand or via the Jekyll command line. Finally, I felt addicted to blogging again after I finished the RStudio addin.] This missing feature means that you cannot easily generate results using R code on your web pages, since you can only use static Markdown documents. Besides, Hugo's default Markdown engine is "Blackfriday", which is less powerful than Pandoc.^[The Pandoc support has been added in a Hugo pull request: https://github.com/gohugoio/hugo/pull/4060. However, I think the support is quite limited, and I'd recommend that you use the R Markdown format instead, because with the official Pandoc support in Hugo, you cannot customize the Pandoc command-line options, rendering is not cached (it could be slow), and you will not be able to use any Markdown extensions from the **bookdown** package (such as numbering figure captions).]
+尽管我们认为 Hugo 是一款出色的静态站点生成器，但确实缺少一个且仅有一个主要功能：对 R Markdown 的支持。这基本上就是 **blogdown** 包的全部要点。^[另一个动机是创建新页面或帖子的更简单方法。静态站点生成器通常提供创建新帖子的命令，但您通常必须在使用这些命令后打开并修改手动创建的新文件。我对此感到非常沮丧，因为我正在寻找一个图形用户界面，我可以在其中填写标题、作者、日期和有关页面的其他信息，然后我就可以立即开始编写内容。这就是为什么我提供了 RStudio 插件 “New Post” 和函数 `blogdown::new_post()`。在过去的几年里，每次我要手动或通过 Jekyll 命令行创建新帖子时，我都讨厌它。最后，在完成 RStudio 插件后，我又对博客上瘾了。] 这个缺失的功能意味着您无法在网页上使用 R 代码轻松生成结果，因为您只能使用静态 Markdown 文档。另外，Hugo 默认的 Markdown 引擎是 "Blackfriday"，功能不如 Pandoc。^[Pandoc 支持已添加到 Hugo pull request: https://github.com/gohugoio/hugo/pull/4060。不过，我认为支持相当有限，我建议您使用 R Markdown 格式，因为 Hugo 中提供了官方 Pandoc 支持，您无法自定义 Pandoc 命令行选项，渲染不会被缓存（它可能很慢），并且您将无法使用 **bookdown** 包中的任何 Markdown 扩展（例如对图形标题进行编号）。]
 
-Hugo uses a special file and folder structure to create your website (Figure \@ref(fig:folders)). The rest of this chapter will give more details on the following files and folders:
+Hugo 使用特殊的文件和文件夹结构来创建您的网站（Figure \@ref(fig:folders)）。本章的其余部分将提供有关以下文件和文件夹的更多详细信息：
 
 - `config.toml`
 - `content/`
@@ -30,27 +30,27 @@ knitr::include_graphics('images/folder-structure.png')
 
 ## Configuration
 
-The first file that you may want to look at is the configuration\index{config.toml} or `config` file in your root directory, in which you can set global configurations of your site. It may contain options like the title and description of your site, as well as other global options like links to your social networks, the navigation menu, and the base URL for your website.
+您可能想要查看的第一个文件是根目录中的配置或 `config` 文件，您可以在其中设置站点的全局配置。它可能包含网站的标题和描述等选项，以及其他全局选项，例如社交网络的链接、导航菜单和网站的基本 URL。
 
-When generating your site, Hugo will search for a file called `config.toml` first. If it cannot find one, it will continue to search for `config.yaml`.^[Hugo also supports `config.json`, but **blogdown** does not support it, so we do not recommend that you use it.] Since most Hugo themes contain example sites that ship `config.toml` files, and the TOML\index{TOML} (Tom's Obvious, Minimal Language) format appears to be more popular in the Hugo community, we will mainly discuss `config.toml` here.
+生成站点时，Hugo 将首先搜索名为 `config.toml` 的文件。如果找不到，它将继续搜索 `config.yaml`。^[Hugo 也支持 `config.json`，但 **blogdown** 不支持，所以我们不建议您使用它。] 由于大多数 Hugo 主题都包含提供 `config.toml` 文件的示例站点，并且 TOML\index{TOML} (Tom's Obvious, Minimal Language) 格式似乎在 Hugo 社区 中更流行，我们这里主要讨论 `config.toml`。
 
-We recommend that you use the TOML syntax only for the config file (you can also use YAML if you prefer), and use YAML as the data format for the metadata of (R) Markdown pages and posts, because R Markdown and **blogdown** fully support only YAML\index{YAML}.^[TOML has its advantages, but I feel they are not significant in the context of Hugo websites. It is a pain to have to know yet another language, TOML, when YAML stands for "Yet Another Markup Language." I'm not sure if the XKCD comic applies in this case: https://xkcd.com/927/.] If you have a website that has already used TOML, you may use `blogdown::hugo_convert(unsafe = TRUE)` to convert TOML data to YAML, but please first make sure you have backed up the website because it will overwrite your Markdown files.
+我们建议您仅在配置文件中使用 TOML 语法（如果您愿意，也可以使用 YAML），并使用 YAML 作为 (R) Markdown 页面和帖子的 metadata 的数据格式，因为 R Markdown 和 **blogdown** 完全支持仅限 YAML。^[TOML 有它的优点，但我觉得它们在 Hugo 网站的背景下并不重要。当 YAML 代表 “另一种标记语言” 时，必须了解另一种语言 TOML 是一种痛苦。我不确定 XKCD 漫画是否适用于这种情况：https://xkcd.com/927/。] 如果您的网站已经使用了 TOML，您可以使用 `blogdown::hugo_convert(unsafe = TRUE)` 将 TOML 数据转换为 YAML，但请首先确保您已备份该网站，因为它会覆盖您的网站 Markdown 文件。
 
-The Hugo documentation does not use TOML or YAML consistently in its examples, which can be confusing. Please pay close attention to the configuration format when copying examples to your own website.
+Hugo 文档在其示例中没有一致地使用 TOML 或 YAML，这可能会令人困惑。将示例复制到您自己的网站时，请密切注意配置格式。
 
 ### TOML Syntax
 
-If you are not familiar with the TOML Syntax, we will give a brief overview and you may read the [full documentation](https://github.com/toml-lang/toml) to know the details.
+如果您不熟悉 TOML 语法，我们将提供简要概述，您可以阅读 [full documentation](https://github.com/toml-lang/toml) 以了解详细信息。
 
-TOML is made up of key-value pairs separated by equal signs:
+TOML 由用等号分隔的键值对组成：
 
 ```js
 key = value
 ```
 
-When you want to edit a configuration in the TOML file, simply change the value. Values that are character strings should be in quotes, whereas Boolean values should be lowercase and bare. 
+当您想要编辑 TOML 文件中的配置时，只需更改 value 即可。字符串 Values 应放在引号中，而布尔 values 应小写且不包含任何内容。
 
-For example, if you want to give your website the title "My Awesome Site," and use relative URLs instead of the default absolute URLs, you may have the following entries in your `config.toml` file.
+例如，如果您想为您的网站指定标题 "My Awesome Site"，并使用相对 URLs 而不是默认的绝对 URLs，则您的 `config.toml` 文件中可能包含以下条目。
 
 ```js
 title = "My Awesome Site"
@@ -58,9 +58,9 @@ title = "My Awesome Site"
 relativeURLs = true
 ```
 
-Most of your website's global variables are entered in the `config.toml` file in exactly this manner. 
+大多数网站的全局变量都是以这种方式输入到 `config.toml` 文件中的。
 
-Further into your `config` file, you may notice some values in brackets like this:
+进一步深入您的 `config` 文件，您可能会注意到括号中的一些值，如下所示：
 
 ```js
 [social]
@@ -68,9 +68,9 @@ Further into your `config` file, you may notice some values in brackets like thi
     twitter = "https://twitter.com/rstudio"
 ```
 
-This is a table in the TOML language and Hugo uses them to fill in information on other pages within your site. For instance, the above table will populate the `.Site.Social` variable in your site's templates (more information on this in Section \@ref(templates)).
+这是一个 TOML 语言的表格，Hugo 使用它们来填写站点内其他页面上的信息。例如，上表将填充站点模板中的 `.Site.Social` 变量（更多信息请参见 Section \@ref(templates)）。
 
-Lastly, you may find some values in double brackets like this:
+最后，您可能会在双括号中找到一些值，如下所示：
 
 ```js
 [[menu.main]]
@@ -86,47 +86,47 @@ Lastly, you may find some values in double brackets like this:
     url = "/about/"
 ```
 
-In TOML, double brackets are used to indicate an array of tables. Hugo interprets this information as a menu. If the code above was found in a `config.toml` file, the resulting website would have links to Blog, Categories, and About pages in the site's main menu. The location and styling of that menu are specified elsewhere, but the names of each menu's choices and the links to each section are defined here. 
+在 TOML 中，双括号用于指示表数组。Hugo 将此信息解释为菜单。如果在 `config.toml` 文件中找到上述代码，则生成的网站将在网站主菜单中包含指向博客、类别和关于页面的链接。该菜单的位置和样式在其他地方指定，但每个菜单选项的名称以及每个部分的链接都在此处定义。
  
-The `config.toml` file is different for each theme. Make sure that when you choose a theme, you read its documentation thoroughly to get an understanding of what each of the configuration options does (more on themes in Section \@ref(themes)).
+每个主题的 `config.toml` 文件都不同。确保当你选择一个主题时，你彻底阅读了它的文档，以了解每个配置选项的作用（更多关于主题的信息，请参见 Section \@ref(themes)）。
 
 ### Options
 
-All built-in options\index{options} that you may set for Hugo are listed at https://gohugo.io/overview/configuration/. You can change any of these options except `contentDir`, which is hard-coded to `content` in **blogdown**. Our general recommendation is that you'd better not modify the defaults unless you understand the consequences. We list a few options that may be of interest to you:
+您可以为 Hugo 设置的所有内置选项在 https://gohugo.io/overview/configuration/ 列出。您可以更改除 `contentDir` 之外的任何选项，它是硬编码到 **blogdown** 中的内容。我们的一般建议是，除非您了解后果，否则最好不要修改默认值。我们列出了您可能感兴趣的一些选项：
 
-- `baseURL`: Normally you have to change the value of this option to the base URL\index{baseURL} of your website. Some Hugo themes may have it set to `http://replace-this-with-your-hugo-site.com/` or `http://www.example.com/` in their example sites, but please make sure to replace them with your own URL (see Chapter \@ref(deployment) and Appendix \@ref(domain-name) for more information on publishing websites and obtaining domain names). Note that this option can be a URL with a subpath, if your website is to be published under a subpath of a domain name, e.g., `http://www.example.com/docs/`.
+- `baseURL`: 通常您必须将此选项的值更改为您网站的基本 URL。某些 Hugo 主题可能在其示例站点中将其设置为 `http://replace-this-with-your-hugo-site.com/` 或 `http://www.example.com/`，但请确保将其替换为您自己的 URL（有关发布网站和获取域名的更多信息，请参阅 Chapter \@ref(deployment) 和 Appendix \@ref(domain-name)）。请注意，如果您的网站要在域名的子路径下发布，则此选项可以是带有子路径的 URL，例如 `http://www.example.com/docs/`。
 
-- `enableEmoji`: You\index{Emoji} may set it to `true` so that you can use [Emoji emoticons](http://www.emoji-cheat-sheet.com) like `:smile:` in Markdown.
+- `enableEmoji`: 您可以将其设置为 `true`，以便您可以在 Markdown 中使用 `:smile:` 等 [Emoji emoticons](http://www.emoji-cheat-sheet.com)。
 
-- `permalinks`: Rules to generate permanent links\index{permalinks} of your pages. By default, Hugo uses full filenames under `content/` to generate links, e.g., `content/about.md` will be rendered to `public/about/index.html`, and `content/post/2015-07-23-foo.md` will be rendered to `public/post/2015-07-23-foo/index.html`, so the actual links are `/about/` and `/post/2015-07-23-foo/` on the website. Although it is not required to set custom rules for permanent links, it is common to see links of the form `/YYYY/mm/dd/post-title/`. Hugo allows you to use several pieces of information about a source file to generate a link, such as the date (year, month, and day), title, and filename, etc. The link can be independent of the actual filename. For example, you may ask Hugo to render pages under `content/post/` using the date and title for their links:
+- `permalinks`: 生成页面永久链接的规则。默认情况下，Hugo 使用 `content/` 下的完整文件名来生成链接，例如，`content/about.md` 将呈现为 `public/about/index.html`，`content/post/2015-07-23-foo.md` 将呈现为 `public/post/2015-07-23-foo/index.html`，所以实际的链接是网站上的 `/about/` 和 `/post/2015-07-23-foo/`。尽管不需要为永久链接设置自定义规则，但通常会看到 `/YYYY/mm/dd/post-title/` 形式的链接。 Hugo 允许您使用有关源文件的多项信息来生成链接，例如日期（年月日）、标题和文件名等。链接可以独立于实际文件名。例如，您可以要求 Hugo 使用链接的日期和标题来呈现 `content/post/` 下的页面：
 
     ```js
     [permalinks]
         post = "/:year/:month/:day/:title/"
     ```
     
-    Personally, I recommend that you use the\index{Slug} `:slug` variable^[A slug is simply a character string that you can use to identify a specific post. A slug will not change, even if the title changes. For instance, if you decide to change the title of your post from "I love blogdown" to "Why blogdown is the best package ever," and you used the post's title in the URL, your old links will now be broken. If instead, you specified the URL via a slug (something like "blogdown-love"), then you can change the title as many times as you'd like and you will not end up with any broken links.] instead of `:title`:
+    就我个人而言，我建议您使用 `:slug` 变量^[slug 只是一个字符串，可用于标识特定的帖子。即使标题改变，slug 也不会改变。例如，如果您决定将帖子的标题从 "I love blogdown" 更改为 "Why blogdown is the best package ever"，并且您在 URL 中使用了该帖子的标题，那么您的旧链接现在将被破坏。相反，如果您通过 slug（类似于 "blogdown-love"）指定 URL，那么您可以根据需要多次更改标题，并且不会出现任何损坏的链接。] 而不是 `:title`:
     
     ```js
     [permalinks]
         post = "/:year/:month/:day/:slug/"
     ```
     
-    This is because your post title may change, and you probably do not want the link to the post to change, otherwise you have to redirect the old link to the new link, and there will be other types of trouble like Disqus comments. The `:slug` variable falls back to `:title` if a field named `slug` is not set in the YAML metadata of the post. You can set a fixed slug so that the link to the post is always fixed and you will have the freedom to update the title of your post.
+    这是因为你的帖子标题可能会发生变化，而你可能不希望帖子的链接发生变化，否则你必须将旧链接重定向到新链接，并且会出现像 Disqus 评论这样的其他类型的麻烦。如果帖子的 YAML metadata 中未设置名为 `slug` 的字段，则 `:slug` 变量会回退到 `:title` 。您可以设置固定的 slug，以便帖子的链接始终固定，并且您可以自由地更新帖子的标题。
     
-    You may find a list of all possible variables that you can use in the `permalinks` option at https://gohugo.io/extras/permalinks/. 
+    您可以在 https://gohugo.io/extras/permalinks/ 找到可在 `permalinks` 选项中使用的所有可能变量的列表。
 
-- `publishDir`: The directory under which you want to generate the website.
+- `publishDir`: 您要在其下生成网站的目录。
 
-- `theme`: The directory name of the Hugo theme under `themes/`.
+- `theme`: `themes/` 下 Hugo 主题的目录名。
 
-- `ignoreFiles`: A list of filename patterns (regular expressions) for Hugo to ignore\index{ignoreFiles} certain files when building the site. I recommend that you specify at least these patterns `["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]`. You should ignore `.Rmd` files because Hugo should only recognize their output files (such as `.html` or `.md` files). Directories with the suffix `_cache` should be ignored because they contain auxiliary files after an `Rmd` file is compiled, which are useless to Hugo.
+- `ignoreFiles`: Hugo 在构建网站时忽略某些文件的文件名模式（正则表达式）列表。我建议您至少指定这些模式 `["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]`。您应该忽略 `.Rmd` 文件，因为 Hugo 应该只识别它们的输出文件（例如 `.html` 或 `.md` 文件）。后缀为 `_cache` 的目录应该被忽略，因为它们包含 `Rmd` 文件编译后的辅助文件，这些文件对 Hugo 来说是无用的。
 
-- `uglyURLs`: By default, Hugo generates "clean" URLs\index{uglyURLs}. This may be a little surprising and requires that you understand how URLs work when your browser fetches a page from a server. Basically, Hugo generates `foo/index.html` for `foo.md` by default instead of `foo.html`, because the former allows you to visit the page via the clean URL `foo/` without `index.html`. Most web servers understand requests like `http://www.example.com/foo/` and will present `index.html` under `foo/` to you. If you prefer the strict mapping from `*.md` to `*.html`, you may enable "ugly" URLs by setting `uglyURLs` to `true`.
+- `uglyURLs`: 默认情况下，Hugo 生成 “clean” URLs。这可能有点令人惊讶，并且要求您了解浏览器从服务器获取页面时 URL 的工作原理。基本上，Hugo 默认为 `foo.md` 生成 `foo/index.html` 而不是 `foo.html`，因为前者允许您通过 clean URL `foo/` 访问页面，而不需要 `index.html`。大多数网络服务器都能理解 `http://www.example.com/foo/` 之类的请求，并将在 `foo/` 下向您显示 `index.html`。如果您更喜欢从 `*.md` 到 `*.html` 的严格映射，您可以通过将 `uglyURLs` 设置为 `true` 来启用 "ugly" URLs。
 
-- `hasCJKLanguage`: If your website is primarily in CJK\index{hasCJKLanguage} (Chinese, Korean, and Japanese), I recommend that you set this option to `true`, so that Hugo's automatic summary and word count work better.
+- `hasCJKLanguage`: 如果您的网站主要是 CJK\index{hasCJKLanguage}（中文、韩文和日文），我建议您将此选项设置为 `true`，以便 Hugo 的自动摘要和字数统计效果更好。
 
-Besides the built-in Hugo options, you can set other arbitrary options in `config.toml`. For example, it is very common to see an option named `params`, which is widely used in many Hugo themes. When you see a variable `.Site.Params.FOO` in a Hugo theme, it means an option `FOO` that you set under `[params]` in `config.toml`, e.g., `.Site.Params.author` is `Frida Gomam` with the following config file:
+除了内置的 Hugo 选项外，您还可以在 `config.toml` 中设置其他任意选项。例如，很常见的是名为 `params` 的选项，它广泛应用于许多 Hugo 主题中。当您在 Hugo 主题中看到变量 `.Site.Params.FOO` 时，它表示您在 `config.toml` 中的 `[params]` 下设置的选项 `FOO`，例如 `.Site.Params.author` 是 `Frida Gomam`，具有以下配置文件：
 
 ```js
 [params]
@@ -134,11 +134,11 @@ Besides the built-in Hugo options, you can set other arbitrary options in `confi
     dateFormat = "2006/01/02"
 ```
 
-The goal of all these options is to avoid hard-coding anything in Hugo themes, so that users can easily edit a single config file to apply the theme to their websites, instead of going through many HTML files and making changes one by one.
+所有这些选项的目标是避免对 Hugo 主题中的任何内容进行硬编码，以便用户可以轻松编辑单个配置文件以将主题应用到他们的网站，而不是浏览许多 HTML 文件并逐一进行更改。
 
 ## Content
 
-The structure of the `content/` directory can be arbitrary. A common structure is that there are a few static pages under the root of `content/`, and a subdirectory `post/` containing blog posts:
+`content/` 目录的结构可以是任意的。常见的结构是 `content/` 根目录下有一些静态页面，以及一个包含博客文章的子目录 `post/`：
 
 ```bash
 ├── _index.md
@@ -153,25 +153,25 @@ The structure of the `content/` directory can be arbitrary. A common structure i
 
 ### YAML metadata
 
-Each page should start with YAML\index{YAML} metadata specifying information like the title, date, author, categories, tags, and so on. Depending on the specific Hugo theme and templates you use, some of these fields may be optional.
+每个页面都应以 YAML\index{YAML} metadata 开头，指定标题、日期、作者、类别、标签等信息。根据您使用的特定 Hugo 主题和模板，其中一些字段可能是可选的。
 
-Among all YAML fields, we want to bring these to your attention:
+在所有 YAML 字段中，我们希望引起您的注意：
 
-- `draft`: You can mark a document as a draft\index{Draft} by setting `draft: true` in its YAML metadata. Draft posts will not be rendered if the site is built via `blogdown::build_site()` or `blogdown::hugo_build()`, but will be rendered in the local preview mode (see Section \@ref(local-preview)).
+- `draft`: 您可以通过在其 YAML metadata 中设置 `draft: true` 将文档标记为草稿。如果网站是通过 `blogdown::build_site()` 或 `blogdown::hugo_build()` 构建的，则不会呈现草稿帖子，但会在本地预览模式下呈现（请参阅 Section \@ref(local-preview)）。
 
-- `publishdate`: You may specify a future date\index{Publish Date} to publish a post. Similar to draft posts, future posts are only rendered in the local preview mode.
+- `publishdate`: 您可以指定发布帖子的未来日期。与草稿帖子类似，未来的帖子仅以本地预览模式呈现。
 
-- `weight`: This field can take a numeric value to tell Hugo the order of pages when sorting them\index{Post Weight}, e.g., when you generate a list of all pages under a directory, and two posts have the same date, you may assign different weights to them to get your desired order on the list.
+- `weight`: 该字段可以采用数值来告诉 Hugo 排序时页面的顺序，例如，当您生成目录下所有页面的列表时，并且两个帖子具有相同的日期，您可以为它们分配不同的权重在列表中获取您想要的顺序。
 
-- `slug`: A character string as the tail of the URL. It is particularly useful when you define custom rules for permanent URLs (see Section \@ref(options)).
+- `slug`: 作为 URL 尾部的字符串。当您为永久 URL 定义自定义规则时，它特别有用（请参阅 Section \@ref(options)）。
 
 ### Body
 
-As we mentioned in Section \@ref(output-format), your post can be written in either R Markdown or plain Markdown. Please be cautious about the syntax differences between the two formats when you write the body of a post.
+正如我们在 Section \@ref(output-format) 中提到的，您的帖子可以用 R Markdown 或普通 Markdown 编写。当您编写帖子正文时，请注意两种格式之间的语法差异。
 
 ### Shortcode
 
-Besides all Markdown features, Hugo provides a useful feature named "shortcodes." You can use a shortcode\index{Shortcode} in the body of your post. When Hugo renders the post, it can automatically generate an HTML snippet based on the parameters you pass to the shortcode. This is convenient because you do not have to type or embed a large amount of HTML code in your post. For example, Hugo has a built-in shortcode for embedding Twitter cards. Normally, this is how you embed a Twitter card (Figure \@ref(fig:jtleek-tweet)) on a page:
+除了所有 Markdown 功能之外，Hugo 还提供了一个名为 "shortcodes" 的有用功能。您可以在帖子正文中使用 shortcode\index{Shortcode}。当 Hugo 渲染帖子时，它可以根据您传递给 shortcode 的参数自动生成 HTML 片段。这很方便，因为您不必在帖子中键入或嵌入大量 HTML 代码。例如，Hugo 有一个内置的 shortcode，用于嵌入 Twitter 卡片。通常，这是在页面上嵌入 Twitter 卡（Figure \@ref(fig:jtleek-tweet)）的方式：
 
 ```html
 <blockquote class="twitter-tweet">
@@ -196,15 +196,15 @@ Besides all Markdown features, Hugo provides a useful feature named "shortcodes.
 knitr::include_graphics('images/jtleek-tweet.png')
 ```
 
-If you use the shortcode, all you need in the Markdown source document is:
+如果您使用 shortcode，您在 Markdown 源文档中只需要：
 
 ```go
 {{< tweet user="jtleek", id="852205086956818432" >}}
 ```
 
-Basically, you only need to pass the username and ID of the tweet to a shortcode named `tweet`.^[Before Hugo v0.89.0, you only need to pass the ID. Since Twitter has started to require the username since late 2021, this means that you have to use Hugo >= 0.89.0 and provide the username if you want to use the Twitter shortcode. For older versions of Hugo, the shortcodes will be broken, unfortunately.] Hugo will fetch the tweet automatically and render the HTML snippet for you. For more about shortcodes, see https://gohugo.io/extras/shortcodes/.
+基本上，您只需将推文的用户名和 ID 传递给名为 `tweet` 的 shortcode。^[Hugo v0.89.0 之前，只需要传递 ID 即可。由于 Twitter 自 2021 年底开始要求用户名，这意味着如果您想使用 Twitter shortcode，则必须使用 Hugo >= 0.89.0 并提供用户名。不幸的是，对于旧版本的 Hugo，shortcode 将被破坏。] Hugo 将自动获取推文并为您呈现 HTML 片段。有关 shortcodes 的更多信息，请参阅 https://gohugo.io/extras/shortcodes/。
 
-Shortcodes are supposed to work in plain Markdown documents only. To use shortcodes in R Markdown instead of plain Markdown, you have to call the function `blogdown::shortcode()`, e.g.,
+Shortcodes 应该仅适用于纯 Markdown 文档。要在 R Markdown 中使用 shortcodes 而不是普通 Markdown，您必须调用函数 `blogdown::shortcode()`，例如，
 
 ````markdown
 `r ''````{r echo=FALSE}
@@ -216,19 +216,19 @@ blogdown::shortcode(
 
 ## Themes
 
-A Hugo theme\index{Themes} is a collection of template files and optional website assets such as CSS and JavaScript files. In a nutshell, a theme defines what your website looks like after your source content is rendered through the templates.
+Hugo 主题是模板文件和可选网站资源（例如 CSS 和 JavaScript 文件）的集合。简而言之，主题定义了通过模板呈现源内容后您的网站的外观。
 
-Hugo has provided a large number of user-contributed themes at https://themes.gohugo.io. Unless you are an experienced web designer, you'd better start from an existing theme here. The quality and complexity of these themes vary a lot, and you should choose one with caution. For example, you may take a look at the number of stars of a theme repository on GitHub, as well as whether the repository is still relatively active. Themes that have not been updated for a long time (e.g., a couple of years) may or may not still work with a later version of Hugo. You will have to test them carefully.
+Hugo 在 https://themes.gohugo.io 上提供了大量用户贡献的主题。除非您是经验丰富的网页设计师，否则最好从此处的现有主题开始。这些主题的质量和复杂性差异很大，您应该谨慎选择。例如，您可以查看某个主题存储库在 GitHub 上的星星数量，以及该存储库是否仍然相对活跃。长时间（例如几年）未更新的主题可能仍适用于更高版本的 Hugo，也可能不适用于。您必须仔细测试它们。
 
-In this section, we will explain how the default theme in **blogdown** works, which may also give you some ideas about how to get started with other themes.
+在本节中，我们将解释 **blogdown** 中的默认主题是如何工作的，这也可能会给您一些关于如何开始使用其他主题的想法。
 
 ### The default theme
 
-The default theme in **blogdown**, hugo-lithium\index{Hugo Lithium Theme}, is hosted on GitHub at https://github.com/yihui/hugo-lithium. It was originally written by Jonathan Rutheiser, and I have made several changes to it. This theme is suitable for those who prefer minimal styles, and want to build a website with a few pages and some blog posts.
+**blogdown** 中的默认主题 hugo-lithium\index{Hugo Lithium Theme} 托管在 GitHub 上：https://github.com/yihui/hugo-lithium。它最初是由 Jonathan Rutheiser 编写的，我对其进行了一些修改。这个主题适合那些喜欢简约风格，想要建立一个只有几个页面和一些博客文章的网站的人。
 
-Typically a theme repository on GitHub has a `README` file, which also serves as the documentation of the theme. After you read it, the next file to look for is `config.toml` under the `exampleSite` directory, which contains sample configurations for a website based on this theme. If a theme does not have a `README` file or `exampleSite` directory, you probably should not use it.
+通常，GitHub 上的主题存储库有一个 `README` 文件，该文件也用作主题的文档。阅读完后，下一个要查找的文件是 `exampleSite` 目录下的 `config.toml`，其中包含基于此主题的网站的示例配置。如果主题没有 `README` 文件或 `exampleSite` 目录，您可能不应该使用它。
 
-The `config.toml` of the theme `hugo-lithium` contains the following options:
+主题 `hugo-lithium` 的 `config.toml` 包含以下选项：
 
 ```js
 baseurl = "/"
@@ -269,19 +269,19 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown", "_files$", "_cache$"]
     alt = "Logo"
 ```
 
-Some of these options may be obvious to understand, and some may need explanations:
+其中一些选项可能很容易理解，而另一些可能需要解释：
 
-- `baseurl`: You\index{baseURL} can configure this option later, after you have a domain name for your website. Do not forget the trailing slash.
+- `baseurl`: 当您拥有网站的域名后，您可以稍后配置此选项。不要忘记结尾的斜杠。
 
-- `relativeurls`: This is optional. You may want to set it to `true` only if you intend to view your website locally through your file viewer, e.g., double-click on an HTML file and view it in your browser. This option defaults to `false` in Hugo, and it means your website must be viewed through a web server, e.g., `blogdown::serve_site()` has provided a local web server, so you can preview your website locally when `relativeurls = false`.
+- `relativeurls`: 这是可选的。仅当您打算通过文件查看器在本地查看您的网站时，您可能才需要将其设置为 `true`，例如，双击 HTML 文件并在浏览器中查看它。该选项在 Hugo 中默认为 `false`，这意味着您的网站必须通过 Web 服务器查看，例如 `blogdown::serve_site()` 提供了本地 Web 服务器，因此当 `relativeurls = false` 时您可以在本地预览您的网站。
 
-- `title`: The title of your website. Typically this is displayed in a web browser's title bar or on a page tab.
+- `title`: 您网站的标题。通常，它显示在网络浏览器的标题栏或页面选项卡上。
 
-- `theme`: The directory name of the theme. You need to be very careful when changing themes, because one theme can be drastically different from another theme in terms of the configurations. It is quite possible that a different theme will not work with your current `config.toml`. Again, you have to read the documentation of a theme to know what options are supported or required.
+- `theme`: 主题的目录名称。更改主题时需要非常小心，因为一个主题在配置方面可能与另一个主题截然不同。不同的主题很可能不适用于您当前的 `config.toml`。同样，您必须阅读主题的文档才能了解支持或需要哪些选项。
 
-- `ignoreFiles` and `permalinks`: These options have been explained in Section \@ref(options).
+- `ignoreFiles` and `permalinks`: 这些选项已在 Section \@ref(options) 中进行了解释。
 
-- `menu`: This list of options specifies the text and URL of menu items at the top. See Figure \@ref(fig:lithium) for a sample page. You can change or add more menu items. If you want to order the items, you may assign a `weight` to each item, e.g.,
+- `menu`: 此选项列表指定顶部菜单项的文本和 URL。见 Figure \@ref(fig:lithium) 获取示例页面。您可以更改或添加更多菜单项。如果您想排序项目，您可以为每个项目分配一个 `weight`，例如，
 
     ```js
     [[menu.main]]
@@ -306,19 +306,19 @@ Some of these options may be obvious to understand, and some may need explanatio
         weight = 5
     ```
     
-    In the above example, I added a menu item `CV` with the URL `/vitae/`, and there is supposed to be a corresponding source file `vitae.md` under the `content/` directory to generate the page `/vitae/index.html`, so the link will actually function.
+    上面的例子中，我添加了一个菜单项 `CV`，URL 为 `/vitae/`，在 `content/` 目录下应该有对应的源文件 `vitae.md` 来生成页面 `/vitae/index.html`，所以链接会真正发挥作用。
 
-- `params`: Miscellaneous parameters\index{params} for the theme.
+- `params`: 主题的其他参数。
 
-    - `description`: A brief description of your website. It is not visible on web pages (you can only see it from the HTML source), but should give search engines a hint about your website.
+    - `description`: 您网站的简短描述。它在网页上不可见（您只能从 HTML 源代码中看到它），但应该向搜索引擎提供有关您网站的提示。
     
-    - `highlightjs*`: These options are used to configure the JavaScript library\index{Syntax Highlighting} [highlight.js](https://highlightjs.org) for syntax highlighting of code blocks on the web pages. You can change the version (e.g., `9.12.0`), the CND host (e.g., using [cdnjs](https://cdnjs.com): `//cdnjs.cloudflare.com/ajax/libs`), add more languages (e.g., `["r", "yaml", "tex"]`), and change the theme (e.g., `atom-one-light`). See https://highlightjs.org/static/demo/ for all languages and themes that highlight.js supports.
+    - `highlightjs*`: 这些选项用于配置 JavaScript library\index{Syntax Highlighting} [highlight.js](https://highlightjs.org) 以对网页上的代码块进行语法高亮显示。您可以更改版本（例如，`9.12.0`）、CND host（例如，使用 [cdnjs](https://cdnjs.com): `//cdnjs.cloudflare.com/ajax/libs`）、添加更多语言（例如，`["r", "yaml", "tex"]`），并更改主题（例如，`atom-one-light`）。请参阅 https://highlightjs.org/static/demo/ 了解 highlight.js 支持的所有语言和主题。
     
-    - `MathJax*`: The JavaScript library MathJax\index{MathJax} can render LaTeX math expressions on web pages. Similar to `highlightjsCDN`, you can specify the CDN host of MathJax, e.g., `//cdnjs.cloudflare.com/ajax/libs`, and you can also specify the version of MathJax.
+    - `MathJax*`: JavaScript library MathJax\index{MathJax} 可以在网页上呈现 LaTeX 数学表达式。与 `highlightjsCDN` 类似，您可以指定 MathJax 的 CDN host，例如 `//cdnjs.cloudflare.com/ajax/libs`，也可以指定 MathJax 的版本。
     
-    - `logo`: A list of options to define the logo\index{Logo} of the website. By default, the image `logo.png` under the `static/` directory is used.
+    - `logo`: 用于定义网站 logo\index{Logo} 的选项列表。默认使用 `static/` 目录下的 `logo.png` 图片。
 
-If you want to be a theme developer and fully understand all the technical details about these options, you have to understand Hugo templates, which we will introduce in Section \@ref(templates).
+如果你想成为一名主题开发人员并完全了解有关这些选项的所有技术细节，你必须了解 Hugo 模板，我们将在 Section \@ref(templates) 中介绍。
 
 ## Templates
 

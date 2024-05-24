@@ -21,11 +21,11 @@ Try to translate **blogdown: Creating Websites with R Markdown** into Simplified
 | 1.6 R Markdown vs. Markdown      |  ✔       | 2024.5.15 |
 | 1.7 Other themes                 |  ✔       | 2024.5.15 |
 | 1.8 A recommended workflow       |  ✔       | 2024.5.16 |
-| 2 Hugo                        |         |    |
-| 2.1 Static sites and Hugo     |          |           |
-| 2.2 Configuration                 |          |           |
-| 2.3 Content               |          |           |
-| 2.4 Themes                       |          |           |
+| 2 Hugo                           |  ✔       | 2024.5.16 |
+| 2.1 Static sites and Hugo        |  ✔       | 2024.5.16 |
+| 2.2 Configuration                |  ✔       | 2024.5.16 |
+| 2.3 Content                      |  ✔       | 2024.5.24 |
+| 2.4 Themes                       |  ✔       | 2024.5.24 |
 | 2.5 Templates                       |          |           |
 | 2.6 Custom layouts           |          |           |
 | 2.7 Static files                       |          |           |

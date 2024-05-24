@@ -117,3 +117,6 @@ fig:project-options
 tab:global-options-new
 tab:global-options-2
 tab:md-diff
+fig:folders
+fig:jtleek-tweet
+fig:github-edit
