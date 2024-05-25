@@ -23,7 +23,7 @@
 <meta name="author" content="Yihui Xie, Amber Thomas, Alison Presmanes Hill" />
 
 
-<meta name="date" content="2024-05-24" />
+<meta name="date" content="2024-05-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -305,26 +305,26 @@ Thanks for your patience while we work to update the book, and please stay tuned
 </div>
 <div id="static-files" class="section level2 hasAnchor" number="2.7">
 <h2><span class="header-section-number">2.7</span> Static files<a href="static-files.html#static-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>All files under the <code>static/</code> directory are copied to <code>public/</code> when Hugo renders a website. This directory is often used to store static web assets like images, CSS, and JavaScript files. For example, an image <code>static/foo/bar.png</code> can be embedded in your post using the Markdown syntax <code>![](/foo/bar.png)</code>.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
-<p>Usually a theme has a <code>static/</code> folder, and you can partially override its files using the same mechanism as overriding <code>layouts/</code> files, i.e., <code>static/file</code> will override <code>themes/theme-name/static/file</code>. In the XMin theme, I have two CSS files <code>style.css</code> and <code>fonts.css</code>. The former is the main style sheet, and the latter is a quite small file to define typefaces only. You may want to define your own typefaces, and you can only provide a <code>static/css/fonts.css</code> to override the one in the theme, e.g.,</p>
+<p>Hugo 渲染网站时，<code>static/</code> 目录下的所有文件都会复制到 <code>public/</code> 中。该目录通常用于存储静态 Web 资源，例如图像、CSS 和 JavaScript 文件。例如，可以使用 Markdown 语法 <code>![](/foo/bar.png)</code> 将图像 <code>static/foo/bar.png</code> 嵌入到您的帖子中。<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
+<p>通常主题有一个 <code>static/</code> 文件夹，您可以使用与覆盖 <code>layouts/</code> 文件相同的机制部分覆盖其文件，即 <code>static/file</code> 将覆盖 <code>themes/theme-name/static/file</code>。在 XMin 主题中，我有两个 CSS 文件 <code>style.css</code> 和 <code>fonts.css</code>。前者是主要样式表，后者是一个非常小的文件，仅用于定义字体。您可能想定义自己的字体，并且只能提供 <code>static/css/fonts.css</code> 来覆盖主题中的字体，例如，</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb46-1"><a href="static-files.html#cb46-1" tabindex="-1"></a>body {</span>
 <span id="cb46-2"><a href="static-files.html#cb46-2" tabindex="-1"></a>  <span class="kw">font-family</span>: <span class="st">&quot;Comic Sans MS&quot;</span><span class="op">,</span> <span class="dv">cursive</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
 <span id="cb46-3"><a href="static-files.html#cb46-3" tabindex="-1"></a>}</span>
 <span id="cb46-4"><a href="static-files.html#cb46-4" tabindex="-1"></a>code {</span>
 <span id="cb46-5"><a href="static-files.html#cb46-5" tabindex="-1"></a>  <span class="kw">font-family</span>: <span class="st">&quot;Courier New&quot;</span><span class="op">,</span> Courier<span class="op">,</span> <span class="dv">monospace</span><span class="op">;</span></span>
 <span id="cb46-6"><a href="static-files.html#cb46-6" tabindex="-1"></a>}</span></code></pre></div>
-<p>To R Markdown users, another important application of the <code>static/</code> directory is to build Rmd documents with custom output formats, i.e., Rmd documents not using the <code>blogdown::html_page()</code> format (see Section <a href="output-format.html#output-format">1.6</a>). For example, you can generate a PDF or presentations from Rmd documents under this directory, so that Hugo will not post-process them but simply copies them to <code>public/</code> for publishing. To build these Rmd files, you must provide a custom build script <code>R/build.R</code> (see Section <a href="methods.html#methods">D.9</a>). You can write a single line of code in this script:</p>
+<p>对于 R Markdown 用户来说，<code>static/</code> 目录的另一个重要应用是构建具有自定义输出格式的 Rmd 文档，即不使用 <code>blogdown::html_page()</code> 格式的 Rmd 文档（参见 Section <a href="output-format.html#output-format">1.6</a>）。例如，您可以从此目录下的 Rmd 文档生成 PDF 或演示文稿，这样 Hugo 就不会对其进行后期处理，而只是将其复制到 <code>public/</code> 进行发布。要构建这些 Rmd 文件，您必须提供自定义构建脚本 <code>R/build.R</code>（请参阅 Section <a href="methods.html#methods">D.9</a>）。您可以在此脚本中编写一行代码：</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="static-files.html#cb47-1" tabindex="-1"></a>blogdown<span class="sc">::</span><span class="fu">build_dir</span>(<span class="st">&quot;static&quot;</span>)</span></code></pre></div>
-<p>The function <code>build_dir()</code> finds all Rmd files under a directory, and calls <code>rmarkdown::render()</code> to build them to the output formats specified in the YAML metadata of the Rmd files. If your Rmd files should not be rendered by a simple <code>rmarkdown::render()</code> call, you are free to provide your own code to render them in <code>R/build.R</code>. There is a built-in caching mechanism in the function <code>build_dir()</code>: an Rmd file will not be compiled if it is older than its output file(s). If you do not want this behavior, you can force all Rmd files to be recompiled every time: <code>build_dir(force = TRUE)</code>.</p>
-<p>I have provided a minimal example in the GitHub repository <a href="https://github.com/yihui/blogdown-static">yihui/blogdown-static,</a> where you can find two Rmd examples under the <code>static/</code> directory. One is an HTML5 presentation based on the <strong>xaringan</strong> package, and the other is a PDF document based on <strong>bookdown</strong>.</p>
-<p>You need to be cautious about arbitrary files under <code>static/</code>, due to Hugo’s overriding mechanism. That is, everything under <code>static/</code> will be copied to <code>public/</code>. You need to make sure that the files you render under <code>static/</code> will not conflict with those files automatically generated by Hugo from <code>content/</code>. For example, if you have a source file <code>content/about.md</code> and an Rmd file <code>static/about/index.Rmd</code> at the same time, the HTML output from the latter will overwrite the former (both Hugo and you will generate an output file with the same name <code>public/about/index.html</code>).</p>
+<p>函数 <code>build_dir()</code> 查找目录下的所有 Rmd 文件，并调用 <code>rmarkdown::render()</code> 将它们构建为 Rmd 文件的 YAML metadata 中指定的输出格式。如果您的 Rmd 文件不应通过简单的 <code>rmarkdown::render()</code> 调用来呈现，您可以自由提供自己的代码以在 <code>R/build.R</code> 中呈现它们。函数 <code>build_dir()</code> 中有一个内置的缓存机制：如果 Rmd 文件早于其输出文件，则不会编译该文件。如果您不希望出现此行为，可以强制每次重新编译所有 Rmd 文件：<code>build_dir(force = TRUE)</code>。</p>
+<p>我在 GitHub 存储库 <a href="https://github.com/yihui/blogdown-static">yihui/blogdown-static,</a> 中提供了一个最小的示例，您可以在 <code>static/</code> 目录下找到两个 Rmd 示例。一个是基于 <strong>xaringan</strong> 包的 HTML5 演示文稿，另一个是基于 <strong>bookdown</strong> 的 PDF 文档。</p>
+<p>由于 Hugo 的覆盖机制，您需要谨慎对待 <code>static/</code> 下的任意文件。也就是说，<code>static/</code> 下的所有内容都会被复制到 <code>public/</code>。您需要确保在 <code>static/</code> 下渲染的文件不会与 Hugo 从 <code>content/</code> 自动生成的文件冲突。例如，如果您同时有一个源文件 <code>content/about.md</code> 和一个 Rmd 文件 <code>static/about/index.Rmd</code>，则后者的 HTML 输出将覆盖前者（Hugo 和您都会生成一个输出文件具有相同的名称 <code>public/about/index.html</code>)。</p>
 
 </div>
 <!-- </div> -->
 <div class="footnotes">
 <hr />
 <ol start="10">
-<li id="fn10"><p>The link of the image depends on your <code>baseurl</code> setting in <code>config.toml</code>. If it does not contain a subpath, <code>/foo/bar.png</code> will be the link of the image, otherwise you may have to adjust it, e.g., for <code>baseurl = "http://example.com/subpath/"</code>, the link to the image should be <code>/subpath/foo/bar.png</code>.<a href="static-files.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>图像的链接取决于您在 <code>config.toml</code> 中的 <code>baseurl</code> 设置。如果它不包含子路径，<code>/foo/bar.png</code> 将是图像的链接，否则你可能需要调整它，例如，对于 <code>baseurl = "http://example.com/subpath/"</code>，链接图像应该是 <code>/subpath/foo/bar.png</code>。<a href="static-files.html#fnref10" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

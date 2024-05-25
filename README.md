@@ -26,9 +26,9 @@ Try to translate **blogdown: Creating Websites with R Markdown** into Simplified
 | 2.2 Configuration                |  ✔       | 2024.5.16 |
 | 2.3 Content                      |  ✔       | 2024.5.24 |
 | 2.4 Themes                       |  ✔       | 2024.5.24 |
-| 2.5 Templates                       |          |           |
-| 2.6 Custom layouts           |          |           |
-| 2.7 Static files                       |          |           |
+| 2.5 Templates                    |  ✔       | 2024.5.25 |
+| 2.6 Custom layouts               |  ✔       | 2024.5.25 |
+| 2.7 Static files                 |  ✔       | 2024.5.25 |
 | 3 Deployment               |          |           |
 | 3.1 Netlify                |          |           |
 | 3.2 GitHub Pages                         |          |           |

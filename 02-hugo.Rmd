@@ -322,15 +322,15 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown", "_files$", "_cache$"]
 
 ## Templates
 
-A Hugo theme consists of two major components: templates\index{Templates}, and web assets. The former is essential, and tells Hugo how to render a page.^[The most common functionality of templates is to render HTML pages, but there can also be special templates, for example, for RSS feeds and sitemaps, which are XML files.] The latter is optional but also important. It typically consists of CSS and JavaScript files, as well as other assets like images and videos. These assets determine the appearance and functionality of your website, and some may be embedded in the content of your web pages.
+Hugo 主题由两个主要组件组成：templates\index{Templates} 和 web assets。前者是必不可少的，它告诉 Hugo 如何渲染页面。^[模板最常见的功能是呈现 HTML 页面，但也可以有特殊的模板，例如用于 RSS 提要和站点地图（它们是 XML 文件）的模板。] 后者是可选的，但也很重要。它通常由 CSS 和 JavaScript 文件以及图像和视频等其他资源组成。这些资源决定了您网站的外观和功能，有些资源可能嵌入到您的网页内容中。
 
-You can learn more about Hugo templates from the official documentation (https://gohugo.io/templates/overview/). There are a great many different types of templates. To make it easier for you to master the key ideas, I created a very minimal Hugo theme, which covers most functionalities that an average user may need, but the total number of lines is only about 150, so we can talk about all the source code of this theme in the following subsection.
+您可以从官方文档（https://gohugo.io/templates/overview/）了解有关 Hugo 模板的更多信息。有很多不同类型的模板。为了让你更容易掌握关键思想，我创建了一个非常小的 Hugo 主题，它涵盖了普通用户可能需要的大部分功能，但总行数只有 150 行左右，所以我们可以在以下小节中谈论该主题的所有源代码。
 
 ### A minimal example
 
-[XMin](https://github.com/yihui/hugo-xmin) is a Hugo theme\index{XMin Theme} I wrote from scratch in about 12 hours. Roughly half an hour was spent on templates, 3.5 hours were spent on tweaking the CSS styles, and 8 hours were spent on the documentation (https://xmin.yihui.org). I think this may be a representative case of how much time you would spend on each part when designing a theme. It is perhaps our nature to spend much more time on cosmetic stuff like CSS than essential stuff like templates. Meanwhile, coding is often easier than documentation.
+[XMin](https://github.com/yihui/hugo-xmin) 是一个 Hugo 主题，我花了大约 12 个小时从头开始编写。大约花了半个小时在模板上，花了 3.5 个小时在调整 CSS 样式上，花了 8 个小时在文档上（https://xmin.yihui.org）。我想这可能是一个代表性的案例，说明你在设计主题时会在每个部分花费多少时间。也许我们的本性是花更多的时间在 CSS 之类的装饰性内容上，而不是模板之类的基本内容上。同时，编码通常比文档更容易。
 
-We will show the source code of the XMin theme. Because the theme may be updated occasionally in the future, you may follow this link to obtain a fixed version that we will talk about in this section: https://github.com/yihui/hugo-xmin/tree/4bb305. Below is a tree view of all files and directories in the theme:
+我们将展示 XMin 主题的源代码。由于主题将来可能会偶尔更新，因此您可以通过以下链接获取我们将在本节中讨论的固定版本：https://github.com/yihui/hugo-xmin/tree/4bb305。下面是主题中所有文件和目录的树形视图：
 
 ```bash
 hugo-xmin/
@@ -371,22 +371,22 @@ hugo-xmin/
         └── ...
 ```
 
-`LICENSE.md` and `README.md` are not required components of a theme, but you definitely should choose a license for your source code so that other people can properly use your code, and a `README` can be the brief documentation of your software.
+`LICENSE.md` 和 `README.md` 不是主题的必需组件，但您绝对应该为源代码选择许可证，以便其他人可以正确使用您的代码，并且 `README` 可以是您的软件的简短文档。
 
-The file `archetypes/default.md` defines the default template based on which users can create new posts. In this theme, `default.md` only provided empty YAML metadata:
+文件 `archetypes/default.md` 定义了用户可以创建新帖子的默认模板。在此主题中，`default.md` 仅提供空的 YAML metadata：
 
 ```yaml
 ---
 ---
 ```
 
-The most important directories of a theme are `layouts/` and `static/`. HTML templates are stored under `layouts/`, and assets are stored under `static/`.
+主题中最重要的目录是 `layouts/` 和 `static/`。HTML 模板存储在 `layouts/` 下，assets 存储在 `static/` 下。
 
-To understand `layouts/`, you must know some basics about HTML (see Section \@ref(html)) because the templates under this directory are mostly HTML documents or fragments. There are many possible types of subdirectories under `layouts/`, but we are only going to introduce two here: `_default/` and `partials/`.
+要理解 `layouts/`，你必须了解一些关于 HTML 的基础知识（参见 Section \@ref(html)），因为该目录下的模板大多是 HTML 文档或片段。在 `layouts/` 下有很多可能的子目录类型，但我们这里只介绍两种：`_default/` 和 `partials/`。
 
-- The `_default/` directory\index{\_default/} is where you put the default templates for your web pages. In the XMin theme, we have three templates: `single.html`, `list.html`, and `terms.html`.
+- `_default/` 目录是放置网页默认模板的位置。在 XMin 主题中，我们有三个模板：`single.html`、`list.html` 和 `terms.html`。
 
-    - `single.html` is a template\index{single.html} for rendering single pages. A single page basically corresponds to a Markdown document under `content/`, and it contains both the (YAML) metadata and content. Typically we want to render the page title, author, date, and the content. Below is the source code of XMin's `single.html`:
+    - `single.html` 是用于渲染单个页面的模板。单个页面基本上对应于 `content/` 下的 Markdown 文档，它包含 (YAML) metadata 和 content。通常我们想要呈现页面标题、作者、日期和内容。下面是 XMin 的 `single.html` 的源代码：
     
         ```html
         {{ partial "header.html" . }}
@@ -407,17 +407,17 @@ To understand `layouts/`, you must know some basics about HTML (see Section \@re
         {{ partial "footer.html" . }}
         ```
         
-        You see a lot of pairs of double curly braces `{{}}`, and that is how you program the templates using Hugo's variables and functions.
+        您会看到很多对双花括号 `{{}}`，这就是您使用 Hugo 的变量和函数对模板进行编程的方式。
         
-        The template starts with a partial template `header.html`, for which you will see the source code soon. For now, you can imagine it as all the HTML tags before the body of your page (e.g., `<html><head>`). Partial templates\index{Partials} are mainly for reusing HTML code. For example, all HTML pages may share very similar `<head></head>` tags, and you can factor out the common parts into partial templates.
+        该模板以部分模板 `header.html` 开头，您很快就会看到其源代码。现在，您可以将其想象为页面 body 之前的所有 HTML 标记（例如 `<html><head>`）。部分模板主要是为了重用 HTML 代码。例如，所有 HTML 页面可能共享非常相似的 `<head></head>` 标记，您可以将公共部分分解为部分模板。
         
-        The metadata of a page is included in a `<div>` element with the class `article-meta`. We recommend that you assign classes to HTML elements when designing templates, so that it will be easier to apply CSS styles to these elements using class names. In a template, you have access to many variables provided by Hugo, e.g., the `.Title` variable stores the value of the page title, and we write the title in a `<span>` in a first-level header `<h1>`. Similarly, the author and date are written in `<h2>`, but only if they are provided in the YAML metadata. The syntax `{{ with FOO }}{{ . }}{{ end }}` is a shorthand of `{{if FOO }}{{ FOO }}{{ end }}`, i.e., it saves you the effort of typing the expression `FOO` twice by using `{{ . }}`. The method `.Format` can be applied to a date object, and in this theme, we format dates in the form `YYYY/mm/dd` (`2006/01/02` is the way to specify the format in Go).
+        页面的 metadata 包含在带有 `article-meta` 类的 `<div>` 元素中。我们建议您在设计模板时为 HTML 元素分配 classes，以便更轻松地使用 class names 将 CSS 样式应用到这些元素。在模板中，您可以访问 Hugo 提供的许多变量，例如 `.Title` 变量存储页面标题的值，我们将标题写在第一级标题 `<h1>` 中的 `<span>` 中。同样，作者和日期也写在 `<h2>` 中，但前提是它们在 YAML metadata 中提供。语法 `{{ with FOO }}{{ . }}{{ end }}` 是 `{{if FOO }}{{ FOO }}{{ end }}` 的简写，即，使用 `{{ . }}` 可以省去两次键入表达式 `FOO` 的麻烦。方法 `.Format` 可以应用于日期对象，在本主题中，我们将日期格式化为 `YYYY/mm/dd` 形式（`2006/01/02` 是 Go 中指定格式的方式）。
         
-        Then we show the content of a page, which is stored in the variable `.Content`. The content is wrapped in a semantic HTML tag `<main>`.
+        然后我们显示页面的内容，该内容存储在变量 `.Content` 中。内容包含在语义 HTML 标记 `<main>` 中。
         
-        The template is finished after we include another partial template `footer.html` (source code to be shown shortly).
+        在我们添加另一个部分模板 `footer.html` （源代码很快就会显示）后，模板就完成了。
         
-        To make it easier to understand how a template works, we show a minimal example post below:
+        为了更容易理解模板的工作原理，我们在下面展示了一个最小的示例文章：
         
         ```markdown
         ---
@@ -429,7 +429,7 @@ To understand `layouts/`, you must know some basics about HTML (see Section \@re
         A single paragraph.
         ```
         
-        Using the template `single.html`, it will be converted to an HTML page with source code that looks more or less like this (with the header and footer omitted):
+        使用模板 `single.html`，它将转换为 HTML 页面，其源代码看起来或多或少像这样（省略了页眉和页脚）：
 
         ```html
         <div class="article-meta">
@@ -443,9 +443,9 @@ To understand `layouts/`, you must know some basics about HTML (see Section \@re
         </main>
         ```
         
-        For a full example of a single page, you may see https://xmin.yihui.org/about/.
+        有关单个页面的完整示例，您可以查看 https://xmin.yihui.org/about/。
 
-    - `list.html` is the template\index{list.html} for rendering lists of pages, such as a list of blog posts, or a list of pages within a category or tag. Here is its source code:
+    - `list.html` 是用于呈现页面列表的模板，例如博客文章列表或类别或标签内的页面列表。这是它的源代码：
 
         ```html
         {{ partial "header.html" . }}
@@ -468,17 +468,17 @@ To understand `layouts/`, you must know some basics about HTML (see Section \@re
         {{ partial "footer.html" . }}
         ```
         
-        Again, it uses two partial templates `header.html` and `footer.html`. The expression `{{if not .IsHome }}` means, if this list is not the home page, show the page title. This is because I do not want to display the title on the homepage. It is just my personal preference. You can certainly display the title in `<h1>` on the home page if you want.
+        同样，它使用两个部分模板 `header.html` 和 `footer.html`。表达式 `{{if not .IsHome }}` 的意思是，如果该列表不是主页，则显示页面标题。这是因为我不想在主页上显示标题。这只是我个人的喜好。如果您愿意，您当然可以在主页的 `<h1>` 中显示标题。
         
-        The `{{ .Content }}` shows the content of the list. Please note that typically `.Content` is empty, which may be surprising. This is because a list page is not generated from a source Markdown file by default. However, there is an exception. When you write a special Markdown file `_index.md` under a directory corresponding to the list name, the `.Content` of the list will be the content of this Markdown file. For example, you can define the content of your homepage in `content/_index.md`, and the content of the post list page under `content/post/_index.md`.
+        `{{ .Content }}` 显示列表的内容。请注意，通常 `.Content` 为空，这可能会令人惊讶。这是因为默认情况下不会从源 Markdown 文件生成列表页面。然而，有一个例外。当你在列表名对应的目录下编写一个特殊的 Markdown 文件 `_index.md` 时，列表的 `.Content` 将是这个 Markdown 文件的内容。例如，您可以在 `content/_index.md` 中定义您的主页内容，在 `content/post/_index.md` 中定义帖子列表页面的内容。
         
-        Next we generate the list using a loop (`range`) through all pages filtered by the condition that the section of a page should not be empty. "Section" in Hugo means the first-level subdirectory name under `content/`. For example, the section of `content/post/foo.md` is `post`. Therefore the filter means that we will list all pages under subdirectories of `content/`. This will exclude pages under the root `content/` directory, such as `content/about.md`.
+        接下来，我们使用循环（`range`）生成列表，该列表通过按页面部分不应为空的条件过滤的所有页面。Hugo 中的 "Section" 是指 `content/` 下的一级子目录名称。例如，`content/post/foo.md` 的部分是 `post`。因此，过滤器意味着我们将列出 `content/` 子目录下的所有页面。这将排除根 `content/` 目录下的页面，例如 `content/about.md`。
         
-        Please note that the variable `.Data` is dynamic, and its value changes according to the specific list you want to generate. For example, the list page https://xmin.yihui.org/post/ only contains pages under `content/post/`, and https://xmin.yihui.org/note/ only contains pages under `content/note/`. These list pages are automatically generated by Hugo, and you do not need to explicitly loop through the sections `post` and `note`. That is, a single template `list.html` will generate multiple lists of pages according to the sections and taxonomy terms (e.g., categories and tags) you have on your website.
+        请注意，变量 `.Data` 是动态的，其值根据您要生成的特定列表而变化。例如，列表页面 https://xmin.yihui.org/post/ 仅包含 `content/post/` 下的页面，https://xmin.yihui.org/note/ 仅包含 `content/note/` 下的页面。这些列表页面是由 Hugo 自动生成的，您不需要显式循环浏览 `post` 和 `note` 部分。也就是说，单个模板 `list.html` 将根据您网站上的部分和分类术语（例如类别和标签）生成多个页面列表。
 
-        The list items are represented by the HTML tags `<li>` in `<ul>`. Each item consists of the date, link, and title of a page. You may see https://xmin.yihui.org/post/ for a full example of a list page.
+        列表项由 `<ul>` 中的 HTML 标记 `<li>` 表示。每个项目由日期、链接和页面标题组成。您可以查看 https://xmin.yihui.org/post/ 以获取列表页面的完整示例。
 
-    - `terms.html` is the template\index{terms.html} for the home page of taxonomy terms. For example, you can use it to generate the full list of categories or tags. The source code is below:
+    - `terms.html` 是分类术语主页的模板。例如，您可以使用它来生成类别或标签的完整列表。源代码如下：
 
         ```html
         {{ partial "header.html" . }}
@@ -499,13 +499,13 @@ To understand `layouts/`, you must know some basics about HTML (see Section \@re
         {{ partial "footer.html" . }}
         ```
         
-        Similar to `list.html`, it also uses a loop. The variable `.Data.Terms` stores all terms under a taxonomy, e.g., all category names. You can think of it as a named list in R (called a `map` in Go), with the names being the terms and the values being lists of pages. The variable `$key` denotes the term and `$value` denotes the list of pages associated with this term. What we render in each `<li>` is a link to the term page as well as the count of posts that used this term (`len` is a Go function that returns the length of an object).
+        与 `list.html` 类似，它也使用循环。变量 `.Data.Terms` 存储分类法下的所有术语，例如所有类别名称。您可以将其视为 R 中的命名列表（在 Go 中称为 `map`），其中名称是术语，值是页面列表。变量 `$key` 表示术语，`$value` 表示与该术语关联的页面列表。我们在每个 `<li>` 中渲染的是术语页面的链接以及使用该术语的帖子数（`len` 是一个返回对象长度的 Go 函数）。
         
-        Hugo automatically renders all taxonomy pages, and the path names are the plural forms of the taxonomies, e.g., https://xmin.yihui.org/categories/ and https://xmin.yihui.org/tags/. That is the meaning of `.Data.Plural`. The leading `$` is required because we are inside a loop, and need to access variables from the outside scope. The link of the term is passed to the Hugo function `relURL` via a pipe `|` to make it relative, which is good practice because relative links are more portable (independent of the domain name).
+        Hugo 自动渲染所有分类页面，路径名称是分类的复数形式，例如 https://xmin.yihui.org/categories/ 和 https://xmin.yihui.org/tags/。这就是 `.Data.Plural` 的含义。前导 `$` 是必需的，因为我们位于循环内部，并且需要从外部范围访问变量。该术语的链接通过管道 `|` 传递给 Hugo 函数 `relURL` 使其相对，这是一个很好的做法，因为相对链接更可移植（独立于域名）。
 
-- The `partials/` directory is the place to put the HTML fragments to be reused by other templates via the `partial` function. We have four partial templates under this directory:
+- `partials/` 目录是放置 HTML 片段的地方，以便其他模板通过 `partial` 函数重用。该目录下有四个部分模板：
 
-    - `header.html` main defines\index{header.html} the `<head>` tag and the navigation menu in the `<nav>` tag.
+    - `header.html` 主要定义 `<head>` 标签和 `<nav>` 标签中的导航菜单。
 
         ```html
         <!DOCTYPE html>
@@ -531,9 +531,9 @@ To understand `layouts/`, you must know some basics about HTML (see Section \@re
             </nav>
         ```
         
-        The `<head>` area should be easy to understand if you are familiar with HTML. Note that we also included a partial template `head_custom.html`, which is empty in this theme, but it will make it much easier for users to add customized code to `<head>` without rewriting the whole template. See Section \@ref(custom-layouts) for more details.
+        如果您熟悉 HTML，`<head>` 区域应该很容易理解。请注意，我们还包含了一个部分模板 `head_custom.html`，该模板在此主题中为空，但它将使用户更容易向 `<head>` 添加自定义代码，而无需重写整个模板。更多详细信息请参见 Section \@ref(custom-layouts)。
         
-        The navigation menu is essentially a list, and each item of the list is read from the variable `.Site.Menus.main`. This means users can define the menu in `config.toml`, e.g., 
+        导航菜单本质上是一个列表，列表中的每个项目都是从变量 `.Site.Menus.main` 中读取的。这意味着用户可以在 `config.toml` 中定义菜单，例如，
       
         ```js  
         [[menu.main]]
@@ -544,7 +544,7 @@ To understand `layouts/`, you must know some basics about HTML (see Section \@re
             url = "/about/"
         ```
 
-        It will generate a menu like this:
+        它会生成一个像这样的菜单：
         
         ```html
         <ul class="menu">
@@ -553,9 +553,9 @@ To understand `layouts/`, you must know some basics about HTML (see Section \@re
         </ul>
         ```
         
-        Hugo has a powerful menu system, and we only used the simplest type of menu in this theme. If you are interested in more features like nested menus, please see the full documentation at http://gohugo.io/extras/menus/.
+        Hugo 拥有强大的菜单系统，而我们在这个主题中只使用了最简单的菜单类型。如果您对嵌套菜单等更多功能感兴趣，请参阅 http://gohugo.io/extras/menus/ 上的完整文档。
 
-    - `footer.html` defines the footer\index{footer.html} area of a page and closes the HTML document:
+    - `footer.html` 定义页面的页脚区域并关闭 HTML 文档：
 
         ```html
           <footer>
@@ -569,16 +569,16 @@ To understand `layouts/`, you must know some basics about HTML (see Section \@re
         </html>
         ```
         
-        The purpose of the partial template `foot_custom.html` is the same as `head_custom.html`; that is, to allow the user to add customized code to the `<footer>` without rewriting the whole template.
+        部分模板 `foot_custom.html` 的用途与 `head_custom.html` 相同；也就是说，允许用户向 `<footer>` 添加自定义代码，而无需重写整个模板。
         
-        Lastly, we use the variable `.Site.Params.footer` to generate a page footer. Note we used the `with` function again. Recall that the syntax `{{ with .Site.Params.footer }}{{ . }}{{ end }}` is a shorthand for `{{if .Site.Params.footer }}{{ .Site.Params.footer }}{{ end }}`. This syntax saves you from typing the expression `.Site.Params.footer` twice by using `{{ . }}` as a placeholder for the variable `footer`, which is defined as a site parameter in our `config.toml` file. The additional function `markdownify` can convert Markdown to HTML (i.e., `{{ . | markdownify }}`. Altogether, this sequence means we can define a `footer` option using Markdown under `params` in `config.toml`, e.g.,
+        最后，我们使用变量 `.Site.Params.footer` 生成页脚。请注意，我们再次使用了 `with` 函数。回想一下语法 `{{ with .Site.Params.footer }}{{ . }}{{ end }}` 是 `{{if .Site.Params.footer }}{{ .Site.Params.footer }}{{ end }}` 的简写。此语法使您无需使用 `{{ . }}` 两次键入表达式 `.Site.Params.footer` 作为变量 `footer` 的占位符，它在我们的 `config.toml` 文件中定义为站点参数。附加函数 `markdownify` 可以将 Markdown 转换为 HTML（即 `{{ . | markdownify }}`）。总而言之，这个序列意味着我们可以在 `config.toml` 中的 `params` 下使用 Markdown 定义 `footer` 选项，例如，
         
         ```js
         [params]
             footer = "&copy; [Yihui Xie](https://yihui.org) 2017"
         ```
 
-There is a special template `404.html`, which Hugo uses to create the 404\index{404.html} page (when a page is not found, this page is displayed):
+有一个特殊的模板 `404.html`，Hugo 使用它来创建 404\index{404.html} 页面（当找不到页面时，显示此页面）：
 
 ```html
 {{ partial "header.html" . }}
@@ -588,11 +588,11 @@ There is a special template `404.html`, which Hugo uses to create the 404\index{
 {{ partial "footer.html" . }}
 ```
 
-With all templates above, we will be able to generate a website from Markdown source files. You are unlikely to be satisfied with the website, however, because the HTML elements are not styled at all, and the default appearance may not look appealing to most people. You may have noticed that in `header.html`, we have included two CSS files, `/css/style.css` and `/css/fonts.css`.
+使用上述所有模板，我们将能够从 Markdown 源文件生成一个网站。但是，您不太可能对该网站感到满意，因为 HTML 元素根本没有样式，并且默认外观可能对大多数人来说并不有吸引力。您可能已经注意到，在 `header.html` 中，我们包含了两个 CSS 文件：`/css/style.css` 和 `/css/fonts.css`。
 
-You can find many existing open-source CSS frameworks online that may be applied to a Hugo theme. For example, the most popular CSS framework may be Bootstrap: http://getbootstrap.com. When I was designing XMin, I wondered how far I could go without using any of these existing frameworks, because they are usually very big. For example, `bootstrap.css` has nearly 10000 lines of code when not minimized. It turned out that I was able to get a satisfactory appearance with about 50 lines of CSS, which I will explain in detail below:
+您可以在线找到许多可应用于 Hugo 主题的现有开源 CSS 框架。例如，最流行的 CSS 框架可能是 Bootstrap：http://getbootstrap.com。当我设计 XMin 时，我想知道在不使用这些现有框架的情况下我能走多远，因为它们通常非常大。例如，`bootstrap.css` 在未最小化时有近 10000 行代码。事实证明，我用了大约 50 行 CSS 就能够得到满意的外观，下面我将详细解释：
 
-- `style.css` defines all styles except the typefaces:
+- `style.css` 定义除字体之外的所有样式：
 
     ```css
     body {
@@ -603,7 +603,7 @@ You can find many existing open-source CSS frameworks online that may be applied
     }
     ```
     
-    The maximum width of the page body is set to 800 pixels because an excessively wide page is difficult to read (`800` is an arbitrary threshold that I picked). The body is centered using the CSS trick `margin: auto`, which means the top, right, bottom, and left margins are automatic. When a block element's left and right margins are `auto`, it will be centered. 
+    页面主体的最大宽度设置为 800 像素，因为过宽的页面难以阅读（`800` 是我选择的任意阈值）。正文使用 CSS 技巧 `margin: auto` 居中，这意味着顶部、右侧、底部和左侧边距是自动的。当块元素的左右边距为 `auto` 时，它将居中。
     
     ```css
     /* header and footer areas */
@@ -623,11 +623,11 @@ You can find many existing open-source CSS frameworks online that may be applied
     }
     ```
     
-    Remember that our menu element is a list `<ul class="menu">` defined in `header.html`. I changed the default display style of `<li>` within the menu to `inline-block`, so that they will be laid out from left to right as inline elements, instead of being stacked vertically as a bullet list (the default behavior).
+    请记住，我们的菜单元素是 `header.html` 中定义的列表 `<ul class="menu">`。我将菜单中 `<li>` 的默认显示样式更改为 `inline-block`，以便它们将作为内联元素从左到右布局，而不是作为项目符号列表垂直堆叠（默认行为）。
     
-    For links (`<a>`) in the menu and the metadata area of an article, the default text decoration (underlines) is removed, and a light background color is applied. The border radius is set to 5 pixels so that you can see a subtle round-corner rectangle behind each link.
+    对于菜单中的链接 (`<a>`) 和文章的 metadata 区域，将删除默认文本修饰（下划线），并应用浅色背景颜色。border radius 设置为 5 pixels，以便您可以看到每个链接后面有一个微妙的圆角矩形。
     
-    The horizontal rule (`<hr>`) is set to a dashed light-gray line to make it less prominent on a page. These rules are used to separate the article body from the header and footer areas.
+    水平线 (`<hr>`) 设置为浅灰色虚线，以使其在页面上不那么突出。这些规则用于将文章正文与页眉和页脚区域分开。
     
     ```css
     /* code */
@@ -641,7 +641,7 @@ You can find many existing open-source CSS frameworks online that may be applied
     pre code { background: none; }
     ```
     
-    For code blocks (`<pre>`), I apply light gray borders with drop-shadow effects. Every inline code element has a very light gray background. These decorations are merely out of my own peculiar interest and emphasis in code.
+    对于代码块 (`<pre>`)，我应用带有阴影效果的浅灰色边框。每个内联代码元素都有一个非常浅的灰色背景。这些装饰仅仅是出于我自己对代码的特殊兴趣和重视。
     
     ```css
     /* misc elements */
@@ -663,9 +663,9 @@ You can find many existing open-source CSS frameworks online that may be applied
     tr:nth-child(even) { background: #eee }
     ```
     
-    Embedded elements like images and videos that exceed the page margin are often ugly, so I restrict their maximum width to 100%. Hyphenation is turned on for words in `<main>`. Blockquotes have a gray left sidebar and a light gray background. Tables are centered by default, with only three horizontal rules: the top and bottom borders of the table, and the bottom border of the table head. Table rows are striped to make it easier to read the table especially when the table is wide.
+    超出页边距的嵌入元素（例如图像和视频）通常很难看，因此我将它们的最大宽度限制为 100%。`<main>` 中的单词连字符已打开。块引用有一个灰色的左侧边栏和浅灰色的背景。表格默认居中，只有三个水平线：表格的顶部和底部边框以及表格标题的底部边框。表格行呈条纹状，以便于阅读表格，尤其是当表格很宽时。
 
-- `fonts.css` is a separate style sheet\index{fonts.css} because it plays a critical role in the appearance of a website, and it is very likely that you will want to customize this file. In most cases, your readers will spend the most time on reading the text on your pages, so it is important to make the text comfortable to read. I'm not an expert in web design, and I just picked Palatino for the body and Lucida Console or Monaco (whichever is available in your system) for the code. It is common to use Google web fonts nowadays. You may try some web fonts and see if you like any of them.
+- `fonts.css` 是一个单独的样式表，因为它在网站的外观中起着至关重要的作用，并且您很可能想要自定义此文件。在大多数情况下，您的读者会花费最多的时间阅读页面上的文本，因此使文本易于阅读非常重要。我不是网页设计方面的专家，我只是选择 Palatino 作为正文，并选择 Lucida Console 或 Monaco（以您的系统中可用的为准）作为代码。现在使用谷歌网络字体很常见。您可以尝试一些网络字体，看看是否喜欢其中的任何一个。
     
     ```css
     body {
@@ -677,9 +677,9 @@ You can find many existing open-source CSS frameworks online that may be applied
     }
     ```
 
-The two CSS files are placed under the `static/css/` directory of the theme. In the HTML template `header.html`, the path `/css/style.css` refers to the file `static/css/style.css`.
+这两个 CSS 文件放在主题的 `static/css/` 目录下。在 HTML 模板 `header.html` 中，路径 `/css/style.css` 引用文件 `static/css/style.css`。
 
-Lastly, this theme provided an example site under `exampleSite/`. The directory structure may be a little confusing because this is a theme instead of a website. In practice, everything under `exampleSite/` should be under the root directory of a website, and the top-level `hugo-xmin/` directory should be under the `themes/` directory of this website, i.e.,
+最后，该主题在 `exampleSite/` 下提供了一个示例站点。目录结构可能有点混乱，因为这是一个主题而不是网站。实际上，`exampleSite/` 下的所有内容都应该在网站的根目录下，并且顶级的 `hugo-xmin/` 目录应该在该网站的 `themes/` 目录下，即：
 
 ```bash
 ├── config.toml
@@ -691,35 +691,35 @@ Lastly, this theme provided an example site under `exampleSite/`. The directory 
 └── ...
 ```
 
-The example site provides a sample `config.toml`, a home page `_index.md`, an about page `about.md`, two posts under `note/` and two under `post/`. It also overrides the `foot_custom.html` in the theme.
+示例站点提供了示例 `config.toml`、主页 `_index.md`、关于页面 `about.md`、`note/` 下的两篇文章和 `post/` 下的两篇文章。它还覆盖主题中的 `foot_custom.html`。
 
 ### Implementing more features {#how-to}
 
-The XMin is actually a highly functional theme, but we understand that it may be too minimal for you. There are a few commonly used features (intentionally) missing in this theme, and we will teach you how to add them by yourself if desired. All these features and the source code can be applied to other themes, too.
+XMin 实际上是一个功能强大的主题，但我们知道它对您来说可能太小了。该主题（故意）缺少一些常用功能，如果需要，我们将教您如何自行添加它们。所有这些功能和源代码也可以应用于其他主题。
 
-- **Enable Google Analytics.** Hugo has provided a built-in partial template. For XMin, you can add
+- **Enable Google Analytics.** Hugo 提供了内置的部分模板。对于 XMin，您可以添加
 
     ```html
     {{ template "_internal/google_analytics.html" . }}
     ```
 
-    to `layouts/partials/foot_custom.html` under the root directory of your website (instead of `themes/hugo-xmin/`), and configure `googleAnalytics` in the `config.toml`. See https://github.com/yihui/hugo-xmin/pull/3 for details, and the HTML source of this page for the JavaScript rendered from the template: https://deploy-preview-3--hugo-xmin.netlify.com.
+    到网站根目录下的 `layouts/partials/foot_custom.html`（而不是 `themes/hugo-xmin/`），并在 `config.toml` 中配置 `googleAnalytics`。有关详细信息，请参阅 https://github.com/yihui/hugo-xmin/pull/3，以及从模板呈现的 JavaScript 的此页面的 HTML 源代码：https://deploy-preview-3--hugo-xmin.netlify.com。
 
-- **Enable Disqus comments.** Similar to Google Analytics, you can add the built-in template
+- **Enable Disqus comments.** 与 Google Analytics 类似，您可以添加内置模板
 
     ```html
     {{ template "_internal/disqus.html" . }}
     ```
 
-    to `foot_custom.html`, and configure the Disqus shortname in `config.toml`. See https://github.com/yihui/hugo-xmin/pull/4 for details, and a preview at https://deploy-preview-4--hugo-xmin.netlify.com.
+    到 `foot_custom.html`，并在 `config.toml` 中配置 Disqus 短名称。有关详细信息，请参阅 https://github.com/yihui/hugo-xmin/pull/4，并在 https://deploy-preview-4--hugo-xmin.netlify.com 上查看预览。
 
-- **Enable syntax highlighting via highlight.js.** Add this\index{Syntax Highlighting} to `head_custom.html`
+- **Enable syntax highlighting via highlight.js.** 将这添加到 `head_custom.html`
 
     ```html
     <link href="//YOUR-CDN-LINK/styles/github.min.css" rel="stylesheet">
     ```
     
-    and this to `foot_custom.html`:
+    并将这添加到 `foot_custom.html`：
     
     ```html
     <script src="//YOUR-CDN-LINK/highlight.min.js"></script>
@@ -731,11 +731,11 @@ The XMin is actually a highly functional theme, but we understand that it may be
     </script>
     ```
     
-    Remember to replace `YOUR-CDN-LINK` with the link to your preferred CDN host of highlight.js, e.g., `cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0`. For more information about highlight.js, please see its homepage: https://highlightjs.org. If you need to use other CDN hosts, cdnjs.com is a good choice: https://cdnjs.com/libraries/highlight.js You can also see which languages and CSS themes are supported there.
+    请记住将 `YOUR-CDN-LINK` 替换为您首选的 highlight.js CDN 主机的链接，例如 `cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0`。有关 highlight.js 的更多信息，请参阅其主页：https://highlightjs.org。如果您需要使用其他 CDN 主机，cdnjs.com 是一个不错的选择：https://cdnjs.com/libraries/highlight.js 您还可以查看那里支持哪些语言和 CSS 主题。
     
-    You may see https://github.com/yihui/hugo-xmin/pull/5 for an actual implementation, and a sample page with syntax highlighting at https://deploy-preview-5--hugo-xmin.netlify.com/post/2016/02/14/a-plain-markdown-post/.
+    您可能会看到 https://github.com/yihui/hugo-xmin/pull/5 的实际实现，以及 https://deploy-preview-5--hugo-xmin.netlify.com/post/2016/02/14/a-plain-markdown-post/ 上带有语法突出显示的示例页面。
 
-- **Support math expressions through MathJax.** Add the code below\index{MathJax} to `foot_custom.html`.
+- **Support math expressions through MathJax.** 将以下代码添加到 `foot_custom.html`。
 
     ```html
     <script src="//yihui.org/js/math-code.js"></script>
@@ -744,11 +744,11 @@ The XMin is actually a highly functional theme, but we understand that it may be
     </script>
     ```
     
-    This requires substantial knowledge of JavaScript and familiarity with MathJax to fully understand the code above, and we will leave the explanation of the code to Section \@ref(javascript).
+    这需要具备丰富的 JavaScript 知识并熟悉 MathJax 才能完全理解上面的代码，我们将把代码的解释留给 Section \@ref(javascript)。
     
-    Remember to replace `YOUR-CDN-LINK` with the link to your preferred CDN host of MathJax, e.g., `cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5`.
+    请记住将 `YOUR-CDN-LINK` 替换为您首选的 MathJax CDN 主机的链接，例如 `cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5`。
 
-- **Show the table of contents (TOC).** To show a TOC\index{Table of Contents} for R Markdown posts, you only need to add the output format `blogdown::html_page` with the option `toc: true` to YAML:
+- **Show the table of contents (TOC).** 要显示 R Markdown 帖子的目录，您只需将输出格式 `blogdown::html_page` 和选项 `toc: true` 添加到 YAML：
 
     ```yaml
     output:
@@ -756,7 +756,7 @@ The XMin is actually a highly functional theme, but we understand that it may be
         toc: true
     ```
     
-    For plain Markdown posts, you have to modify the template `single.html`. The TOC of a post is stored in the Hugo template variable `.TableOfContents`. You may want an option to control whether to show the TOC, e.g., you may add an option `toc: true` to the YAML metadata of a Markdown post to show the TOC. The code below can be added before the content of a post in `single.html`:
+    对于普通的 Markdown 帖子，您必须修改模板 `single.html`。帖子的目录存储在 Hugo 模板变量 `.TableOfContents` 中。您可能需要一个选项来控制是否显示目录，例如，您可以将选项 `toc: true` 添加到 Markdown 帖子的 YAML metadata 中以显示目录。可以在 `single.html` 中的帖子内容之前添加以下代码：
     
     ```html
     {{ if .Params.toc }}
@@ -764,9 +764,9 @@ The XMin is actually a highly functional theme, but we understand that it may be
     {{ end }}
     ```
     
-    See https://github.com/yihui/hugo-xmin/pull/7 for an implementation with examples.
+    请参阅 https://github.com/yihui/hugo-xmin/pull/7 了解示例实现。
 
-- **Display categories and tags in a post if provided in its YAML.** Add the code\index{Tags} below where you want to place the categories and tags in `single.html`, e.g., in `<div class="article-meta"></div>`.
+- **Display categories and tags in a post if provided in its YAML.** 在 `single.html` 中要放置类别和标签的位置添加下面的代码，例如，在 `<div class="article-meta"></div>` 中。
 
     ```html
     <p class="terms">
@@ -781,11 +781,11 @@ The XMin is actually a highly functional theme, but we understand that it may be
     </p>
     ```
     
-    Basically the code loops through the YAML metadata fields `categories` and `tags`, and for each field, its value is obtained from `.Param`, then we use an inside loop to write out the terms with links of the form `<a href="/tags/foo/">foo</a>`.
+    基本上，代码循环遍历 YAML metadata 字段 `categories` 和 `tags`，对于每个字段，其值从 `.Param` 获取，然后我们使用内部循环以 `<a href="/tags/foo/">foo</a>` 形式的链接写出术语。
 
-    You may see https://github.com/yihui/hugo-xmin/pull/2 for the complete implementation and a preview at https://deploy-preview-2--hugo-xmin.netlify.com/post/2016/02/14/a-plain-markdown-post/.
+    您可以在 https://github.com/yihui/hugo-xmin/pull/2 上查看完整的实现和预览在 https://deploy-preview-2--hugo-xmin.netlify.com/post/2016 /02/14/a-plain-markdown-post/。
 
-- **Add pagination.** When you have a large number of posts on a website, you may not want to display the full list on a single page, but show N posts (e.g., N = 10) per page. It is easy to add pagination to a website using Hugo's built-in functions and templates. Instead of looping through all posts in a list template (e.g., `range .Data.Pages`), you paginate the full list of posts using the function `.Paginate` (e.g., `range (.Paginate .Data.Pages)`). Below is a template fragment that you may insert to your template file `list.html`:
+- **Add pagination.** 当网站上有大量帖子时，您可能不希望在单个页面上显示完整列表，而是每页显示 N 个帖子（例如，N = 10）。使用 Hugo 的内置函数和模板可以轻松地向网站添加分页。您无需循环遍历列表模板中的所有帖子（例如 `range .Data.Pages`），而是使用函数 `.Paginate` 对完整的帖子列表进行分页（例如 `range (.Paginate .Data.Pages)`）。下面是一个模板片段，您可以将其插入到模板文件 `list.html` 中：
 
     ```html
     <ul>
@@ -800,15 +800,15 @@ The XMin is actually a highly functional theme, but we understand that it may be
     {{ template "_internal/pagination.html" . }}
     ```
 
-    See https://github.com/yihui/hugo-xmin/pull/16 for a full implementation.
+    完整实现请参见 https://github.com/yihui/hugo-xmin/pull/16。
 
-- **Add a GitHub Edit button or link to a page.** If none\index{GitHub Edit Page} of the above features look exciting to you (which would not surprise me), this little feature is really a great example of showing you the power of plain-text files and static websites, when combined with GitHub (or other services that support the online editing of plain-text files). I believe it would be difficult, if not impossible, to implement this feature in dynamic website frameworks like WordPress.
+- **Add a GitHub Edit button or link to a page.** 如果上述功能对您来说都不令人兴奋（这不会让我感到惊讶），那么这个小功能确实是一个很好的例子，它向您展示了纯文本文件和静态网站与 GitHub（或其他支持纯文本文件在线编辑的服务）结合使用时的强大功能。我相信在 WordPress 这样的动态网站框架中实现这个功能即使不是不可能，也是很困难的。
 
-    Basically, when you browse any text files in a repository on GitHub, you can edit them right on the page by hitting the Edit button (see Figure \@ref(fig:github-edit) for an example) if you have a GitHub account. If you have write access to the repository, you can commit the changes directly online, otherwise GitHub will fork the repository for you automatically, so that you can edit the file in your own repository, and GitHub will guide you to create a pull request to the original repository. When the original owner sees the pull request, he/she can see the changes you made and decide whether to accept them or not or ask you to make further changes. Although the terminology "pull request" is highly confusing to beginners,^[In my opinion, it really should be called "merge request" instead.] it is probably the single greatest feature invented by GitHub, because it makes it so much easier for people to make contributions.
+    基本上，当您浏览 GitHub 上存储库中的任何文本文件时，如果您有 GitHub 帐户，则可以通过单击 Edit 按钮直接在页面上编辑它们（示例见 Figure \@ref(fig:github-edit)）。如果您对存储库有写权限，则可以直接在线提交更改，否则 GitHub 会自动为您 fork 存储库，以便您可以在自己的存储库中编辑文件，并且 GitHub 会引导您创建 pull request 原始存储库。当原所有者看到 pull request 时，他/她可以看到您所做的更改并决定是否接受它们或要求您进行进一步的更改。尽管术语 "pull request" 对初学者来说非常令人困惑，^[在我看来，它确实应该被称为 "merge request"。] 它可能是 GitHub 发明的最伟大的功能，因为它使人们更容易做出贡献。
     
-    What is really handy is that all you need is a URL of a fixed form to edit a file on GitHub: `https://github.com/USER/REPO/edit/BRANCH/PATH/TO/FILE`. For example, https://github.com/rbind/yihui/edit/master/content/knitr/faq.md, where `USER` is `rbind`, `REPO` is `yihui`, `BRANCH` is `master`, and the file path is `content/knitr/faq.md`.
+    真正方便的是，您只需要一个固定形式的 URL 即可编辑 GitHub 上的文件：`https://github.com/USER/REPO/edit/BRANCH/PATH/TO/FILE`。例如，https://github.com/rbind/yihui/edit/master/content/knitr/faq.md，其中 `USER` 为 `rbind`，`REPO` 为 `yihui`，`BRANCH` 为 `master`，文件路径为 `content/knitr/faq.md`。
     
-    The key to implementing this feature is the variable `.File.Path`, which gives us the source file path of a page under `content/`, e.g., `post/foo.md`. If your website only uses plain Markdown files, the implementation will be very simple. I omitted the full GitHub URL in `...` below, of which an example could be `https://github.com/rbind/yihui/edit/master/content/`.
+    实现此功能的关键是变量 `.File.Path`，它为我们提供了 `content/` 下页面的源文件路径，例如 `post/foo.md`。如果您的网站仅使用纯 Markdown 文件，那么实现将非常简单。我在下面的 `...` 中省略了完整的 GitHub URL，其中一个示例可以是 `https://github.com/rbind/yihui/edit/master/content/`。
     
     ```html
     {{ with .File.Path }}
@@ -816,7 +816,7 @@ The XMin is actually a highly functional theme, but we understand that it may be
     {{ end }}
     ```
 
-    However, the case is a little more complicated for **blogdown** users, when R Markdown posts are involved. You cannot just use `.File.Path` because it actually points to the `.html` output file from an `.Rmd` file, whereas the `.Rmd` file is the actual source file. The Edit button or link should not point to the `.html` file. Below is the complete implementation that you may add to a template file depending on where you want to show the Edit link (e.g., `footer.html`):
+    然而，当涉及 R Markdown 帖子时，对于 **blogdown** 用户来说，情况会稍微复杂一些。您不能只使用 `.File.Path`，因为它实际上指向 `.Rmd` 文件的 `.html` 输出文件，而 `.Rmd` 文件是实际的源文件。编辑按钮或链接不应指向 `.html` 文件。以下是完整的实现，您可以根据您想要显示编辑链接的位置（例如 `footer.html`）将其添加到模板文件中：
 
     ```html
     {{ if .File.Path }}
@@ -836,32 +836,32 @@ The XMin is actually a highly functional theme, but we understand that it may be
     {{ end }}
     ```
     
-    The basic logic is that for a file, if the same filename with the extension `.Rmd` exists, we will point the Edit link to the Rmd file. First, we define a variable `$Rmd` to be the filename with the `.Rmd` extension. Then we check if it exists. Unfortunately, there is no function in Hugo like `file.exists()` in R, so we have to use a hack: list all files under the directory and see if the Rmd file is in the list. [`$.Scratch`](http://gohugo.io/extras/scratch/) is the way to dynamically store and obtain variables in Hugo templates. Most variables in Hugo are read-only, and you have to use `$.Scratch` when you want to modify a variable. We set a variable `FilePath` in `$.Scratch`, whose value is the full path to the Rmd file when the Rmd file exists, and the path to the Markdown source file otherwise. Finally, we concatenate a custom option `GithubEdit` in `config.toml` with the file path to complete the Edit link `<a>`. Here is an example of the option in `config.toml`:
+    基本逻辑是，对于一个文件，如果存在扩展名为 `.Rmd` 的相同文件名，我们会将编辑链接指向该 Rmd 文件。首先，我们定义变量 `$Rmd` 作为扩展名为 `.Rmd` 的文件名。然后我们检查它是否存在。不幸的是，Hugo 中没有像 R 中的 `file.exists()` 这样的函数，所以我们必须使用一个 hack：列出目录下的所有文件，并查看 Rmd 文件是否在列表中。[`$.Scratch`](http://gohugo.io/extras/scratch/) 是 Hugo 模板中动态存储和获取变量的方式。Hugo 中的大多数变量都是只读的，当你想修改变量时你必须使用 `$.Scratch`。我们在 `$.Scratch` 中设置一个变量 `FilePath`，当 Rmd 文件存在时，其值为 Rmd 文件的完整路径，否则为 Markdown 源文件的路径。最后，我们将 `config.toml` 中的自定义选项 `GithubEdit` 与文件路径连接起来，完成编辑链接 `<a>`。以下是 `config.toml` 中的选项示例：
     
     ```js
     [params]
       GithubEdit = "https://github.com/rbind/yihui/edit/master/content/"
     ```
     
-    Please note that if you use Hugo on Windows to build and deploy your site, you may have to change the file path separators from backslashes to forward slashes, e.g., you may need `{{ $.Scratch.Set "FilePath" (replace ($.Scratch.Get "FilePath") "\\" "/") }}` in the template. To avoid this complication, we do not recommend that you deploy your site through Windows (see Chapter \@ref(deployment) for deployment methods).
+    请注意，如果您在 Windows 上使用 Hugo 来构建和部署站点，您可能需要将文件路径分隔符从反斜杠更改为正斜杠，例如，您可能需要 `{{ $.Scratch.Set "FilePath" (replace ($.Scratch.Get "FilePath") "\\" "/") }}` 在模板中。为了避免这种复杂情况，我们不建议您通过 Windows 部署站点（有关部署方法，请参阅 Chapter \@ref(deployment)）。
     
-    You may see https://github.com/yihui/hugo-xmin/pull/6 for an actual implementation with R Markdown examples, and see the footer of this page for the Edit link: https://deploy-preview-6--hugo-xmin.netlify.com. You can actually see a link in the footer of every page, except the lists of pages (because they do not have source files).
+    您可以查看 https://github.com/yihui/hugo-xmin/pull/6 以了解 R Markdown 示例的实际实现，并查看本页页脚的编辑链接：https://deploy-preview-6 --hugo-xmin.netlify.com。实际上，您可以在每个页面的页脚中看到一个链接，页面列表除外（因为它们没有源文件）。
 
 ```{r github-edit, fig.cap='Edit a text file online on GitHub.', echo=FALSE, fig.align='center', out.width='100%'}
 knitr::include_graphics('images/github-edit.png')
 ```
 
-After you digest the XMin theme and the implementations of additional features, it should be much easier to understand other people's templates. There are a large number of Hugo themes but the primary differences among them are often in styles. The basic components of templates are often similar.
+当你消化了 XMin 主题和附加功能的实现后，理解其他人的模板应该会容易得多。Hugo 主题有很多，但它们之间的主要区别通常在于风格。模板的基本组件通常是相似的。
 
 ## Custom layouts
 
-It is very likely that you want to customize a theme unless you designed it. The most straightforward way is to simply make changes directly in the theme,^[If you are new to web development, be careful changing content within the theme. Minor changes like colors and font sizes can be found within the CSS files of the theme and can be altered simply with minimal risk of breaking the theme's functionality.] but the problem is that a Hugo theme may be constantly updated by its original author for improvements or bug fixes. Similar to the "you break it, you buy it" policy (the [Pottery Barn rule](https://en.wikipedia.org/wiki/Pottery_Barn_rule)), once you touch someone else's source code, you will be responsible for its future maintenance, and the original author should not be responsible for the changes you made on your side. That means it may not be easy to pull future updates of this theme to your website (you have to carefully read the changes and make sure they do not conflict with your changes), but if you are completely satisfied with the current state of the theme and do not want future updates, it is fine to modify the theme files directly.
+您很可能想要自定义主题，除非您设计了它。最直接的方法是直接在主题中进行更改，^[如果您是 Web 开发新手，请小心更改主题内的内容。颜色和字体大小等细微更改可以在主题的 CSS 文件中找到，并且可以简单地进行更改，而破坏主题功能的风险最小。] 但问题是 Hugo 主题可能会被其原作者不断更新以进行改进或错误修复。类似于 "you break it, you buy it" 的政策（the [Pottery Barn rule](https://en.wikipedia.org/wiki/Pottery_Barn_rule)），一旦你接触了别人的源代码，你将负责其未来的维护，而原作者不应对你所做的更改负责在你身边。这意味着将该主题的未来更新拉到您的网站可能并不容易（您必须仔细阅读更改并确保它们不会与您的更改冲突），但如果您对主题的当前状态完全满意并且不想以后更新，直接修改主题文件就可以了。
 
-A theme author who is aware of the fact that users may customize their theme will typically provide two ways: one is to provide options in `config.toml`, so that you can change these options without touching the template files; the other is to leave a few lightweight template files under `layouts/` in the theme, so that you can override them without touching the core template files. Take the XMin theme for example:
+意识到用户可以自定义主题的主题作者通常会提供两种方法：一种是在 `config.toml` 中提供选项，以便您可以在不接触模板文件的情况下更改这些选项；另一种是在主题中的 `layouts/` 下留下一些轻量级模板文件，这样你就可以覆盖它们而无需触及核心模板文件。以 XMin 主题为例：
 
-I have two empty HTML files `head_custom.html` and `foot_custom.html` under `layouts/partials/` in the theme. The former will be added inside `<head></head>` of a page, e.g., you can load JavaScript libraries or include CSS style sheets via `<link>`. The latter will be added before the footer of a page, e.g., you may load additional JavaScript libraries or embed Disqus comments there.
+我在主题中的 `layouts/partials/` 下有两个空的 HTML 文件 `head_custom.html` 和 `foot_custom.html`。前者将添加到页面的 `<head></head>` 内，例如，您可以通过 `<link>` 加载 JavaScript 库或包含 CSS 样式表。后者将添加在页面页脚之前，例如，您可以加载其他 JavaScript 库或嵌入 Disqus comments。
 
-The way that you customize these two files is not to edit them directly in the theme folder, but to create a directory `layouts/partials/` under the root directory of your website, e.g., your directory structure may look like this:
+自定义这两个文件的方式不是直接在主题文件夹中编辑它们，而是在网站根目录下创建一个目录 `layouts/partials/`，例如，您的目录结构可能如下所示：
 
 ```bash
 your-website/
@@ -883,13 +883,13 @@ your-website/
         └── head_custom.html
 ```
 
-All files under `layouts/` under the root directory will override files with the same relative paths under `themes/hugo-xmin/layouts/`, e.g., the file `layouts/partials/foot_custom.html`, when provided, will override `themes/hugo-xmin/layouts/partials/foot_custom.html`. That means you only need to create and maintain at most two files under `layouts/` instead of maintaining all files under `themes/`. Note that this overriding mechanism applies to all files under `layouts/`, and is not limited to the `partials/` directory. It also applies to any Hugo theme that you actually use for your website, and is not limited to `hugo-xmin`.
+根目录下的 `layouts/` 下的所有文件将覆盖 `themes/hugo-xmin/layouts/` 下具有相同相对路径的文件，例如文件 `layouts/partials/foot_custom.html`，如果提供，将覆盖 `themes/hugo-xmin/layouts/partials/foot_custom.html`。这意味着您只需要在 `layouts/` 下创建和维护最多两个文件，而不是在 `themes/` 下维护所有文件。请注意，此覆盖机制适用于 `layouts/` 下的所有文件，并且不限 `partials/` 目录。它还适用于您实际用于网站的任何 Hugo 主题，并且不限于 `hugo-xmin`。
 
 ## Static files
 
-All files under the `static/` directory\index{Static Directory} are copied to `public/` when Hugo renders a website. This directory is often used to store static web assets like images, CSS, and JavaScript files. For example, an image `static/foo/bar.png` can be embedded in your post using the Markdown syntax `![](/foo/bar.png)`.^[The link of the image depends on your `baseurl` setting in `config.toml`. If it does not contain a subpath, `/foo/bar.png` will be the link of the image, otherwise you may have to adjust it, e.g., for `baseurl = "http://example.com/subpath/"`, the link to the image should be `/subpath/foo/bar.png`.]
+Hugo 渲染网站时，`static/` 目录下的所有文件都会复制到 `public/` 中。该目录通常用于存储静态 Web 资源，例如图像、CSS 和 JavaScript 文件。例如，可以使用 Markdown 语法 `![](/foo/bar.png)` 将图像 `static/foo/bar.png` 嵌入到您的帖子中。^[图像的链接取决于您在 `config.toml` 中的 `baseurl` 设置。如果它不包含子路径，`/foo/bar.png` 将是图像的链接，否则你可能需要调整它，例如，对于 `baseurl = "http://example.com/subpath/"`，链接图像应该是 `/subpath/foo/bar.png`。]
 
-Usually a theme has a `static/` folder, and you can partially override its files using the same mechanism as overriding `layouts/` files, i.e., `static/file` will override `themes/theme-name/static/file`. In the XMin theme, I have two CSS files `style.css` and `fonts.css`. The former is the main style sheet, and the latter is a quite small file to define typefaces only. You may want to define your own typefaces, and you can only provide a `static/css/fonts.css` to override the one in the theme, e.g.,
+通常主题有一个 `static/` 文件夹，您可以使用与覆盖 `layouts/` 文件相同的机制部分覆盖其文件，即 `static/file` 将覆盖 `themes/theme-name/static/file`。在 XMin 主题中，我有两个 CSS 文件 `style.css` 和 `fonts.css`。前者是主要样式表，后者是一个非常小的文件，仅用于定义字体。您可能想定义自己的字体，并且只能提供 `static/css/fonts.css` 来覆盖主题中的字体，例如，
 
 ```css
 body {
@@ -900,14 +900,14 @@ code {
 }
 ```
 
-To R Markdown users, another important application of the `static/` directory is to build Rmd documents with custom output formats, i.e., Rmd documents not using the `blogdown::html_page()` format (see Section \@ref(output-format)). For example, you can generate a PDF or presentations from Rmd documents under this directory, so that Hugo will not post-process them but simply copies them to `public/` for publishing. To build these Rmd files, you must provide a custom build script `R/build.R` (see Section \@ref(methods)). You can write a single line of code in this script\index{blogdown::build\_dir()}:
+对于 R Markdown 用户来说，`static/` 目录的另一个重要应用是构建具有自定义输出格式的 Rmd 文档，即不使用 `blogdown::html_page()` 格式的 Rmd 文档（参见 Section \@ref(output-format)）。例如，您可以从此目录下的 Rmd 文档生成 PDF 或演示文稿，这样 Hugo 就不会对其进行后期处理，而只是将其复制到 `public/` 进行发布。要构建这些 Rmd 文件，您必须提供自定义构建脚本 `R/build.R`（请参阅 Section \@ref(methods)）。您可以在此脚本中编写一行代码：
 
 ```r
 blogdown::build_dir("static")
 ```
 
-The function `build_dir()` finds all Rmd files under a directory, and calls `rmarkdown::render()` to build them to the output formats specified in the YAML metadata of the Rmd files. If your Rmd files should not be rendered by a simple `rmarkdown::render()` call, you are free to provide your own code to render them in `R/build.R`. There is a built-in caching mechanism in the function `build_dir()`: an Rmd file will not be compiled if it is older than its output file(s). If you do not want this behavior, you can force all Rmd files to be recompiled every time: `build_dir(force = TRUE)`.
+函数 `build_dir()` 查找目录下的所有 Rmd 文件，并调用 `rmarkdown::render()` 将它们构建为 Rmd 文件的 YAML metadata 中指定的输出格式。如果您的 Rmd 文件不应通过简单的 `rmarkdown::render()` 调用来呈现，您可以自由提供自己的代码以在 `R/build.R` 中呈现它们。函数 `build_dir()` 中有一个内置的缓存机制：如果 Rmd 文件早于其输出文件，则不会编译该文件。如果您不希望出现此行为，可以强制每次重新编译所有 Rmd 文件：`build_dir(force = TRUE)`。
 
-I have provided a minimal example in the GitHub repository [yihui/blogdown-static,](https://github.com/yihui/blogdown-static) where you can find two Rmd examples under the `static/` directory. One is an HTML5 presentation based on the **xaringan** package, and the other is a PDF document based on **bookdown**.
+我在 GitHub 存储库 [yihui/blogdown-static,](https://github.com/yihui/blogdown-static) 中提供了一个最小的示例，您可以在 `static/` 目录下找到两个 Rmd 示例。一个是基于 **xaringan** 包的 HTML5 演示文稿，另一个是基于 **bookdown** 的 PDF 文档。
 
-You need to be cautious about arbitrary files under `static/`, due to Hugo's overriding mechanism. That is, everything under `static/` will be copied to `public/`. You need to make sure that the files you render under `static/` will not conflict with those files automatically generated by Hugo from `content/`. For example, if you have a source file `content/about.md` and an Rmd file `static/about/index.Rmd` at the same time, the HTML output from the latter will overwrite the former (both Hugo and you will generate an output file with the same name `public/about/index.html`).
+由于 Hugo 的覆盖机制，您需要谨慎对待 `static/` 下的任意文件。也就是说，`static/` 下的所有内容都会被复制到 `public/`。您需要确保在 `static/` 下渲染的文件不会与 Hugo 从 `content/` 自动生成的文件冲突。例如，如果您同时有一个源文件 `content/about.md` 和一个 Rmd 文件 `static/about/index.Rmd`，则后者的 HTML 输出将覆盖前者（Hugo 和您都会生成一个输出文件具有相同的名称 `public/about/index.html`)。

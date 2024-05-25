@@ -23,7 +23,7 @@
 <meta name="author" content="Yihui Xie, Amber Thomas, Alison Presmanes Hill" />
 
 
-<meta name="date" content="2024-05-24" />
+<meta name="date" content="2024-05-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -305,10 +305,10 @@ Thanks for your patience while we work to update the book, and please stay tuned
 </div>
 <div id="custom-layouts" class="section level2 hasAnchor" number="2.6">
 <h2><span class="header-section-number">2.6</span> Custom layouts<a href="custom-layouts.html#custom-layouts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>It is very likely that you want to customize a theme unless you designed it. The most straightforward way is to simply make changes directly in the theme,<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> but the problem is that a Hugo theme may be constantly updated by its original author for improvements or bug fixes. Similar to the “you break it, you buy it” policy (the <a href="https://en.wikipedia.org/wiki/Pottery_Barn_rule">Pottery Barn rule</a>), once you touch someone else’s source code, you will be responsible for its future maintenance, and the original author should not be responsible for the changes you made on your side. That means it may not be easy to pull future updates of this theme to your website (you have to carefully read the changes and make sure they do not conflict with your changes), but if you are completely satisfied with the current state of the theme and do not want future updates, it is fine to modify the theme files directly.</p>
-<p>A theme author who is aware of the fact that users may customize their theme will typically provide two ways: one is to provide options in <code>config.toml</code>, so that you can change these options without touching the template files; the other is to leave a few lightweight template files under <code>layouts/</code> in the theme, so that you can override them without touching the core template files. Take the XMin theme for example:</p>
-<p>I have two empty HTML files <code>head_custom.html</code> and <code>foot_custom.html</code> under <code>layouts/partials/</code> in the theme. The former will be added inside <code>&lt;head&gt;&lt;/head&gt;</code> of a page, e.g., you can load JavaScript libraries or include CSS style sheets via <code>&lt;link&gt;</code>. The latter will be added before the footer of a page, e.g., you may load additional JavaScript libraries or embed Disqus comments there.</p>
-<p>The way that you customize these two files is not to edit them directly in the theme folder, but to create a directory <code>layouts/partials/</code> under the root directory of your website, e.g., your directory structure may look like this:</p>
+<p>您很可能想要自定义主题，除非您设计了它。最直接的方法是直接在主题中进行更改，<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> 但问题是 Hugo 主题可能会被其原作者不断更新以进行改进或错误修复。类似于 “you break it, you buy it” 的政策（the <a href="https://en.wikipedia.org/wiki/Pottery_Barn_rule">Pottery Barn rule</a>），一旦你接触了别人的源代码，你将负责其未来的维护，而原作者不应对你所做的更改负责在你身边。这意味着将该主题的未来更新拉到您的网站可能并不容易（您必须仔细阅读更改并确保它们不会与您的更改冲突），但如果您对主题的当前状态完全满意并且不想以后更新，直接修改主题文件就可以了。</p>
+<p>意识到用户可以自定义主题的主题作者通常会提供两种方法：一种是在 <code>config.toml</code> 中提供选项，以便您可以在不接触模板文件的情况下更改这些选项；另一种是在主题中的 <code>layouts/</code> 下留下一些轻量级模板文件，这样你就可以覆盖它们而无需触及核心模板文件。以 XMin 主题为例：</p>
+<p>我在主题中的 <code>layouts/partials/</code> 下有两个空的 HTML 文件 <code>head_custom.html</code> 和 <code>foot_custom.html</code>。前者将添加到页面的 <code>&lt;head&gt;&lt;/head&gt;</code> 内，例如，您可以通过 <code>&lt;link&gt;</code> 加载 JavaScript 库或包含 CSS 样式表。后者将添加在页面页脚之前，例如，您可以加载其他 JavaScript 库或嵌入 Disqus comments。</p>
+<p>自定义这两个文件的方式不是直接在主题文件夹中编辑它们，而是在网站根目录下创建一个目录 <code>layouts/partials/</code>，例如，您的目录结构可能如下所示：</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="custom-layouts.html#cb45-1" tabindex="-1"></a><span class="ex">your-website/</span></span>
 <span id="cb45-2"><a href="custom-layouts.html#cb45-2" tabindex="-1"></a><span class="ex">├──</span> config.toml</span>
 <span id="cb45-3"><a href="custom-layouts.html#cb45-3" tabindex="-1"></a><span class="ex">├──</span> ...</span>
@@ -326,12 +326,12 @@ Thanks for your patience while we work to update the book, and please stay tuned
 <span id="cb45-15"><a href="custom-layouts.html#cb45-15" tabindex="-1"></a>    <span class="ex">└──</span> partials</span>
 <span id="cb45-16"><a href="custom-layouts.html#cb45-16" tabindex="-1"></a>        <span class="ex">├──</span> foot_custom.html</span>
 <span id="cb45-17"><a href="custom-layouts.html#cb45-17" tabindex="-1"></a>        <span class="ex">└──</span> head_custom.html</span></code></pre></div>
-<p>All files under <code>layouts/</code> under the root directory will override files with the same relative paths under <code>themes/hugo-xmin/layouts/</code>, e.g., the file <code>layouts/partials/foot_custom.html</code>, when provided, will override <code>themes/hugo-xmin/layouts/partials/foot_custom.html</code>. That means you only need to create and maintain at most two files under <code>layouts/</code> instead of maintaining all files under <code>themes/</code>. Note that this overriding mechanism applies to all files under <code>layouts/</code>, and is not limited to the <code>partials/</code> directory. It also applies to any Hugo theme that you actually use for your website, and is not limited to <code>hugo-xmin</code>.</p>
+<p>根目录下的 <code>layouts/</code> 下的所有文件将覆盖 <code>themes/hugo-xmin/layouts/</code> 下具有相同相对路径的文件，例如文件 <code>layouts/partials/foot_custom.html</code>，如果提供，将覆盖 <code>themes/hugo-xmin/layouts/partials/foot_custom.html</code>。这意味着您只需要在 <code>layouts/</code> 下创建和维护最多两个文件，而不是在 <code>themes/</code> 下维护所有文件。请注意，此覆盖机制适用于 <code>layouts/</code> 下的所有文件，并且不限 <code>partials/</code> 目录。它还适用于您实际用于网站的任何 Hugo 主题，并且不限于 <code>hugo-xmin</code>。</p>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="9">
-<li id="fn9"><p>If you are new to web development, be careful changing content within the theme. Minor changes like colors and font sizes can be found within the CSS files of the theme and can be altered simply with minimal risk of breaking the theme’s functionality.<a href="custom-layouts.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>如果您是 Web 开发新手，请小心更改主题内的内容。颜色和字体大小等细微更改可以在主题的 CSS 文件中找到，并且可以简单地进行更改，而破坏主题功能的风险最小。<a href="custom-layouts.html#fnref9" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
