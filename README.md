@@ -4,9 +4,9 @@
 
 Try to translate **blogdown: Creating Websites with R Markdown** into Simplified Chinese.
 
-- **Original Book**: [https://bookdown.org/yihui/blogdown/](https://bookdown.org/yihui/blogdown/)
+- **Original Book**: [blogdown-book](https://bookdown.org/yihui/blogdown/)
 
-- **Translation Book**: [https://zhenghu159.github.io/blogdown-book-zh-cn/](https://zhenghu159.github.io/blogdown-book-zh-cn/)
+- **Translation Book**: [blogdown-book-zh-cn/](https://books-zh-cn.github.io/blogdown-book-zh-cn/)
 
 ## Translation progress
 
